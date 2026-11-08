@@ -1,0 +1,507 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Taller Adolescencia</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+/* Layout: cuaderno de trabajo por días — pestañas de día arriba, cada día con su color suave, explicación, ejercicio escrito y tabla para llenar */
+:root{
+  --bg:#F5F7FA; --surface:#FFFFFF; --ink:#1C2632; --muted:#5A6777; --line:#D7DEE7;
+  --input:#FFF8DC; --ok:#17713F; --okbg:#DCF2E3; --err:#B3261E; --errbg:#FCE2DF;
+  --d1:#3A6BA0; --d1s:#E5EDF7; --d2:#357F62; --d2s:#E2F1EA; --d3:#A86F14; --d3s:#F8EEDC;
+  --d4:#65569E; --d4s:#ECE8F6; --d5:#B65345; --d5s:#F8E5E1;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11161C; --surface:#19212A; --ink:#E5EAF0; --muted:#9BA8B6; --line:#2C3743;
+  --input:#2B2817; --ok:#74D49C; --okbg:#173826; --err:#FF8E84; --errbg:#44201C;
+  --d1:#8DB5E3; --d1s:#1C2A3B; --d2:#82C9A9; --d2s:#18302A; --d3:#E5B464; --d3s:#33291A;
+  --d4:#B5A8E6; --d4s:#272338; --d5:#EE9C8F; --d5s:#3A2320; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11161C; --surface:#19212A; --ink:#E5EAF0; --muted:#9BA8B6; --line:#2C3743;
+  --input:#2B2817; --ok:#74D49C; --okbg:#173826; --err:#FF8E84; --errbg:#44201C;
+  --d1:#8DB5E3; --d1s:#1C2A3B; --d2:#82C9A9; --d2s:#18302A; --d3:#E5B464; --d3s:#33291A;
+  --d4:#B5A8E6; --d4s:#272338; --d5:#EE9C8F; --d5s:#3A2320; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:800}
+h2{font-size:1.45rem;font-weight:800}
+h3{font-size:1.05rem;font-weight:600}
+p{margin:0}
+.top{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
+.back{display:inline-block;margin-bottom:8px;color:var(--d1);font-weight:700;text-decoration:none}
+.back:hover{text-decoration:underline}
+.top .sub{color:var(--muted);margin-top:4px}
+.who{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.who label{font-size:.85rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.who input{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--input);color:var(--ink);min-width:0;width:220px;max-width:100%}
+.nota{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 14px;text-align:center}
+.nota b{font-family:var(--f-display);font-size:1.6rem;display:block;font-variant-numeric:tabular-nums}
+.nota span{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.tab{flex:1 0 150px;font:inherit;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;border-top:4px solid var(--dc)}
+.tab small{color:var(--muted);font-size:.78rem}
+.tab .t{font-weight:700;font-size:.95rem}
+.tab .sc{font-size:.8rem;font-variant-numeric:tabular-nums;color:var(--dc);font-weight:700}
+.tab[aria-selected="true"]{background:var(--ds);border-color:var(--dc)}
+.tab:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--dc,var(--d1));outline-offset:2px}
+.day{display:flex;flex-direction:column;gap:16px}
+.band{background:var(--ds);border-left:6px solid var(--dc);border-radius:8px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.band .eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dc);font-weight:700}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:720px){.cols{grid-template-columns:1fr}}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.box ol,.box ul{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px}
+.ej{display:flex;flex-direction:column;gap:10px}
+.ej li{padding-left:2px}
+.ej .f{font-weight:700;color:var(--dc)}
+.note{font-size:.88rem;color:var(--muted)}
+.exp1{border-left:5px solid var(--dc);background:var(--ds)}
+.exp1 summary{color:var(--dc)}
+.exp1 p{margin:6px 0}
+.mov{list-style:none;padding:0!important;margin:8px 0!important;display:flex;flex-direction:column;gap:8px}
+.mov li{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px}
+.lado{flex:0 0 auto;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-radius:4px;padding:2px 8px;margin-top:2px}
+.lado.deb{background:var(--d2s);color:var(--d2);border:1px solid var(--d2)}
+.lado.cre{background:var(--d4s);color:var(--d4);border:1px solid var(--d4)}
+.cuadra{font-weight:700;color:var(--ok)}
+.ref summary,.fact summary{color:var(--dc,var(--d1))}
+.ref p{margin:6px 0}
+.fact{margin-top:8px;padding:6px 12px}
+.fact summary{font-size:.92rem}
+.guia{display:flex;flex-direction:column;gap:10px;padding-left:1.3em}
+.guia ul{margin:4px 0;padding-left:1.2em;display:flex;flex-direction:column;gap:2px}
+td.tot{font-weight:800;font-size:1.05rem}
+.ana h4{font-family:var(--f-display);font-size:1rem;margin:14px 0 6px}
+.esf td.ex{color:var(--muted);font-size:.9rem;min-width:260px}
+.esf tr.grp td{font-weight:700;color:var(--dc);background:var(--ds);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.kpi{border:1px solid var(--line);border-top:4px solid var(--dc);border-radius:8px;background:var(--surface);padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.kpi small{color:var(--muted);font-weight:700}
+.kpi b{font-family:var(--f-display);font-size:1.4rem;color:var(--dc);font-variant-numeric:tabular-nums}
+.kpi span{font-size:.86rem;color:var(--muted)}
+.concl{display:flex;flex-direction:column;gap:6px;padding-left:1.3em}
+/* marca de agua */
+.wm{position:fixed;inset:0;z-index:60;pointer-events:none;background-repeat:repeat;background-size:360px 220px;opacity:.07;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220'%3E%3Ctext x='180' y='120' text-anchor='middle' transform='rotate(-24 180 110)' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%231C2632'%3EPAMAVA soluciones%3C/text%3E%3C/svg%3E")}
+:root[data-theme="dark"] .wm{opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220'%3E%3Ctext x='180' y='120' text-anchor='middle' transform='rotate(-24 180 110)' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%23E5EAF0'%3EPAMAVA soluciones%3C/text%3E%3C/svg%3E")}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .wm{opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220'%3E%3Ctext x='180' y='120' text-anchor='middle' transform='rotate(-24 180 110)' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%23E5EAF0'%3EPAMAVA soluciones%3C/text%3E%3C/svg%3E")}}
+@media print{.wm{position:fixed}}
+.vals{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.val{display:inline-flex;flex-direction:column;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:3px 10px;line-height:1.25}
+.val small{font-size:.72rem;color:var(--muted)}
+.val b{font-variant-numeric:tabular-nums;font-size:.95rem;color:var(--ink)}
+.val.iva{border-color:var(--d1);background:var(--d1s)}
+.val.iva small,.val.iva b{color:var(--d1)}
+.val.ret{border-color:var(--d5);background:var(--d5s)}
+.val.ret small,.val.ret b{color:var(--d5)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+details summary{cursor:pointer;font-weight:700}
+details[open] summary{margin-bottom:10px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:middle}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--bg);font-weight:700}
+td.n{text-align:right}
+th,th.n{text-align:center}
+.asiento{display:flex;flex-direction:column;gap:8px}
+.ahead{display:flex;flex-direction:column;gap:2px}
+.ahead .lbl{font-weight:700;color:var(--dc)}
+input.num,select.cel{font:inherit;font-size:.95rem;width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:5px;background:var(--input);color:var(--ink);font-variant-numeric:tabular-nums}
+input.num{text-align:right;min-width:110px}
+select.cel{min-width:90px}
+select.cel[data-k$="-c"]{min-width:230px}
+.ok{background:var(--okbg)!important;border-color:var(--ok)!important;color:var(--ok)!important}
+.err{background:var(--errbg)!important;border-color:var(--err)!important;color:var(--err)!important}
+.ic{width:42px;text-align:center;font-weight:800;font-size:1.05rem}
+.ic.ok,.ic.err{border-radius:5px}
+.cuenta{color:var(--muted);font-size:.92rem;min-width:180px}
+tr.sum td{background:var(--bg);font-weight:700}
+.msg{font-size:.88rem;font-weight:700;padding:2px 8px;border-radius:5px;display:inline-block}
+.foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px}
+.score{font-family:var(--f-display);font-size:1.15rem}
+.score b{color:var(--dc)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{font:inherit;cursor:pointer;border-radius:6px;padding:8px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.btn.pri{background:var(--dc);border-color:var(--dc);color:var(--surface);font-weight:700}
+.confirm{display:flex;gap:8px;align-items:center;font-size:.9rem}
+.aux{display:grid;grid-template-columns:1fr;gap:16px}
+.q{display:flex;flex-direction:column;gap:8px;padding:12px 0;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0}
+.q label{display:flex;gap:8px;align-items:flex-start;padding:6px 10px;border:1px solid var(--line);border-radius:6px;cursor:pointer}
+.q .exp{font-size:.88rem;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.85rem;color:var(--muted);align-items:center}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid var(--line);vertical-align:-2px;margin-right:4px}
+@media (prefers-reduced-motion: no-preference){.tab,.btn{transition:background .15s,border-color .15s}}
+
+.fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;font:inherit;font-weight:700;cursor:pointer;border:0;border-radius:999px;padding:12px 18px;background:var(--dc,var(--d1));color:var(--surface);box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--surface);border-top:4px solid var(--dc,var(--d1));box-shadow:0 -6px 24px rgba(0,0,0,.2);max-height:42vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px)}
+.sheet-in{width:100%;max-width:980px;margin:0 auto;min-height:0;display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sheet-h{display:flex;gap:8px;align-items:center;justify-content:space-between;padding-block:8px;border-bottom:1px solid var(--line)}
+.sheet-t{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.sheet-t .lbl{font-weight:700;color:var(--dc);margin-right:6px}
+.stab{font:inherit;font-size:.9rem;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 12px}
+.stab[aria-pressed="true"]{background:var(--dc);border-color:var(--dc);color:var(--surface);font-weight:700}
+.sheet-b{overflow:auto;padding-block:10px;min-height:0}
+.sheet-b .box{border:0;padding:0}
+html.sheet-open{scroll-padding-bottom:46vh}
+html.sheet-open .wrap{padding-bottom:calc(42vh + 24px)}
+/* encabezado fijo: título, nombre, nota, leyenda y pestañas siempre visibles */
+.stick{position:sticky;top:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;gap:12px;margin-inline:-16px;padding:10px 16px 10px;border-bottom:1px solid transparent}
+.stick.mini{border-bottom-color:var(--line);box-shadow:0 6px 14px rgba(0,0,0,.08);gap:8px;padding-block:6px 8px}
+.stick.mini .back,.stick.mini .top .sub{display:none}
+.stick.mini h1{font-size:1.15rem}
+.stick.mini .who label{flex-direction:row;align-items:center;gap:6px}
+.stick.mini .who input{padding:4px 8px;width:180px}
+.stick.mini .nota{padding:2px 12px;display:flex;align-items:baseline;gap:6px}
+.stick.mini .nota b{font-size:1.15rem}
+.stick.mini .legend{font-size:.78rem;gap:8px}
+.stick.mini .legend span:last-child{display:none}
+.stick.mini .tab{padding:5px 10px;flex-basis:130px}
+.stick.mini .tab .t{font-size:.85rem}
+@media (max-width:720px){
+  .stick.mini .legend{display:none}
+  .stick.mini .top{gap:6px;align-items:center}
+  .stick.mini .who label{font-size:0}
+  .stick.mini .who input{font-size:.9rem;width:150px}
+  .tab{flex-basis:128px}
+}
+/* calculadora flotante (igual a la del Taller de asientos) */
+.calc{position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:50;width:min(310px,calc(100vw - 24px));font-family:var(--f-body)}
+.calc:not(.open){width:auto}
+.calc .ct{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;background:var(--d1);color:var(--surface);border:0;border-radius:12px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.calc.open .ct{border-radius:12px 12px 0 0}
+.calc .cb{display:none;background:var(--surface);border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;padding:10px;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.calc.open .cb{display:block}
+.calc input{width:100%;font-family:ui-monospace,Consolas,monospace;font-size:16px;text-align:right;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--input);color:var(--ink)}
+.calc .cr{font-family:ui-monospace,Consolas,monospace;font-size:20px;font-weight:700;text-align:right;min-height:1.6em;margin:6px 2px;word-break:break-all}
+.calc .ck{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.calc .ck button{font:inherit;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:9px 0;font-size:16px;font-weight:600;cursor:pointer;color:var(--ink)}
+.calc .ck button.op{background:var(--d1s);color:var(--d1)}
+.calc .ck button.eq{background:var(--d1);color:var(--surface);border-color:var(--d1)}
+.calc .cc{display:flex;gap:6px;margin-top:8px}
+.calc .cc button{font:inherit;flex:1;border:0;border-radius:8px;padding:7px;background:var(--d1s);color:var(--d1);font-weight:600;cursor:pointer}
+.calc .ct span:first-child{white-space:nowrap}
+.calc .ct small{font-size:.78rem}
+@media (max-width:720px){.calc .ct small{display:none}}
+
+/* ---- taller estados financieros ---- */
+.st td.lab{font-size:.93rem;min-width:200px}
+.st tr.grp td{font-weight:700;color:var(--dc);background:var(--ds);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
+.st tr.big td{background:var(--ds);font-weight:800;border-top:2px solid var(--dc)}
+.st tr.fixr td{background:var(--bg);color:var(--muted);font-weight:700}
+.st td.dash{color:var(--muted);text-align:center}
+.st td.c25{color:var(--muted);font-size:.9rem;min-width:110px}
+select.acc{min-width:260px}
+.ecp input.num{min-width:120px}
+.docs{display:flex;flex-direction:column;gap:8px}
+.doc{border-left:5px solid var(--d1);padding:8px 12px}
+.doc summary{color:var(--d1)}
+.doc ol{padding-left:1.3em;display:flex;flex-direction:column;gap:6px;margin:6px 0}
+.notas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:14px}
+.nota-c{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--dc);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.nota-c .nh{display:flex;gap:8px;align-items:baseline}
+.nn{font-size:.75rem;font-weight:800;color:var(--dc);background:var(--ds);border-radius:4px;padding:2px 8px;text-transform:uppercase}
+.nota-c table{min-width:0}
+.nota-c td{border-bottom:1px solid var(--line)}
+.nota-c input.num{min-width:120px}
+.nota-c select.cel{min-width:0;max-width:260px}
+.concg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:820px){.concg{grid-template-columns:1fr}}
+.cbox{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--dc);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.cbox table{min-width:0}
+.cbox input.num{min-width:120px}
+.cuadra2{font-weight:700;font-size:1.05rem;padding:10px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--muted)}
+.st select.cel{min-width:220px}
+.st tbody td:first-child:not(.lab){white-space:nowrap}
+.st select.cel{min-width:240px}
+.xrow td{white-space:normal!important;background:var(--ds);color:var(--ink);font-size:.9rem;border-left:4px solid var(--dc)}
+.casos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:14px}
+.caso{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--dc);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.caso .nh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.fl{display:flex;flex-direction:column;gap:4px;font-size:.88rem;font-weight:700;color:var(--muted)}
+.fl select.cel{font-weight:400;white-space:normal;min-width:0}
+.ic2{align-self:flex-start;min-width:30px;text-align:center;font-weight:800;border-radius:5px;padding:0 6px}
+.ic2:empty{display:none}
+.xcase{background:var(--ds);border-left:4px solid var(--dc);border-radius:6px;padding:8px 10px;font-size:.92rem}
+.tind{min-width:880px}
+.tind td{vertical-align:top;font-size:.86rem}
+.tind ul{margin:0;padding-left:1.1em}
+.tind td.ed{font-weight:800;white-space:nowrap;color:var(--d1)}
+@media (max-width:640px){
+ .st,.st tbody{display:block;min-width:0!important;width:100%}
+ .st thead{display:none}
+ .st tbody tr{display:grid;grid-template-columns:1fr 42px;align-items:center;border-bottom:1px solid var(--line)}
+ .st td{border-bottom:0}
+ .st td.lab{grid-column:1 / -1;padding-bottom:2px;font-weight:600}
+ .st select.cel{min-width:0!important;width:100%}
+ .st tr.xrow{display:grid}
+ .st tr.xrow[hidden]{display:none}
+ .st tr.xrow td{grid-column:1 / -1}
+}
+</style>
+
+</head><body>
+<div class="wm" aria-hidden="true"></div>
+<div class="wrap">
+  <div class="stick" id="stick">
+  <header class="top">
+    <div>
+      <a class="back" href="index.html">← Centro de Primera Infancia</a>
+      <h1>Adolescencia</h1>
+      <p class="sub">Técnico en atención a la primera infancia y adolescencia · Cambios, comunicación, riesgos, protección y rutas</p>
+    </div>
+    <div class="who">
+      <label for="nombre">Nombre del estudiante<input id="nombre" data-k="nombre" placeholder="Escribe tu nombre" autocomplete="off"></label>
+      <div class="nota"><span>Nota</span><b id="nota">0,0</b><span>sobre 10</span></div>
+    </div>
+  </header>
+  <div class="legend">
+    <span><i class="sw" style="background:var(--input)"></i>Por responder</span>
+    <span><i class="sw" style="background:var(--okbg)"></i>Correcto ✔</span>
+    <span><i class="sw" style="background:var(--errbg)"></i>Error ✘, revisa</span>
+    <span>Elige la respuesta en cada lista; aparecerá una explicación 💡. Tu avance se guarda en este navegador.</span>
+  </div>
+  <nav class="tabs" id="tabs" role="tablist"></nav>
+  </div>
+  <main id="days"></main>
+</div>
+
+<button class="fab" id="fab" type="button" aria-expanded="false" aria-controls="sheet">Ver ejercicio</button>
+<aside class="sheet" id="sheet" hidden aria-label="Ejercicio del paso">
+  <div class="sheet-in">
+    <div class="sheet-h">
+      <div class="sheet-t"><span class="lbl" id="sheetDay"></span><button class="stab" type="button" data-sv="ej" aria-pressed="true">Ejercicio</button><button class="stab" type="button" data-sv="pa" aria-pressed="false">Paso a paso</button></div>
+      <button class="btn" type="button" id="sheetClose">Cerrar</button>
+    </div>
+    <div class="sheet-b" id="sheetBody"></div>
+  </div>
+</aside>
+
+
+
+<script>
+const D={key:"pi-adolescencia-v1",
+title:"Adolescencia",sub:"Técnico en atención a la primera infancia y adolescencia · Cambios, comunicación, riesgos, protección y rutas",
+fuentes:[
+ "Organización Mundial de la Salud. Salud del adolescente y salud mental de los adolescentes (notas descriptivas). La adolescencia va de los 10 a los 19 años.",
+ "Congreso de Colombia. (2006). <i>Ley 1098 de 2006, Código de la Infancia y la Adolescencia</i>: artículo 3 (adolescente de 12 a 18 años) y Libro II (Sistema de Responsabilidad Penal para Adolescentes).",
+ "Congreso de Colombia. (2013). <i>Ley 1620 de 2013</i> y Decreto 1965 de 2013: Ruta de Atención Integral para la Convivencia Escolar.",
+ "Ministerio de Salud y Protección Social. Línea 192, opción 4: orientación en salud mental.",
+ "ICBF. Línea 141: protección, emergencia y orientación, 24 horas."],
+days:[
+{tc:"Cambios",t:"¿Qué cambia en la adolescencia?",
+ que:"Para la OMS la adolescencia va de los <b>10 a los 19 años</b>; en Colombia el Código de la Infancia considera adolescente a quien tiene <b>de 12 a 18 años</b>. Es una etapa de grandes cambios en el cuerpo, en la forma de pensar, en las emociones y en las relaciones.",
+ pasos:["Lee el documento sobre las cuatro dimensiones del cambio.","Lee cada cambio.","Elige la dimensión a la que pertenece principalmente.","Lee la explicación 💡."],
+ ej:"<p>Clasifica cada cambio en su <b>dimensión</b>.</p>",
+ doc:`<details class="doc"><summary>📄 Las 4 dimensiones del cambio</summary><ul class="guia">
+  <li><b>Física (pubertad):</b> cambios del cuerpo por las hormonas: estatura, voz, vello, menstruación o eyaculación.</li>
+  <li><b>Cognitiva:</b> cambios en la forma de pensar: ideas abstractas, argumentar, planear.</li>
+  <li><b>Emocional:</b> emociones más intensas, autoestima, imagen corporal, búsqueda de quién soy.</li>
+  <li><b>Social:</b> más peso de los amigos, deseo de independencia y privacidad, nuevas relaciones.</li></ul></details>`,
+ blocks:[{type:"cls",c1:"Cambio",col:"Dimensión",opts:["Física (pubertad)","Cognitiva (pensamiento)","Emocional","Social"],items:[
+  ["Crece rápido de estatura y le cambia la voz.",0,"Son cambios del cuerpo producidos por las hormonas de la pubertad."],
+  ["Aparece la menstruación o las primeras eyaculaciones.",0,"Son señales de la maduración sexual del cuerpo."],
+  ["Empieza a pensar en ideas abstractas como la justicia o el futuro.",1,"Es el pensamiento abstracto: un cambio cognitivo."],
+  ["Discute las normas y pide razones antes de aceptarlas.",1,"Argumentar y cuestionar es parte del desarrollo del pensamiento."],
+  ["Planea mejor, pero a veces se arriesga sin medir las consecuencias.",1,"La capacidad de planear y controlar impulsos todavía está madurando."],
+  ["Tiene cambios de ánimo rápidos e intensos.",2,"Las emociones se viven con más intensidad."],
+  ["Le preocupa mucho lo que otros piensen de su cuerpo.",2,"La imagen corporal y la autoestima son temas emocionales centrales."],
+  ["El grupo de amigos se vuelve muy importante.",3,"Los pares ganan peso: dimensión social."],
+  ["Busca más privacidad e independencia de la familia.",3,"Es parte de construir autonomía en sus relaciones."]]}],
+ post:[["💬 Explicación sencilla: no es “rebeldía sin causa”",`<p>Muchos comportamientos que molestan a los adultos tienen sentido: el adolescente <b>está construyendo quién es</b>. Discutir, buscar privacidad o preferir a los amigos son pasos hacia la autonomía. El adulto no desaparece: <b>acompaña con normas claras y mucho diálogo</b>.</p>`]]},
+{tc:"Comunicación",t:"Comunicarse con un adolescente",
+ que:"La forma en que el adulto habla hace la diferencia. La comunicación <b>asertiva</b> pone límites claros con respeto y escucha. Los estilos autoritario, permisivo o sobreprotector alejan al adolescente o lo dejan sin guía.",
+ pasos:["Lee el documento con los cuatro estilos.","Lee cada frase o actitud del adulto.","Elige el estilo que muestra."],
+ ej:"<p>Elige el <b>estilo de comunicación</b> de cada frase o actitud del adulto.</p>",
+ doc:`<details class="doc"><summary>📄 Los 4 estilos del adulto</summary><ul class="guia">
+  <li><b>Asertivo:</b> escucha, explica las normas, pone límites claros y busca acuerdos.</li>
+  <li><b>Autoritario:</b> impone, amenaza o castiga sin explicar ni escuchar.</li>
+  <li><b>Permisivo:</b> no pone normas ni se interesa; “todo vale”.</li>
+  <li><b>Sobreprotector:</b> le resuelve todo y no lo deja asumir responsabilidades.</li></ul></details>`,
+ blocks:[{type:"cls",c1:"Lo que dice o hace el adulto",col:"Estilo",opts:["Asertivo","Autoritario","Permisivo","Sobreprotector"],items:[
+  ["“Te escucho. ¿Qué pasó? Busquemos juntos una solución.”",0,"Escucha y busca acuerdos: asertivo."],
+  ["“Aquí se hace lo que yo digo y punto.”",1,"Impone sin explicar: autoritario."],
+  ["“Haz lo que quieras, a mí no me importa.”",2,"No hay normas ni interés: permisivo."],
+  ["“Yo te hago las tareas para que no sufras.”",3,"Le quita la responsabilidad: sobreprotector."],
+  ["“Entiendo que estés molesto; la norma es llegar a las 8. ¿Cómo podemos cumplirla?”",0,"Valida la emoción y mantiene el límite: asertivo."],
+  ["“Si vuelves a sacar una mala nota te quito el celular por un año.”",1,"Amenaza con un castigo desproporcionado: autoritario."],
+  ["No le pone horarios ni le pregunta con quién sale, para no tener problemas.",2,"Evita poner límites: permisivo."],
+  ["Le resuelve todos sus conflictos con los amigos para que no se sienta mal.",3,"No le permite aprender a resolver: sobreprotector."]]}],
+ post:[["💬 Cinco claves para hablar con adolescentes",`<ol class="guia"><li>Escucha más de lo que hablas.</li><li>Valida lo que siente antes de corregir (“entiendo que estés molesto”).</li><li>Explica el porqué de las normas.</li><li>Critica la conducta, nunca a la persona.</li><li>Cumple lo que acuerdas: la coherencia genera confianza.</li></ol>`]]},
+{tc:"Riesgo y protección",t:"Factores de riesgo y factores protectores",
+ que:"Los <b>factores de riesgo</b> aumentan la probabilidad de problemas (consumo, violencia, dificultades de salud mental). Los <b>factores protectores</b> ayudan al adolescente a salir adelante. Trabajar con adolescentes es, sobre todo, <b>fortalecer los protectores</b>.",
+ pasos:["Lee cada situación.","Pregúntate: ¿esto lo cuida o lo pone en peligro?","Elige factor protector o factor de riesgo."],
+ ej:"<p>Decide si cada situación es un <b>factor protector</b> o un <b>factor de riesgo</b>.</p>",
+ doc:`<details class="doc"><summary>📄 Datos de la OMS sobre salud mental en la adolescencia</summary><ul class="guia">
+  <li>Uno de cada siete adolescentes de 10 a 19 años presenta un trastorno mental, y muchos no son detectados ni tratados.</li>
+  <li>La mitad de los trastornos mentales empiezan a los 14 años o antes.</li>
+  <li>La violencia (en especial el acoso), la crianza severa y los graves problemas socioeconómicos son riesgos reconocidos.</li>
+  <li>Hábitos como dormir bien, hacer ejercicio y aprender a manejar las emociones protegen la salud mental.</li></ul></details>`,
+ blocks:[{type:"cls",c1:"Situación",col:"Tipo de factor",opts:["Factor protector","Factor de riesgo"],items:[
+  ["Tener al menos un adulto de confianza con quien hablar.",0,"Un adulto disponible es uno de los factores protectores más fuertes."],
+  ["Empezar a consumir alcohol a temprana edad.",1,"El consumo temprano aumenta el riesgo de dependencia y otros problemas."],
+  ["Practicar un deporte, arte o pertenecer a un grupo juvenil.",0,"Da sentido de pertenencia, habilidades y amigos sanos."],
+  ["Ser víctima de acoso escolar o ciberacoso.",1,"El acoso es un riesgo reconocido para la salud mental."],
+  ["Dormir bien y tener rutinas saludables.",0,"El sueño y los hábitos saludables protegen la salud mental."],
+  ["Crecer con gritos, golpes o humillaciones.",1,"La crianza violenta daña la autoestima y la salud mental."],
+  ["Recibir información clara sobre sexualidad y derechos sexuales y reproductivos.",0,"La información permite tomar decisiones responsables y cuidarse."],
+  ["Pasar muchas horas en redes sin supervisión y compartir datos con desconocidos.",1,"Expone a contactos peligrosos y a ciberacoso."],
+  ["Sentirse parte de su colegio y de su comunidad.",0,"La pertenencia protege frente al aislamiento y la deserción."]]}],
+ post:[]},
+{tc:"Casos",t:"Casos: ¿cómo actúo?",
+ que:"Ante una situación difícil la regla es la misma: <b>escuchar sin juzgar, no quedarse callado y activar la ruta</b> que corresponde. En el colegio, el comité escolar de convivencia (Ley 1620); ante una vulneración de derechos, el ICBF (Línea 141); en salud mental, la Línea 192 opción 4.",
+ pasos:["Lee el caso con calma.","Elige qué debes hacer.","Recuerda: nunca se culpa, se ridiculiza ni se expone al adolescente."],
+ ej:"<p>En cada caso, elige <b>qué debes hacer</b>.</p>",
+ doc:`<details class="doc"><summary>📄 Rutas y líneas de ayuda</summary><ul class="guia">
+  <li><b>Comité escolar de convivencia:</b> acoso, ciberacoso y violencia escolar (Ley 1620 de 2013).</li>
+  <li><b>Línea 141 del ICBF:</b> vulneración de derechos, 24 horas.</li>
+  <li><b>Línea 192, opción 4:</b> orientación en salud mental (Ministerio de Salud).</li>
+  <li><b>Línea 123:</b> emergencias.</li></ul></details>`,
+ blocks:[{type:"casos",items:[
+  {n:"Andrés · 13 años",t:"Sus compañeros se burlan de él en un grupo de WhatsApp del curso y publican montajes con su foto.",qs:[{q:"¿Qué debes hacer?",o:["Decirle que no le pare bolas","Escucharlo, guardar las evidencias e informar al comité de convivencia para activar la ruta","Salirse del grupo y olvidar el tema","Responder en el grupo insultando a los agresores"],a:1}],x:"El ciberacoso se atiende con la ruta de convivencia escolar de la Ley 1620. Las evidencias (capturas) son importantes."},
+  {n:"Camila · 15 años",t:"Hace semanas está aislada y triste, dejó de comer con sus amigas y dice que nada tiene sentido.",qs:[{q:"¿Qué debes hacer?",o:["Decirle que es una etapa y que ya se le pasará","Escucharla sin juzgar, no dejarla sola si la ves en riesgo, avisar a orientación y a su familia y buscar ayuda profesional (Línea 192, opción 4)","Contarlo en el salón para que la animen","Regañarla por estar triste"],a:1}],x:"Tristeza prolongada, aislamiento y frases de desesperanza son señales de alerta. Se escucha, se acompaña y se busca ayuda profesional."},
+  {n:"Felipe · 16 años",t:"Cuenta que está consumiendo marihuana los fines de semana con unos amigos.",qs:[{q:"¿Qué debes hacer?",o:["Expulsarlo de inmediato","Dialogar con respeto, informar a orientación escolar y a la familia, y orientarlo hacia los servicios de salud","Ignorarlo porque es su vida","Contarlo a todos los profesores para que lo vigilen"],a:1}],x:"El consumo se aborda desde la salud y el acompañamiento, no desde la exclusión."},
+  {n:"Sara · 13 años",t:"Le cuenta a la orientadora que está embarazada.",qs:[{q:"¿Qué debes hacer?",o:["Pedirle que se retire del colegio","Acompañarla, garantizar que siga estudiando y reportar al ICBF (Línea 141), porque en Colombia toda relación sexual con una persona menor de 14 años es un delito","Guardar el secreto como ella pide","Regañarla delante de su familia"],a:1}],x:"Es un caso de protección: se reporta, se garantiza su atención en salud y su derecho a seguir estudiando."},
+  {n:"Kevin · 16 años",t:"Comete un hurto en una tienda del barrio.",qs:[{q:"¿Qué pasa con él según la ley?",o:["Va a la cárcel de adultos","No le pasa nada porque es menor de edad","Responde ante el Sistema de Responsabilidad Penal para Adolescentes, con medidas de carácter pedagógico","Solo lo castigan sus padres"],a:2}],x:"Los adolescentes de 14 a 18 años responden ante un sistema especial, con medidas pedagógicas y de restablecimiento de derechos."},
+  {n:"Laura y Daniela · 14 años",t:"Discuten en el patio por un malentendido, sin agresiones.",qs:[{q:"¿Qué debes hacer?",o:["Reportarlas al ICBF","Mediar: escuchar a ambas, ayudarlas a dialogar y llegar a un acuerdo","Sancionarlas a las dos","Dejar que lo resuelvan a los golpes"],a:1}],x:"Es un conflicto cotidiano (situación tipo I): se resuelve con mediación y diálogo."}]}],
+ post:[["💬 Lo que nunca debes hacer",`<ul class="guia"><li>Prometer guardar un secreto cuando hay riesgo para su vida o sus derechos.</li><li>Ridiculizar, exponer o culpar al adolescente.</li><li>Minimizar lo que siente (“eso no es nada”).</li><li>Actuar sola: siempre se informa a la institución y se activa la ruta.</li></ul>`]]},
+{tc:"Derechos",t:"Derechos y deberes en la adolescencia",
+ que:"Los adolescentes tienen los mismos derechos que los niños y además nuevas responsabilidades. Conocer la ley ayuda a orientarlos sin mitos y a proteger sus derechos a la educación, la salud, la intimidad y la participación.",
+ pasos:["Lee cada afirmación.","Decide si es verdadera o falsa.","Responde la evaluación final."],
+ ej:"<p>Decide si cada afirmación es <b>verdadera o falsa</b>.</p>",doc:"",
+ blocks:[{type:"cls",c1:"Afirmación",col:"¿Verdadera o falsa?",opts:["Verdadera","Falsa"],items:[
+  ["La OMS define la adolescencia como la etapa entre los 10 y los 19 años.",0,"Verdadero."],
+  ["En Colombia el Código de la Infancia considera adolescente a la persona de 12 a 18 años.",0,"Verdadero (artículo 3 de la Ley 1098)."],
+  ["Un adolescente de 15 años que comete un delito va a la cárcel de adultos.",1,"Falso. Responde ante el Sistema de Responsabilidad Penal para Adolescentes."],
+  ["Una estudiante puede ser retirada del colegio por estar embarazada.",1,"Falso. Tiene derecho a continuar sus estudios."],
+  ["La Línea 192, opción 4, del Ministerio de Salud brinda orientación en salud mental.",0,"Verdadero."],
+  ["El ciberacoso también se atiende con la ruta de convivencia escolar.",0,"Verdadero. La Ley 1620 incluye el acoso a través de internet."],
+  ["Pedir ayuda en salud mental es una señal de debilidad.",1,"Falso. Buscar ayuda es una forma de cuidarse; mientras antes se pida, mejor."],
+  ["Los adolescentes no tienen derecho a opinar sobre las decisiones que los afectan.",1,"Falso. Tienen derecho a participar y a ser escuchados."]]}],
+ post:[]}],
+eval:[
+ {q:"Para la OMS, ¿entre qué edades va la adolescencia?",o:["8 a 15 años","10 a 19 años","12 a 21 años","14 a 18 años"],a:1,e:"La OMS la ubica entre los 10 y los 19 años."},
+ {q:"“Entiendo que estés molesto; la norma es llegar a las 8. ¿Cómo podemos cumplirla?” es un estilo:",o:["Autoritario","Permisivo","Asertivo","Sobreprotector"],a:2,e:"Reconoce lo que siente el adolescente sin quitar la norma: ese es el estilo asertivo."},
+ {q:"Verdadero o falso: tener un adulto de confianza es un factor protector.",o:["Verdadero","Falso"],a:0,e:"Verdadero. Es uno de los más importantes."},
+ {q:"Ante un caso de ciberacoso en el colegio se activa:",o:["La ruta de convivencia escolar (Ley 1620)","La Registraduría","La DIAN","Nada, es fuera del colegio"],a:0,e:"La Ley 1620 incluye el acoso que ocurre por internet."},
+ {q:"Un adolescente triste por semanas, aislado y sin esperanza necesita:",o:["Que lo dejen solo","Que lo regañen","Escucha sin juicio, aviso a orientación y familia, y ayuda profesional","Que se lo cuenten al curso"],a:2,e:"Son señales de alerta en salud mental: se acompaña y se busca ayuda."}]
+};
+
+// Motor común de los talleres del Centro de Primera Infancia. Recibe D (datos del taller).
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const KEY=D.key;
+let store={}; try{store=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){store={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
+const exp=(t,html,open)=>`<details class="ref"${open?" open":""}><summary>${t}</summary>${html}</details>`;
+const Q=[]; // {tab,id,a,grp}
+function sel(tab,id,a,opts,lab,grp){Q.push({tab,id,a,grp});return `<select class="cel" id="${id}" data-k="${id}" aria-label="${lab||"Elige"}"><option value="">— elige —</option>${opts.map((o,j)=>`<option value="${j}">${o}</option>`).join("")}</select>`}
+const CASEX=[]; // {ids:[], xid}
+
+function intro(d){return `<div class="band"><span class="eyebrow">Paso ${d.n} de ${D.days.length}</span><h2>${d.t}</h2></div>
+  <div class="cols"><div class="box"><h3>¿Qué es?</h3><p>${d.que}</p></div><div class="box"><h3>Paso a paso</h3><ol>${d.pasos.map(p=>`<li>${p}</li>`).join("")}</ol></div></div>`}
+function footer(n){const last=n===D.days.length;return `<div class="foot"><p class="score">${D.days[n-1].tc}: <b id="sc${n}">0</b></p><div class="btns" id="rb${n}">
+  <button class="btn" data-reset="${n}">Reiniciar</button>${last?"":`<button class="btn pri" data-go="${n+1}">Siguiente paso →</button>`}</div></div>`}
+function block(n,b,bi){
+  let h=b.h3?`<h3>${b.h3}</h3>`:"";
+  if(b.type==="cls"){
+    h+=`<div class="tw"><table class="st"><thead><tr><th style="text-align:left">${b.c1||"Situación"}</th><th>${b.col}</th><th class="ic">✓</th></tr></thead><tbody>`;
+    b.items.forEach((it,i)=>{const id=`t${n}-${bi}-${i}`;
+      h+=`<tr><td class="lab">${i+1}. ${it[0]}</td><td>${sel(n,id,it[1],b.opts,b.col)}</td><td class="ic" id="${id}-i"></td></tr><tr class="xrow" id="${id}-x" hidden><td colspan="3">💡 ${it[2]}</td></tr>`});
+    h+=`</tbody></table></div>`;
+  } else if(b.type==="casos"){
+    h+=`<div class="casos">`;
+    b.items.forEach((c,i)=>{const base=`c${n}-${bi}-${i}`,ids=[];
+      h+=`<div class="caso"><div class="nh"><span class="nn">${b.lab||"Caso"} ${i+1}</span><b>${c.n}</b></div>${c.t?`<p>${c.t}</p>`:""}`;
+      c.qs.forEach((q,j)=>{const id=`${base}-${j}`;ids.push(id);
+        h+=`<label class="fl">${q.q}${sel(n,id,q.a,q.o,q.q)}</label><span class="ic2" id="${id}-i"></span>`});
+      h+=`<p class="xcase" id="${base}-x" hidden>💡 ${c.x}</p></div>`;CASEX.push({ids,xid:base+"-x"});});
+    h+=`</div>`;
+  }
+  return h;
+}
+function dayBody(d){
+  let h=`<div class="box"><h3>El ejercicio</h3>${d.ej}${d.doc?`<div class="docs">${d.doc}</div>`:""}</div>`;
+  (d.pre||[]).forEach(e=>h+=exp(e[0],e[1]));
+  d.blocks.forEach((b,bi)=>h+=block(d.n,b,bi));
+  (d.post||[]).forEach(e=>h+=exp(e[0],e[1]));
+  if(d.n===D.days.length){
+    h+=exp("📚 Fuentes para consultar",`<ul class="guia">${D.fuentes.map(f=>`<li>${f}</li>`).join("")}</ul>`);
+    h+=`<div class="box"><h3>Evaluación final · ${D.eval.length} preguntas</h3>`;
+    D.eval.forEach((q,i)=>{h+=`<div class="q"><p><b>${i+1}.</b> ${q.q}</p>${q.o.map((o,j)=>`<label id="q${i}-${j}-l"><input type="radio" name="q${i}" id="q${i}-${j}" data-k="q${i}" value="${j}"> ${o}</label>`).join("")}<p class="exp" id="q${i}-e" hidden>${q.e}</p></div>`});
+    h+=`</div>`;
+  }
+  return h;
+}
+const tabs=$("#tabs"), days=$("#days");
+D.days.forEach((d,i)=>{d.n=i+1;
+  tabs.insertAdjacentHTML("beforeend",`<button class="tab" role="tab" id="tab${d.n}" aria-selected="false" style="--dc:var(--d${d.n});--ds:var(--d${d.n}s)" data-go="${d.n}"><small>Paso ${d.n}</small><span class="t">${d.tc}</span><span class="sc" id="tsc${d.n}">0 %</span></button>`);
+  days.insertAdjacentHTML("beforeend",`<section class="day" id="day${d.n}" role="tabpanel" hidden style="--dc:var(--d${d.n});--ds:var(--d${d.n}s)">${intro(d)}${dayBody(d)}${footer(d.n)}</section>`);
+});
+$$("[data-k]").forEach(el=>{const v=store[el.dataset.k]; if(v==null)return; if(el.type==="radio") el.checked=(el.value===v); else el.value=v;});
+
+const mark=(el,s)=>{if(!el)return;el.classList.remove("ok","err");if(s)el.classList.add(s)};
+const icon=(el,s)=>{if(!el)return;mark(el,s);el.textContent=s==="ok"?"✔":s==="err"?"✘":""};
+function check(){
+  const N=D.days.length,ok={},tot={};for(let n=1;n<=N;n++){ok[n]=0;tot[n]=0}
+  Q.forEach(q=>{tot[q.tab]++;const s=$("#"+q.id),v=s.value,g=v!==""&&+v===q.a,st=v===""?"":(g?"ok":"err");
+    mark(s,st);icon($(`#${q.id}-i`),st);q.st=st;if(g)ok[q.tab]++;const x=$(`#${q.id}-x`);if(x)x.hidden=v==="";});
+  CASEX.forEach(c=>{$("#"+c.xid).hidden=!c.ids.every(id=>$("#"+id).value!=="")});
+  let okE=0;
+  D.eval.forEach((q,i)=>{q.o.forEach((_,j)=>mark($(`#q${i}-${j}-l`),""));
+    const r=$(`input[name="q${i}"]:checked`),e=$(`#q${i}-e`);
+    if(r){const j=+r.value,g=j===q.a;mark($(`#q${i}-${j}-l`),g?"ok":"err");if(g)okE++;e.hidden=false}else e.hidden=true;});
+  const pct={};for(let n=1;n<N;n++)pct[n]=ok[n]/tot[n];pct[N]=.5*ok[N]/tot[N]+.5*okE/D.eval.length;
+  for(let n=1;n<N;n++)$("#sc"+n).textContent=`${ok[n]} de ${tot[n]} correctas`;
+  $("#sc"+N).textContent=`actividad ${ok[N]} de ${tot[N]} · evaluación ${okE} de ${D.eval.length}`;
+  let nota=0;for(let n=1;n<=N;n++){nota+=10/N*pct[n];$("#tsc"+n).textContent=Math.round(pct[n]*100)+" %"}
+  $("#nota").textContent=(Math.round(nota*10)/10).toLocaleString("es-CO",{minimumFractionDigits:1,maximumFractionDigits:1});
+}
+function show(n){curDay=n;if(!$("#sheet").hidden)renderSheet();D.days.forEach(d=>{$("#day"+d.n).hidden=d.n!==n;$("#tab"+d.n).setAttribute("aria-selected",d.n===n)});
+  try{localStorage.setItem(KEY+"-tab",n)}catch(e){}}
+document.addEventListener("change",e=>{const el=e.target;if(!el.dataset||!el.dataset.k)return;store[el.dataset.k]=el.value;save();check();});
+document.addEventListener("input",e=>{const el=e.target;if(!el.dataset||!el.dataset.k)return;store[el.dataset.k]=el.value;save();check();});
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-go]"); if(g){show(+g.dataset.go); window.scrollTo({top:0}); return;}
+  const r=e.target.closest("[data-reset]"); if(r){const n=r.dataset.reset,box=$("#rb"+n);
+    box.dataset.html=box.innerHTML;
+    box.innerHTML=`<span class="confirm">¿Borrar todo lo de este paso? <button class="btn pri" data-yes="${n}">Sí, borrar</button><button class="btn" data-no="${n}">Cancelar</button></span>`; return;}
+  const y=e.target.closest("[data-yes]"); if(y){const n=y.dataset.yes;
+    $$(`#day${n} [data-k]`).forEach(el=>{delete store[el.dataset.k]; if(el.type==="radio")el.checked=false; else el.value=""});
+    save(); check(); const box=$("#rb"+n); box.innerHTML=box.dataset.html; return;}
+  const no=e.target.closest("[data-no]"); if(no){const box=$("#rb"+no.dataset.no); box.innerHTML=box.dataset.html;}
+});
+let curDay=1, sheetView="ej";
+function renderSheet(){
+  const sec=$("#day"+curDay); if(!sec)return;
+  const d=D.days[curDay-1];
+  $("#sheet").style.setProperty("--dc","var(--d"+d.n+")");
+  $("#fab").style.setProperty("--dc","var(--d"+d.n+")");
+  $("#sheetDay").textContent=d.t;
+  $$(".stab").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.sv===sheetView)));
+  const boxes=[...sec.querySelectorAll(".box")];
+  const src=sheetView==="ej"?boxes.find(b=>b.querySelector("h3")&&b.querySelector("h3").textContent.trim()==="El ejercicio"):sec.querySelector(".cols .box:nth-child(2)");
+  const body=$("#sheetBody"); body.textContent="";
+  if(src){const c=src.cloneNode(true); c.querySelectorAll("[id]").forEach(x=>x.removeAttribute("id")); body.appendChild(c);}
+}
+function setSheet(open){$("#sheet").hidden=!open;$("#fab").hidden=open;$("#fab").setAttribute("aria-expanded",String(open));document.documentElement.classList.toggle("sheet-open",open);if(open)renderSheet();}
+$("#fab").addEventListener("click",()=>setSheet(true));
+$("#sheetClose").addEventListener("click",()=>setSheet(false));
+document.addEventListener("click",e=>{const b=e.target.closest("[data-sv]"); if(b){sheetView=b.dataset.sv;renderSheet();}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#sheet").hidden)setSheet(false)});
+let start=1; try{start=+localStorage.getItem(KEY+"-tab")||1}catch(e){}
+show(start>=1&&start<=D.days.length?start:1); check();
+
+/* ---------- encabezado fijo ---------- */
+(function(){const st=$("#stick");let mini=false;
+  const upd=()=>{const y=scrollY;if(!mini&&y>90){mini=true;st.classList.add("mini")}else if(mini&&y<20){mini=false;st.classList.remove("mini")}};
+  addEventListener("scroll",upd,{passive:true});upd();
+  const pad=()=>{document.documentElement.style.scrollPaddingTop=(st.offsetHeight+12)+"px"};
+  try{new ResizeObserver(pad).observe(st)}catch(e){addEventListener("resize",pad)}pad();
+})();
+</script>
+
+</body></html>

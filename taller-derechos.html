@@ -1,0 +1,537 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Taller Derechos y marco legal</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+/* Layout: cuaderno de trabajo por días — pestañas de día arriba, cada día con su color suave, explicación, ejercicio escrito y tabla para llenar */
+:root{
+  --bg:#F5F7FA; --surface:#FFFFFF; --ink:#1C2632; --muted:#5A6777; --line:#D7DEE7;
+  --input:#FFF8DC; --ok:#17713F; --okbg:#DCF2E3; --err:#B3261E; --errbg:#FCE2DF;
+  --d1:#3A6BA0; --d1s:#E5EDF7; --d2:#357F62; --d2s:#E2F1EA; --d3:#A86F14; --d3s:#F8EEDC;
+  --d4:#65569E; --d4s:#ECE8F6; --d5:#B65345; --d5s:#F8E5E1;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11161C; --surface:#19212A; --ink:#E5EAF0; --muted:#9BA8B6; --line:#2C3743;
+  --input:#2B2817; --ok:#74D49C; --okbg:#173826; --err:#FF8E84; --errbg:#44201C;
+  --d1:#8DB5E3; --d1s:#1C2A3B; --d2:#82C9A9; --d2s:#18302A; --d3:#E5B464; --d3s:#33291A;
+  --d4:#B5A8E6; --d4s:#272338; --d5:#EE9C8F; --d5s:#3A2320; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11161C; --surface:#19212A; --ink:#E5EAF0; --muted:#9BA8B6; --line:#2C3743;
+  --input:#2B2817; --ok:#74D49C; --okbg:#173826; --err:#FF8E84; --errbg:#44201C;
+  --d1:#8DB5E3; --d1s:#1C2A3B; --d2:#82C9A9; --d2s:#18302A; --d3:#E5B464; --d3s:#33291A;
+  --d4:#B5A8E6; --d4s:#272338; --d5:#EE9C8F; --d5s:#3A2320; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:800}
+h2{font-size:1.45rem;font-weight:800}
+h3{font-size:1.05rem;font-weight:600}
+p{margin:0}
+.top{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
+.back{display:inline-block;margin-bottom:8px;color:var(--d1);font-weight:700;text-decoration:none}
+.back:hover{text-decoration:underline}
+.top .sub{color:var(--muted);margin-top:4px}
+.who{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.who label{font-size:.85rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.who input{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--input);color:var(--ink);min-width:0;width:220px;max-width:100%}
+.nota{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 14px;text-align:center}
+.nota b{font-family:var(--f-display);font-size:1.6rem;display:block;font-variant-numeric:tabular-nums}
+.nota span{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.tab{flex:1 0 150px;font:inherit;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;border-top:4px solid var(--dc)}
+.tab small{color:var(--muted);font-size:.78rem}
+.tab .t{font-weight:700;font-size:.95rem}
+.tab .sc{font-size:.8rem;font-variant-numeric:tabular-nums;color:var(--dc);font-weight:700}
+.tab[aria-selected="true"]{background:var(--ds);border-color:var(--dc)}
+.tab:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--dc,var(--d1));outline-offset:2px}
+.day{display:flex;flex-direction:column;gap:16px}
+.band{background:var(--ds);border-left:6px solid var(--dc);border-radius:8px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.band .eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dc);font-weight:700}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:720px){.cols{grid-template-columns:1fr}}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.box ol,.box ul{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px}
+.ej{display:flex;flex-direction:column;gap:10px}
+.ej li{padding-left:2px}
+.ej .f{font-weight:700;color:var(--dc)}
+.note{font-size:.88rem;color:var(--muted)}
+.exp1{border-left:5px solid var(--dc);background:var(--ds)}
+.exp1 summary{color:var(--dc)}
+.exp1 p{margin:6px 0}
+.mov{list-style:none;padding:0!important;margin:8px 0!important;display:flex;flex-direction:column;gap:8px}
+.mov li{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px}
+.lado{flex:0 0 auto;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-radius:4px;padding:2px 8px;margin-top:2px}
+.lado.deb{background:var(--d2s);color:var(--d2);border:1px solid var(--d2)}
+.lado.cre{background:var(--d4s);color:var(--d4);border:1px solid var(--d4)}
+.cuadra{font-weight:700;color:var(--ok)}
+.ref summary,.fact summary{color:var(--dc,var(--d1))}
+.ref p{margin:6px 0}
+.fact{margin-top:8px;padding:6px 12px}
+.fact summary{font-size:.92rem}
+.guia{display:flex;flex-direction:column;gap:10px;padding-left:1.3em}
+.guia ul{margin:4px 0;padding-left:1.2em;display:flex;flex-direction:column;gap:2px}
+td.tot{font-weight:800;font-size:1.05rem}
+.ana h4{font-family:var(--f-display);font-size:1rem;margin:14px 0 6px}
+.esf td.ex{color:var(--muted);font-size:.9rem;min-width:260px}
+.esf tr.grp td{font-weight:700;color:var(--dc);background:var(--ds);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.kpi{border:1px solid var(--line);border-top:4px solid var(--dc);border-radius:8px;background:var(--surface);padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.kpi small{color:var(--muted);font-weight:700}
+.kpi b{font-family:var(--f-display);font-size:1.4rem;color:var(--dc);font-variant-numeric:tabular-nums}
+.kpi span{font-size:.86rem;color:var(--muted)}
+.concl{display:flex;flex-direction:column;gap:6px;padding-left:1.3em}
+/* marca de agua */
+.wm{position:fixed;inset:0;z-index:60;pointer-events:none;background-repeat:repeat;background-size:360px 220px;opacity:.07;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220'%3E%3Ctext x='180' y='120' text-anchor='middle' transform='rotate(-24 180 110)' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%231C2632'%3EPAMAVA soluciones%3C/text%3E%3C/svg%3E")}
+:root[data-theme="dark"] .wm{opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220'%3E%3Ctext x='180' y='120' text-anchor='middle' transform='rotate(-24 180 110)' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%23E5EAF0'%3EPAMAVA soluciones%3C/text%3E%3C/svg%3E")}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .wm{opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220'%3E%3Ctext x='180' y='120' text-anchor='middle' transform='rotate(-24 180 110)' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%23E5EAF0'%3EPAMAVA soluciones%3C/text%3E%3C/svg%3E")}}
+@media print{.wm{position:fixed}}
+.vals{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.val{display:inline-flex;flex-direction:column;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:3px 10px;line-height:1.25}
+.val small{font-size:.72rem;color:var(--muted)}
+.val b{font-variant-numeric:tabular-nums;font-size:.95rem;color:var(--ink)}
+.val.iva{border-color:var(--d1);background:var(--d1s)}
+.val.iva small,.val.iva b{color:var(--d1)}
+.val.ret{border-color:var(--d5);background:var(--d5s)}
+.val.ret small,.val.ret b{color:var(--d5)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+details summary{cursor:pointer;font-weight:700}
+details[open] summary{margin-bottom:10px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:middle}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--bg);font-weight:700}
+td.n{text-align:right}
+th,th.n{text-align:center}
+.asiento{display:flex;flex-direction:column;gap:8px}
+.ahead{display:flex;flex-direction:column;gap:2px}
+.ahead .lbl{font-weight:700;color:var(--dc)}
+input.num,select.cel{font:inherit;font-size:.95rem;width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:5px;background:var(--input);color:var(--ink);font-variant-numeric:tabular-nums}
+input.num{text-align:right;min-width:110px}
+select.cel{min-width:90px}
+select.cel[data-k$="-c"]{min-width:230px}
+.ok{background:var(--okbg)!important;border-color:var(--ok)!important;color:var(--ok)!important}
+.err{background:var(--errbg)!important;border-color:var(--err)!important;color:var(--err)!important}
+.ic{width:42px;text-align:center;font-weight:800;font-size:1.05rem}
+.ic.ok,.ic.err{border-radius:5px}
+.cuenta{color:var(--muted);font-size:.92rem;min-width:180px}
+tr.sum td{background:var(--bg);font-weight:700}
+.msg{font-size:.88rem;font-weight:700;padding:2px 8px;border-radius:5px;display:inline-block}
+.foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px}
+.score{font-family:var(--f-display);font-size:1.15rem}
+.score b{color:var(--dc)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{font:inherit;cursor:pointer;border-radius:6px;padding:8px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.btn.pri{background:var(--dc);border-color:var(--dc);color:var(--surface);font-weight:700}
+.confirm{display:flex;gap:8px;align-items:center;font-size:.9rem}
+.aux{display:grid;grid-template-columns:1fr;gap:16px}
+.q{display:flex;flex-direction:column;gap:8px;padding:12px 0;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0}
+.q label{display:flex;gap:8px;align-items:flex-start;padding:6px 10px;border:1px solid var(--line);border-radius:6px;cursor:pointer}
+.q .exp{font-size:.88rem;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.85rem;color:var(--muted);align-items:center}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid var(--line);vertical-align:-2px;margin-right:4px}
+@media (prefers-reduced-motion: no-preference){.tab,.btn{transition:background .15s,border-color .15s}}
+
+.fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;font:inherit;font-weight:700;cursor:pointer;border:0;border-radius:999px;padding:12px 18px;background:var(--dc,var(--d1));color:var(--surface);box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--surface);border-top:4px solid var(--dc,var(--d1));box-shadow:0 -6px 24px rgba(0,0,0,.2);max-height:42vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px)}
+.sheet-in{width:100%;max-width:980px;margin:0 auto;min-height:0;display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sheet-h{display:flex;gap:8px;align-items:center;justify-content:space-between;padding-block:8px;border-bottom:1px solid var(--line)}
+.sheet-t{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.sheet-t .lbl{font-weight:700;color:var(--dc);margin-right:6px}
+.stab{font:inherit;font-size:.9rem;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 12px}
+.stab[aria-pressed="true"]{background:var(--dc);border-color:var(--dc);color:var(--surface);font-weight:700}
+.sheet-b{overflow:auto;padding-block:10px;min-height:0}
+.sheet-b .box{border:0;padding:0}
+html.sheet-open{scroll-padding-bottom:46vh}
+html.sheet-open .wrap{padding-bottom:calc(42vh + 24px)}
+/* encabezado fijo: título, nombre, nota, leyenda y pestañas siempre visibles */
+.stick{position:sticky;top:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;gap:12px;margin-inline:-16px;padding:10px 16px 10px;border-bottom:1px solid transparent}
+.stick.mini{border-bottom-color:var(--line);box-shadow:0 6px 14px rgba(0,0,0,.08);gap:8px;padding-block:6px 8px}
+.stick.mini .back,.stick.mini .top .sub{display:none}
+.stick.mini h1{font-size:1.15rem}
+.stick.mini .who label{flex-direction:row;align-items:center;gap:6px}
+.stick.mini .who input{padding:4px 8px;width:180px}
+.stick.mini .nota{padding:2px 12px;display:flex;align-items:baseline;gap:6px}
+.stick.mini .nota b{font-size:1.15rem}
+.stick.mini .legend{font-size:.78rem;gap:8px}
+.stick.mini .legend span:last-child{display:none}
+.stick.mini .tab{padding:5px 10px;flex-basis:130px}
+.stick.mini .tab .t{font-size:.85rem}
+@media (max-width:720px){
+  .stick.mini .legend{display:none}
+  .stick.mini .top{gap:6px;align-items:center}
+  .stick.mini .who label{font-size:0}
+  .stick.mini .who input{font-size:.9rem;width:150px}
+  .tab{flex-basis:128px}
+}
+/* calculadora flotante (igual a la del Taller de asientos) */
+.calc{position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:50;width:min(310px,calc(100vw - 24px));font-family:var(--f-body)}
+.calc:not(.open){width:auto}
+.calc .ct{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;background:var(--d1);color:var(--surface);border:0;border-radius:12px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.calc.open .ct{border-radius:12px 12px 0 0}
+.calc .cb{display:none;background:var(--surface);border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;padding:10px;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.calc.open .cb{display:block}
+.calc input{width:100%;font-family:ui-monospace,Consolas,monospace;font-size:16px;text-align:right;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--input);color:var(--ink)}
+.calc .cr{font-family:ui-monospace,Consolas,monospace;font-size:20px;font-weight:700;text-align:right;min-height:1.6em;margin:6px 2px;word-break:break-all}
+.calc .ck{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.calc .ck button{font:inherit;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:9px 0;font-size:16px;font-weight:600;cursor:pointer;color:var(--ink)}
+.calc .ck button.op{background:var(--d1s);color:var(--d1)}
+.calc .ck button.eq{background:var(--d1);color:var(--surface);border-color:var(--d1)}
+.calc .cc{display:flex;gap:6px;margin-top:8px}
+.calc .cc button{font:inherit;flex:1;border:0;border-radius:8px;padding:7px;background:var(--d1s);color:var(--d1);font-weight:600;cursor:pointer}
+.calc .ct span:first-child{white-space:nowrap}
+.calc .ct small{font-size:.78rem}
+@media (max-width:720px){.calc .ct small{display:none}}
+
+/* ---- taller estados financieros ---- */
+.st td.lab{font-size:.93rem;min-width:200px}
+.st tr.grp td{font-weight:700;color:var(--dc);background:var(--ds);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
+.st tr.big td{background:var(--ds);font-weight:800;border-top:2px solid var(--dc)}
+.st tr.fixr td{background:var(--bg);color:var(--muted);font-weight:700}
+.st td.dash{color:var(--muted);text-align:center}
+.st td.c25{color:var(--muted);font-size:.9rem;min-width:110px}
+select.acc{min-width:260px}
+.ecp input.num{min-width:120px}
+.docs{display:flex;flex-direction:column;gap:8px}
+.doc{border-left:5px solid var(--d1);padding:8px 12px}
+.doc summary{color:var(--d1)}
+.doc ol{padding-left:1.3em;display:flex;flex-direction:column;gap:6px;margin:6px 0}
+.notas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:14px}
+.nota-c{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--dc);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.nota-c .nh{display:flex;gap:8px;align-items:baseline}
+.nn{font-size:.75rem;font-weight:800;color:var(--dc);background:var(--ds);border-radius:4px;padding:2px 8px;text-transform:uppercase}
+.nota-c table{min-width:0}
+.nota-c td{border-bottom:1px solid var(--line)}
+.nota-c input.num{min-width:120px}
+.nota-c select.cel{min-width:0;max-width:260px}
+.concg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:820px){.concg{grid-template-columns:1fr}}
+.cbox{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--dc);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.cbox table{min-width:0}
+.cbox input.num{min-width:120px}
+.cuadra2{font-weight:700;font-size:1.05rem;padding:10px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--muted)}
+.st select.cel{min-width:220px}
+.st tbody td:first-child:not(.lab){white-space:nowrap}
+.st select.cel{min-width:240px}
+.xrow td{white-space:normal!important;background:var(--ds);color:var(--ink);font-size:.9rem;border-left:4px solid var(--dc)}
+.casos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:14px}
+.caso{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--dc);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.caso .nh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.fl{display:flex;flex-direction:column;gap:4px;font-size:.88rem;font-weight:700;color:var(--muted)}
+.fl select.cel{font-weight:400;white-space:normal;min-width:0}
+.ic2{align-self:flex-start;min-width:30px;text-align:center;font-weight:800;border-radius:5px;padding:0 6px}
+.ic2:empty{display:none}
+.xcase{background:var(--ds);border-left:4px solid var(--dc);border-radius:6px;padding:8px 10px;font-size:.92rem}
+.tind{min-width:880px}
+.tind td{vertical-align:top;font-size:.86rem}
+.tind ul{margin:0;padding-left:1.1em}
+.tind td.ed{font-weight:800;white-space:nowrap;color:var(--d1)}
+@media (max-width:640px){
+ .st,.st tbody{display:block;min-width:0!important;width:100%}
+ .st thead{display:none}
+ .st tbody tr{display:grid;grid-template-columns:1fr 42px;align-items:center;border-bottom:1px solid var(--line)}
+ .st td{border-bottom:0}
+ .st td.lab{grid-column:1 / -1;padding-bottom:2px;font-weight:600}
+ .st select.cel{min-width:0!important;width:100%}
+ .st tr.xrow{display:grid}
+ .st tr.xrow[hidden]{display:none}
+ .st tr.xrow td{grid-column:1 / -1}
+}
+</style>
+
+</head><body>
+<div class="wm" aria-hidden="true"></div>
+<div class="wrap">
+  <div class="stick" id="stick">
+  <header class="top">
+    <div>
+      <a class="back" href="index.html">← Centro de Primera Infancia</a>
+      <h1>Derechos y marco legal</h1>
+      <p class="sub">Técnico en atención a la primera infancia · Normas, principios, De Cero a Siempre y rutas de protección</p>
+    </div>
+    <div class="who">
+      <label for="nombre">Nombre del estudiante<input id="nombre" data-k="nombre" placeholder="Escribe tu nombre" autocomplete="off"></label>
+      <div class="nota"><span>Nota</span><b id="nota">0,0</b><span>sobre 10</span></div>
+    </div>
+  </header>
+  <div class="legend">
+    <span><i class="sw" style="background:var(--input)"></i>Por responder</span>
+    <span><i class="sw" style="background:var(--okbg)"></i>Correcto ✔</span>
+    <span><i class="sw" style="background:var(--errbg)"></i>Error ✘, revisa</span>
+    <span>Elige la respuesta en cada lista; aparecerá una explicación 💡. Tu avance se guarda en este navegador.</span>
+  </div>
+  <nav class="tabs" id="tabs" role="tablist"></nav>
+  </div>
+  <main id="days"></main>
+</div>
+
+<button class="fab" id="fab" type="button" aria-expanded="false" aria-controls="sheet">Ver ejercicio</button>
+<aside class="sheet" id="sheet" hidden aria-label="Ejercicio del paso">
+  <div class="sheet-in">
+    <div class="sheet-h">
+      <div class="sheet-t"><span class="lbl" id="sheetDay"></span><button class="stab" type="button" data-sv="ej" aria-pressed="true">Ejercicio</button><button class="stab" type="button" data-sv="pa" aria-pressed="false">Paso a paso</button></div>
+      <button class="btn" type="button" id="sheetClose">Cerrar</button>
+    </div>
+    <div class="sheet-b" id="sheetBody"></div>
+  </div>
+</aside>
+
+
+
+<script>
+const D={key:"pi-derechos-v1",
+title:"Derechos y marco legal",sub:"Técnico en atención a la primera infancia · Normas, principios, De Cero a Siempre y rutas de protección",
+fuentes:[
+ "Asamblea General de las Naciones Unidas. (1989). <i>Convención sobre los Derechos del Niño</i>. Aprobada en Colombia por la Ley 12 de 1991.",
+ "Constitución Política de Colombia. (1991). Artículos 44 y 45.",
+ "Congreso de Colombia. (2006). <i>Ley 1098 de 2006, Código de la Infancia y la Adolescencia</i>.",
+ "Congreso de Colombia. (2016). <i>Ley 1804 de 2016, Política de Estado para el Desarrollo Integral de la Primera Infancia De Cero a Siempre</i>.",
+ "Congreso de Colombia. (2021). <i>Ley 2089 de 2021</i>, que prohíbe el castigo físico y los tratos crueles, humillantes o degradantes contra niñas, niños y adolescentes.",
+ "Congreso de Colombia. (2013). <i>Ley 1620 de 2013, Sistema Nacional de Convivencia Escolar</i>.",
+ "ICBF. Línea 141: línea gratuita nacional de protección, emergencia y orientación, 24 horas. https://www.icbf.gov.co"],
+days:[
+{tc:"Las normas",t:"Las normas que protegen a la niñez",
+ que:"En Colombia los niños, niñas y adolescentes son <b>sujetos de derechos</b>: no son “propiedad” de nadie y tienen derechos propios. Varias normas, desde un tratado internacional hasta leyes recientes, explican esos derechos y quién debe garantizarlos.",
+ pasos:["Abre la línea de tiempo de las normas.","Lee cada descripción del ejercicio.","Elige la norma a la que corresponde.","Lee la explicación 💡 aunque aciertes."],
+ ej:"<p>Lee cada descripción y elige <b>de qué norma</b> se trata.</p>",
+ doc:`<details class="doc"><summary>📄 Línea de tiempo de las normas de infancia en Colombia</summary><ul class="guia">
+  <li><b>1989 · Convención sobre los Derechos del Niño (ONU).</b> El primer gran acuerdo mundial: los niños tienen derechos propios. Colombia la adoptó en 1991.</li>
+  <li><b>1991 · Constitución Política, artículo 44.</b> Lista los derechos fundamentales de los niños y dice que sus derechos están por encima de los de los demás.</li>
+  <li><b>2006 · Ley 1098, Código de la Infancia y la Adolescencia.</b> La ley central: define edades, principios, derechos, obligaciones y el proceso para restablecer derechos.</li>
+  <li><b>2013 · Ley 1620.</b> Sistema de convivencia escolar y su ruta de atención.</li>
+  <li><b>2016 · Ley 1804, De Cero a Siempre.</b> Política de Estado para la primera infancia: atención integral, realizaciones, entornos y educación inicial.</li>
+  <li><b>2021 · Ley 2089.</b> Crianza sin violencia: prohíbe el castigo físico y los tratos humillantes.</li></ul></details>`,
+ blocks:[{type:"cls",col:"¿Qué norma es?",c1:"Descripción",opts:["Convención sobre los Derechos del Niño (1989)","Constitución Política, artículo 44","Ley 1098 de 2006 · Código de la Infancia","Ley 1804 de 2016 · De Cero a Siempre","Ley 2089 de 2021 · Sin castigo físico","Ley 1620 de 2013 · Convivencia escolar"],items:[
+  ["Acuerdo internacional de las Naciones Unidas que Colombia aprobó con la Ley 12 de 1991.",0,"Es la Convención sobre los Derechos del Niño, adoptada por la ONU en 1989."],
+  ["Dice que los derechos de los niños prevalecen sobre los derechos de los demás.",1,"Lo establece el artículo 44 de la Constitución, que además enumera sus derechos fundamentales."],
+  ["Define que se es niño o niña de 0 a 12 años y adolescente de 12 a 18 años.",2,"El Código de la Infancia y la Adolescencia (artículo 3) define estas edades."],
+  ["Señala que la primera infancia va de los 0 a los 6 años y que el desarrollo integral es un derecho.",2,"Es el artículo 29 del Código de la Infancia y la Adolescencia."],
+  ["Convierte la estrategia De Cero a Siempre en una política de Estado que no depende del gobierno de turno.",3,"La Ley 1804 de 2016 hizo de De Cero a Siempre una política de Estado."],
+  ["Define las “realizaciones”, los “entornos” y la Ruta Integral de Atenciones (RIA).",3,"Son conceptos del artículo 4 de la Ley 1804 de 2016."],
+  ["Afirma que la educación inicial es un derecho de los niños y niñas menores de 6 años.",3,"Lo dice el artículo 5 de la Ley 1804 de 2016."],
+  ["Prohíbe corregir a los niños con golpes, gritos, humillaciones o cualquier tipo de violencia.",4,"La Ley 2089 de 2021 prohíbe el castigo físico y los tratos crueles, humillantes o degradantes."],
+  ["Crea la ruta para atender el acoso y la violencia escolar, incluido el que ocurre por internet.",5,"La Ley 1620 de 2013 crea el Sistema Nacional de Convivencia Escolar y su ruta de atención."]]}],
+ post:[["💬 Explicación sencilla: ¿por qué tantas normas?",`<p>Piensa en una casa: la <b>Convención</b> es el terreno (el acuerdo mundial), la <b>Constitución</b> son los cimientos, el <b>Código de la Infancia</b> son las paredes (la ley principal) y las demás leyes son los cuartos especiales: primera infancia (1804), colegio (1620) y crianza sin violencia (2089).</p><p>Todas dicen lo mismo de fondo: <b>los niños tienen derechos y los adultos tenemos la obligación de garantizarlos</b>.</p>`]]},
+{tc:"Principios",t:"Los cuatro principios de la protección",
+ que:"El Código de la Infancia (artículos 7 a 10) tiene cuatro principios que guían toda decisión sobre un niño: <b>protección integral</b>, <b>interés superior</b>, <b>prevalencia de los derechos</b> y <b>corresponsabilidad</b>.",
+ pasos:["Lee qué significa cada principio en el documento.","Lee la situación y pregúntate qué idea está detrás.","Elige el principio que mejor la explica."],
+ ej:"<p>Lee cada situación y elige el <b>principio</b> que se está aplicando.</p>",
+ doc:`<details class="doc"><summary>📄 Los 4 principios en palabras sencillas</summary><ul class="guia">
+  <li><b>Protección integral:</b> reconocer a los niños como sujetos de derechos, garantizar que se cumplan, prevenir que se amenacen y restablecerlos si se vulneran.</li>
+  <li><b>Interés superior:</b> en cada decisión se busca lo que de verdad es mejor para <b>ese</b> niño.</li>
+  <li><b>Prevalencia de los derechos:</b> si los derechos de un niño chocan con los de otra persona, se prefieren los del niño.</li>
+  <li><b>Corresponsabilidad:</b> la familia, la sociedad y el Estado son responsables al mismo tiempo de cuidar y proteger a los niños.</li></ul></details>`,
+ blocks:[{type:"cls",col:"Principio",opts:["Protección integral","Interés superior del niño","Prevalencia de los derechos","Corresponsabilidad"],items:[
+  ["La familia, el jardín y el centro de salud se reúnen para atender juntos a un niño con bajo peso.",3,"Varios actores responden al mismo tiempo: familia, sociedad y Estado comparten la responsabilidad."],
+  ["En la fila del centro de salud se atiende primero a una madre con su bebé enfermo.",2,"El derecho del niño a la salud se pone por encima de la comodidad de los adultos."],
+  ["El juez decide con quién vivirá una niña pensando en su bienestar y no en lo que prefieren los padres.",1,"La decisión se toma buscando lo mejor para ella: interés superior."],
+  ["El Estado hace campañas para prevenir el maltrato y, si ocurre, inicia el proceso para restablecer los derechos.",0,"Garantizar, prevenir y restablecer: eso es la protección integral."],
+  ["Los vecinos avisan a la Línea 141 al ver a un niño solo en la calle de noche.",3,"La sociedad también es responsable de proteger a los niños."],
+  ["Una obra en la calle se detiene para construir primero el acceso seguro al jardín infantil.",2,"El derecho de los niños a un entorno seguro prevalece sobre otros intereses."],
+  ["Antes de cambiar a un niño de jardín, se escucha lo que él siente y se piensa en cómo lo afectará.",1,"Escuchar al niño y pensar en su bienestar particular es aplicar su interés superior."],
+  ["Se reconoce que un bebé tiene derechos propios, aunque todavía no pueda reclamarlos.",0,"Reconocer a los niños como sujetos de derechos es la base de la protección integral."]]}],
+ post:[["💬 Truco para no confundir los principios",`<ul class="guia"><li>Si la pregunta es <b>“¿qué es lo mejor para este niño?”</b> → interés superior.</li><li>Si hay <b>dos derechos en conflicto</b> y gana el del niño → prevalencia.</li><li>Si aparecen <b>varios responsables</b> (familia, comunidad, instituciones) → corresponsabilidad.</li><li>Si se habla de <b>garantizar, prevenir y restablecer</b> → protección integral.</li></ul>`]]},
+{tc:"De Cero a Siempre",t:"De Cero a Siempre: entornos y realizaciones",
+ que:"La Ley 1804 de 2016 dice que el desarrollo integral se logra cuando se cumplen unas condiciones llamadas <b>realizaciones</b>, en los <b>entornos</b> donde vive el niño: el hogar, el entorno de salud, el educativo y el espacio público.",
+ pasos:["Parte A: decide en qué entorno ocurre cada situación.","Parte B: lee lo que vive el niño y elige qué realización se está cumpliendo.","Revisa el documento si tienes dudas."],
+ ej:"<p>Clasifica cada lugar en su <b>entorno</b> (parte A) y cada situación en su <b>realización</b> (parte B).</p>",
+ doc:`<details class="doc"><summary>📄 Las 7 realizaciones de la Ley 1804 de 2016</summary><p class="note">El Estado se compromete a que cada niña y cada niño:</p><ol class="guia">
+  <li>Cuente con padre, madre, familiares o cuidadores que lo acojan y practiquen pautas de crianza que favorezcan su desarrollo.</li>
+  <li>Viva y disfrute del nivel más alto posible de salud.</li><li>Goce y mantenga un estado nutricional adecuado.</li>
+  <li>Crezca en entornos que favorezcan su desarrollo.</li><li>Construya su identidad en un marco de diversidad.</li>
+  <li>Exprese sentimientos, ideas y opiniones en sus entornos cotidianos y estos sean tenidos en cuenta.</li>
+  <li>Crezca en entornos que promuevan y garanticen sus derechos y actúen ante situaciones de riesgo o vulneración.</li></ol></details>`,
+ blocks:[
+  {type:"cls",h3:"A. ¿En qué entorno ocurre?",c1:"Lugar o momento",col:"Entorno",opts:["Hogar","Entorno de salud","Entorno educativo","Espacio público"],items:[
+   ["La cocina donde la abuela prepara la comida y conversa con el niño.",0,"La casa y la familia forman el entorno hogar."],
+   ["La consulta de control de crecimiento y desarrollo.",1,"Las IPS, hospitales y puestos de salud son el entorno de salud."],
+   ["El CDI o el hogar comunitario del barrio.",2,"Los jardines, CDI, hogares comunitarios y colegios son el entorno educativo."],
+   ["El parque, la biblioteca pública y la plaza del barrio.",3,"Los espacios abiertos a todos son el espacio público."],
+   ["La jornada de vacunación en el puesto de salud.",1,"Es una atención en el entorno de salud."],
+   ["La ludoteca del municipio, abierta a todas las familias.",3,"Es un espacio público para el juego."]]},
+  {type:"cls",h3:"B. ¿Qué realización se está cumpliendo?",c1:"Lo que vive el niño",col:"Realización",opts:["Cuidadores que lo acogen con buenas pautas de crianza","El nivel más alto posible de salud","Estado nutricional adecuado","Entornos que favorecen su desarrollo","Identidad en un marco de diversidad","Expresa sus ideas y es escuchado","Entornos que protegen sus derechos y actúan ante el riesgo"],items:[
+   ["Su mamá y su abuelo lo arrullan, le hablan con cariño y le ponen rutinas sin gritos.",0,"Cuidadores que acogen y practican una crianza amorosa."],
+   ["Tiene sus vacunas al día y asiste a sus controles.",1,"Se está garantizando su salud."],
+   ["Recibe leche materna y alimentos variados según su edad.",2,"Se cuida su estado nutricional."],
+   ["Juega en espacios limpios, seguros y con materiales para explorar.",3,"El entorno favorece su desarrollo."],
+   ["En el jardín se celebran las costumbres de su comunidad indígena y se respeta su lengua.",4,"Construye su identidad valorando la diversidad."],
+   ["En la asamblea del salón los niños eligen el cuento del día y se tiene en cuenta su opinión.",5,"Expresa sus ideas y es escuchado."],
+   ["La maestra nota marcas de golpes y activa la ruta de protección.",6,"El entorno actúa ante una situación de riesgo para proteger sus derechos."]]}],
+ post:[["💬 Explicación sencilla: atención integral",`<p>La atención integral significa que <b>todo lo que el niño necesita llega a tiempo y de manera coordinada</b>. Según la Ley 1804 debe ser <b>pertinente</b> (acorde a su edad y contexto), <b>oportuna</b> (en el momento justo), <b>flexible</b>, <b>diferencial</b> (respeta las diferencias), <b>continua</b> y <b>complementaria</b> (los actores se apoyan entre sí).</p>`]]},
+{tc:"Rutas de protección",t:"Rutas de protección: ¿qué hago?",
+ que:"Cuando un derecho se amenaza o se vulnera, la agente educativa <b>no se queda callada ni actúa sola</b>: escucha, registra, informa a su institución y reporta a la autoridad. En Colombia, el ICBF (Línea 141), la Comisaría de Familia y la Policía son las puertas de entrada.",
+ pasos:["Lee el caso con calma.","Identifica qué derecho está en riesgo.","Elige la acción correcta: proteger sin revictimizar.","Si es un conflicto normal entre niños, se maneja pedagógicamente."],
+ ej:"<p>En cada caso, elige <b>qué derecho está en riesgo</b> y <b>qué debes hacer</b>.</p>",
+ doc:`<details class="doc"><summary>📄 Directorio de protección</summary><ul class="guia">
+  <li><b>Línea 141 del ICBF:</b> gratuita, nacional, 24 horas: protección, emergencia y orientación.</li>
+  <li><b>Defensoría de Familia (ICBF) y Comisaría de Familia:</b> autoridades que verifican derechos y ordenan medidas de protección.</li>
+  <li><b>Línea 123:</b> Policía, ante una emergencia o peligro inmediato.</li>
+  <li><b>Comité escolar de convivencia:</b> casos de acoso o violencia en el colegio (Ley 1620).</li></ul></details>`,
+ blocks:[{type:"casos",items:[
+  {n:"Samuel · 4 años",t:"Llega con moretones repetidos en los brazos y cuenta que su papá le pega con la correa.",qs:[
+    {q:"¿Qué derecho está en riesgo?",o:["Integridad personal (protección contra el maltrato)","Identidad","Educación","Ninguno: es un conflicto normal"],a:0},
+    {q:"¿Qué debes hacer?",o:["Hablar con el papá para que no lo vuelva a hacer y no reportar","Escuchar sin interrogar, registrar lo que dijo, informar a la coordinación y reportar a la Línea 141 del ICBF","Esperar a ver si vuelve a pasar","Publicar las fotos en el grupo de padres"],a:1}],
+   x:"Es una posible vulneración de su integridad. No se interroga al niño ni se enfrenta al agresor: se registra textualmente lo que dijo y se reporta para que la autoridad verifique."},
+  {n:"Luciana · 3 años",t:"Se queda sola en casa todo el día mientras sus padres trabajan; una vecina la ve en la ventana.",qs:[
+    {q:"¿Qué derecho está en riesgo?",o:["Integridad personal y cuidado (negligencia)","Identidad","Recreación únicamente","Ninguno"],a:0},
+    {q:"¿Qué debes hacer?",o:["Nada, es un asunto privado de la familia","Reportar a la Línea 141 del ICBF para que se verifiquen sus derechos","Regañar a los padres en público","Llevarse a la niña a vivir a otra casa"],a:1}],
+   x:"Dejar sola a una niña de 3 años es negligencia y la pone en peligro. El ICBF verifica y orienta a la familia; nadie debe actuar por su cuenta."},
+  {n:"Una mamá del jardín",t:"Dice: “Una palmada a tiempo no hace daño; así me criaron a mí”.",qs:[
+    {q:"¿Qué norma habla de esto?",o:["Ley 2089 de 2021","Ley 1620 de 2013","Ninguna, es una decisión de cada familia","Ley de tránsito"],a:0},
+    {q:"¿Qué debes hacer?",o:["Darle la razón para no tener problemas","Explicarle con respeto que la ley prohíbe el castigo físico y orientarla en crianza sin violencia: normas claras, rutinas y consecuencias sin golpes","Amenazarla con quitarle a su hijo","Ignorar el comentario"],a:1}],
+   x:"La Ley 2089 de 2021 prohíbe el castigo físico como método de corrección. La agente educativa orienta con respeto: hay formas de poner límites sin violencia."},
+  {n:"Juan y Pedro · 5 años",t:"Se pelean por un carrito en el rincón de juego; uno llora.",qs:[
+    {q:"¿Qué derecho está en riesgo?",o:["Integridad personal","Identidad","Ninguno: es un conflicto normal entre niños","Salud"],a:2},
+    {q:"¿Qué debes hacer?",o:["Reportar al ICBF","Acompañarlos a expresar lo que sienten y a buscar un acuerdo (turnos, compartir)","Castigar a los dos sin recreo","Quitar el juguete para siempre"],a:1}],
+   x:"Los conflictos entre niños son parte del aprendizaje. Se manejan pedagógicamente: nombrar emociones, escuchar y llegar a acuerdos."},
+  {n:"Mateo · 2 años",t:"No tiene registro civil ni está afiliado a salud porque la familia llegó hace poco al municipio.",qs:[
+    {q:"¿Qué derecho está en riesgo?",o:["Identidad y salud","Recreación","Ninguno","Libertad de culto"],a:0},
+    {q:"¿Qué debes hacer?",o:["No recibirlo en el jardín hasta que tenga papeles","Recibirlo y orientar a la familia para registrarlo en la Registraduría y afiliarlo al sistema de salud, informando a la entidad","Decirle a la familia que eso no es importante","Registrarlo tú con otro apellido"],a:1}],
+   x:"Tener nombre, registro y salud son derechos. Se orienta a la familia sin negarle la atención al niño."},
+  {n:"Valeria · 14 años",t:"Cuenta que un adulto que conoció por redes le pide fotos íntimas y la amenaza.",qs:[
+    {q:"¿Qué derecho está en riesgo?",o:["Integridad y libertad sexual","Educación","Ninguno, ella decidió hablar con él","Recreación"],a:0},
+    {q:"¿Qué debes hacer?",o:["Decirle que es su culpa por usar redes","Escucharla sin juzgar, no borrar las pruebas, informar a la institución y reportar de inmediato a la Línea 141 del ICBF o a la Policía","Escribirle al adulto para confrontarlo","Guardar el secreto como ella pide"],a:1}],
+   x:"Es una situación grave. Nunca se culpa a la víctima ni se guarda el secreto: se protegen las pruebas y se reporta de inmediato."}]}],
+ post:[["💬 Lo que nunca debes hacer ante una sospecha",`<ul class="guia"><li>Interrogar al niño una y otra vez o pedirle que muestre sus heridas (lo revictimiza).</li><li>Confrontar al posible agresor.</li><li>Prometer guardar el secreto.</li><li>Esperar a tener “pruebas”: basta con una sospecha razonable; la autoridad es quien verifica.</li><li>Contarlo a personas que no tienen que actuar.</li></ul>`]]},
+{tc:"Mi papel",t:"Mi papel como agente educativa",
+ que:"La agente educativa es <b>garante de derechos</b>: los promueve en su trabajo diario, previene situaciones de riesgo y activa las rutas cuando hace falta. Su forma de tratar a los niños también es un ejemplo para las familias.",
+ pasos:["Lee cada afirmación.","Decide si es verdadera o falsa.","Responde la evaluación final."],
+ ej:"<p>Decide si cada afirmación es <b>verdadera o falsa</b>.</p>",
+ doc:"",
+ blocks:[{type:"cls",c1:"Afirmación",col:"¿Verdadera o falsa?",opts:["Verdadera","Falsa"],items:[
+  ["Si la familia no da permiso, no se puede reportar un caso de maltrato.",1,"Falso. La protección del niño está por encima: se reporta aunque la familia no esté de acuerdo."],
+  ["Para reportar no hace falta tener pruebas definitivas; basta una sospecha razonable.",0,"Verdadero. La autoridad es quien verifica; la agente educativa informa lo que observó."],
+  ["La Línea 141 del ICBF es gratuita y atiende las 24 horas.",0,"Verdadero. Es la línea nacional de protección, emergencia y orientación."],
+  ["La agente educativa debe interrogar al niño a fondo para saber exactamente qué pasó.",1,"Falso. Se escucha y se registra lo que dice, sin presionar ni repetir preguntas."],
+  ["Los gritos y las humillaciones también son formas de maltrato prohibidas.",0,"Verdadero. La Ley 2089 prohíbe también los tratos crueles, humillantes o degradantes."],
+  ["La información de un niño en riesgo se comparte con discreción, solo con quien debe actuar.",0,"Verdadero. Se protege su intimidad y su buen nombre."],
+  ["El castigo físico está permitido si es suave y no deja marcas.",1,"Falso. Cualquier castigo físico como forma de corrección está prohibido."],
+  ["Promover los derechos incluye escuchar a los niños y tener en cuenta su opinión.",0,"Verdadero. Expresarse y ser escuchados es uno de sus derechos y una de las realizaciones."]]}],
+ post:[]}],
+eval:[
+ {q:"En Colombia, según el Código de la Infancia y la Adolescencia, una persona de 15 años es:",o:["Niño","Adolescente","Adulto","Primera infancia"],a:1,e:"Adolescente es la persona entre 12 y 18 años."},
+ {q:"¿Qué principio dice que la familia, la sociedad y el Estado son responsables al mismo tiempo de proteger a los niños?",o:["Interés superior","Prevalencia de los derechos","Corresponsabilidad","Protección integral"],a:2,e:"La corresponsabilidad reparte el deber de proteger entre los tres actores."},
+ {q:"Verdadero o falso: la Ley 1804 de 2016 convirtió De Cero a Siempre en una política de Estado.",o:["Verdadero","Falso"],a:0,e:"Verdadero. Por eso no depende del gobierno de turno."},
+ {q:"Ante la sospecha de maltrato, la acción correcta es:",o:["Esperar pruebas","Confrontar a la familia","Registrar lo observado, informar a la institución y reportar a la autoridad (Línea 141)","Guardar el secreto"],a:2,e:"Se reporta ante la sospecha razonable; la autoridad verifica."},
+ {q:"¿Cuál de estos NO es un entorno de la Ley 1804?",o:["Hogar","Entorno de salud","Espacio público","Centro comercial de lujo"],a:3,e:"Los entornos son el hogar, el de salud, el educativo, el espacio público y otros propios de cada cultura."}]
+};
+
+// Motor común de los talleres del Centro de Primera Infancia. Recibe D (datos del taller).
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const KEY=D.key;
+let store={}; try{store=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){store={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
+const exp=(t,html,open)=>`<details class="ref"${open?" open":""}><summary>${t}</summary>${html}</details>`;
+const Q=[]; // {tab,id,a,grp}
+function sel(tab,id,a,opts,lab,grp){Q.push({tab,id,a,grp});return `<select class="cel" id="${id}" data-k="${id}" aria-label="${lab||"Elige"}"><option value="">— elige —</option>${opts.map((o,j)=>`<option value="${j}">${o}</option>`).join("")}</select>`}
+const CASEX=[]; // {ids:[], xid}
+
+function intro(d){return `<div class="band"><span class="eyebrow">Paso ${d.n} de ${D.days.length}</span><h2>${d.t}</h2></div>
+  <div class="cols"><div class="box"><h3>¿Qué es?</h3><p>${d.que}</p></div><div class="box"><h3>Paso a paso</h3><ol>${d.pasos.map(p=>`<li>${p}</li>`).join("")}</ol></div></div>`}
+function footer(n){const last=n===D.days.length;return `<div class="foot"><p class="score">${D.days[n-1].tc}: <b id="sc${n}">0</b></p><div class="btns" id="rb${n}">
+  <button class="btn" data-reset="${n}">Reiniciar</button>${last?"":`<button class="btn pri" data-go="${n+1}">Siguiente paso →</button>`}</div></div>`}
+function block(n,b,bi){
+  let h=b.h3?`<h3>${b.h3}</h3>`:"";
+  if(b.type==="cls"){
+    h+=`<div class="tw"><table class="st"><thead><tr><th style="text-align:left">${b.c1||"Situación"}</th><th>${b.col}</th><th class="ic">✓</th></tr></thead><tbody>`;
+    b.items.forEach((it,i)=>{const id=`t${n}-${bi}-${i}`;
+      h+=`<tr><td class="lab">${i+1}. ${it[0]}</td><td>${sel(n,id,it[1],b.opts,b.col)}</td><td class="ic" id="${id}-i"></td></tr><tr class="xrow" id="${id}-x" hidden><td colspan="3">💡 ${it[2]}</td></tr>`});
+    h+=`</tbody></table></div>`;
+  } else if(b.type==="casos"){
+    h+=`<div class="casos">`;
+    b.items.forEach((c,i)=>{const base=`c${n}-${bi}-${i}`,ids=[];
+      h+=`<div class="caso"><div class="nh"><span class="nn">${b.lab||"Caso"} ${i+1}</span><b>${c.n}</b></div>${c.t?`<p>${c.t}</p>`:""}`;
+      c.qs.forEach((q,j)=>{const id=`${base}-${j}`;ids.push(id);
+        h+=`<label class="fl">${q.q}${sel(n,id,q.a,q.o,q.q)}</label><span class="ic2" id="${id}-i"></span>`});
+      h+=`<p class="xcase" id="${base}-x" hidden>💡 ${c.x}</p></div>`;CASEX.push({ids,xid:base+"-x"});});
+    h+=`</div>`;
+  }
+  return h;
+}
+function dayBody(d){
+  let h=`<div class="box"><h3>El ejercicio</h3>${d.ej}${d.doc?`<div class="docs">${d.doc}</div>`:""}</div>`;
+  (d.pre||[]).forEach(e=>h+=exp(e[0],e[1]));
+  d.blocks.forEach((b,bi)=>h+=block(d.n,b,bi));
+  (d.post||[]).forEach(e=>h+=exp(e[0],e[1]));
+  if(d.n===D.days.length){
+    h+=exp("📚 Fuentes para consultar",`<ul class="guia">${D.fuentes.map(f=>`<li>${f}</li>`).join("")}</ul>`);
+    h+=`<div class="box"><h3>Evaluación final · ${D.eval.length} preguntas</h3>`;
+    D.eval.forEach((q,i)=>{h+=`<div class="q"><p><b>${i+1}.</b> ${q.q}</p>${q.o.map((o,j)=>`<label id="q${i}-${j}-l"><input type="radio" name="q${i}" id="q${i}-${j}" data-k="q${i}" value="${j}"> ${o}</label>`).join("")}<p class="exp" id="q${i}-e" hidden>${q.e}</p></div>`});
+    h+=`</div>`;
+  }
+  return h;
+}
+const tabs=$("#tabs"), days=$("#days");
+D.days.forEach((d,i)=>{d.n=i+1;
+  tabs.insertAdjacentHTML("beforeend",`<button class="tab" role="tab" id="tab${d.n}" aria-selected="false" style="--dc:var(--d${d.n});--ds:var(--d${d.n}s)" data-go="${d.n}"><small>Paso ${d.n}</small><span class="t">${d.tc}</span><span class="sc" id="tsc${d.n}">0 %</span></button>`);
+  days.insertAdjacentHTML("beforeend",`<section class="day" id="day${d.n}" role="tabpanel" hidden style="--dc:var(--d${d.n});--ds:var(--d${d.n}s)">${intro(d)}${dayBody(d)}${footer(d.n)}</section>`);
+});
+$$("[data-k]").forEach(el=>{const v=store[el.dataset.k]; if(v==null)return; if(el.type==="radio") el.checked=(el.value===v); else el.value=v;});
+
+const mark=(el,s)=>{if(!el)return;el.classList.remove("ok","err");if(s)el.classList.add(s)};
+const icon=(el,s)=>{if(!el)return;mark(el,s);el.textContent=s==="ok"?"✔":s==="err"?"✘":""};
+function check(){
+  const N=D.days.length,ok={},tot={};for(let n=1;n<=N;n++){ok[n]=0;tot[n]=0}
+  Q.forEach(q=>{tot[q.tab]++;const s=$("#"+q.id),v=s.value,g=v!==""&&+v===q.a,st=v===""?"":(g?"ok":"err");
+    mark(s,st);icon($(`#${q.id}-i`),st);q.st=st;if(g)ok[q.tab]++;const x=$(`#${q.id}-x`);if(x)x.hidden=v==="";});
+  CASEX.forEach(c=>{$("#"+c.xid).hidden=!c.ids.every(id=>$("#"+id).value!=="")});
+  let okE=0;
+  D.eval.forEach((q,i)=>{q.o.forEach((_,j)=>mark($(`#q${i}-${j}-l`),""));
+    const r=$(`input[name="q${i}"]:checked`),e=$(`#q${i}-e`);
+    if(r){const j=+r.value,g=j===q.a;mark($(`#q${i}-${j}-l`),g?"ok":"err");if(g)okE++;e.hidden=false}else e.hidden=true;});
+  const pct={};for(let n=1;n<N;n++)pct[n]=ok[n]/tot[n];pct[N]=.5*ok[N]/tot[N]+.5*okE/D.eval.length;
+  for(let n=1;n<N;n++)$("#sc"+n).textContent=`${ok[n]} de ${tot[n]} correctas`;
+  $("#sc"+N).textContent=`actividad ${ok[N]} de ${tot[N]} · evaluación ${okE} de ${D.eval.length}`;
+  let nota=0;for(let n=1;n<=N;n++){nota+=10/N*pct[n];$("#tsc"+n).textContent=Math.round(pct[n]*100)+" %"}
+  $("#nota").textContent=(Math.round(nota*10)/10).toLocaleString("es-CO",{minimumFractionDigits:1,maximumFractionDigits:1});
+}
+function show(n){curDay=n;if(!$("#sheet").hidden)renderSheet();D.days.forEach(d=>{$("#day"+d.n).hidden=d.n!==n;$("#tab"+d.n).setAttribute("aria-selected",d.n===n)});
+  try{localStorage.setItem(KEY+"-tab",n)}catch(e){}}
+document.addEventListener("change",e=>{const el=e.target;if(!el.dataset||!el.dataset.k)return;store[el.dataset.k]=el.value;save();check();});
+document.addEventListener("input",e=>{const el=e.target;if(!el.dataset||!el.dataset.k)return;store[el.dataset.k]=el.value;save();check();});
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-go]"); if(g){show(+g.dataset.go); window.scrollTo({top:0}); return;}
+  const r=e.target.closest("[data-reset]"); if(r){const n=r.dataset.reset,box=$("#rb"+n);
+    box.dataset.html=box.innerHTML;
+    box.innerHTML=`<span class="confirm">¿Borrar todo lo de este paso? <button class="btn pri" data-yes="${n}">Sí, borrar</button><button class="btn" data-no="${n}">Cancelar</button></span>`; return;}
+  const y=e.target.closest("[data-yes]"); if(y){const n=y.dataset.yes;
+    $$(`#day${n} [data-k]`).forEach(el=>{delete store[el.dataset.k]; if(el.type==="radio")el.checked=false; else el.value=""});
+    save(); check(); const box=$("#rb"+n); box.innerHTML=box.dataset.html; return;}
+  const no=e.target.closest("[data-no]"); if(no){const box=$("#rb"+no.dataset.no); box.innerHTML=box.dataset.html;}
+});
+let curDay=1, sheetView="ej";
+function renderSheet(){
+  const sec=$("#day"+curDay); if(!sec)return;
+  const d=D.days[curDay-1];
+  $("#sheet").style.setProperty("--dc","var(--d"+d.n+")");
+  $("#fab").style.setProperty("--dc","var(--d"+d.n+")");
+  $("#sheetDay").textContent=d.t;
+  $$(".stab").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.sv===sheetView)));
+  const boxes=[...sec.querySelectorAll(".box")];
+  const src=sheetView==="ej"?boxes.find(b=>b.querySelector("h3")&&b.querySelector("h3").textContent.trim()==="El ejercicio"):sec.querySelector(".cols .box:nth-child(2)");
+  const body=$("#sheetBody"); body.textContent="";
+  if(src){const c=src.cloneNode(true); c.querySelectorAll("[id]").forEach(x=>x.removeAttribute("id")); body.appendChild(c);}
+}
+function setSheet(open){$("#sheet").hidden=!open;$("#fab").hidden=open;$("#fab").setAttribute("aria-expanded",String(open));document.documentElement.classList.toggle("sheet-open",open);if(open)renderSheet();}
+$("#fab").addEventListener("click",()=>setSheet(true));
+$("#sheetClose").addEventListener("click",()=>setSheet(false));
+document.addEventListener("click",e=>{const b=e.target.closest("[data-sv]"); if(b){sheetView=b.dataset.sv;renderSheet();}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#sheet").hidden)setSheet(false)});
+let start=1; try{start=+localStorage.getItem(KEY+"-tab")||1}catch(e){}
+show(start>=1&&start<=D.days.length?start:1); check();
+
+/* ---------- encabezado fijo ---------- */
+(function(){const st=$("#stick");let mini=false;
+  const upd=()=>{const y=scrollY;if(!mini&&y>90){mini=true;st.classList.add("mini")}else if(mini&&y<20){mini=false;st.classList.remove("mini")}};
+  addEventListener("scroll",upd,{passive:true});upd();
+  const pad=()=>{document.documentElement.style.scrollPaddingTop=(st.offsetHeight+12)+"px"};
+  try{new ResizeObserver(pad).observe(st)}catch(e){addEventListener("resize",pad)}pad();
+})();
+</script>
+
+</body></html>

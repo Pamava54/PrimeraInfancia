@@ -218,7 +218,7 @@ select.acc{min-width:260px}
 .st select.cel{min-width:220px}
 .st tbody td:first-child:not(.lab){white-space:nowrap}
 .st select.cel{min-width:240px}
-.xrow td{background:var(--ds);color:var(--ink);font-size:.9rem;border-left:4px solid var(--dc)}
+.xrow td{white-space:normal!important;background:var(--ds);color:var(--ink);font-size:.9rem;border-left:4px solid var(--dc)}
 .casos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:14px}
 .caso{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--dc);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .caso .nh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
@@ -231,6 +231,17 @@ select.acc{min-width:260px}
 .tind td{vertical-align:top;font-size:.86rem}
 .tind ul{margin:0;padding-left:1.1em}
 .tind td.ed{font-weight:800;white-space:nowrap;color:var(--d1)}
+@media (max-width:640px){
+ .st,.st tbody{display:block;min-width:0!important;width:100%}
+ .st thead{display:none}
+ .st tbody tr{display:grid;grid-template-columns:1fr 42px;align-items:center;border-bottom:1px solid var(--line)}
+ .st td{border-bottom:0}
+ .st td.lab{grid-column:1 / -1;padding-bottom:2px;font-weight:600}
+ .st select.cel{min-width:0!important;width:100%}
+ .st tr.xrow{display:grid}
+ .st tr.xrow[hidden]{display:none}
+ .st tr.xrow td{grid-column:1 / -1}
+}
 </style>
 
 </head><body>
