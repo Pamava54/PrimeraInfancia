@@ -291,8 +291,8 @@ const TABLA=[
  ["5 años",["Sigue las reglas o se turna en los juegos","Canta, baila o actúa para usted","Hace tareas simples de la casa"],["Cuenta historias con al menos 2 eventos","Mantiene una conversación con más de 3 intercambios","Usa o reconoce rimas simples"],["Cuenta hasta 10","Presta atención de 5 a 10 minutos en una actividad","Escribe algunas letras de su nombre"],["Se abotona algunos botones","Salta en un pie"]]
 ];
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-let store={}; try{store=JSON.parse(localStorage.getItem("desa-v1")||"{}")||{}}catch(e){store={}}
-const save=()=>{try{localStorage.setItem("desa-v1",JSON.stringify(store))}catch(e){}};
+let store={}; try{store=JSON.parse(localStorage.getItem("desa-v2")||"{}")||{}}catch(e){store={}}
+const save=()=>{try{localStorage.setItem("desa-v2",JSON.stringify(store))}catch(e){}};
 const exp=(t,html,open)=>`<details class="ref"${open?" open":""}><summary>${t}</summary>${html}</details>`;
 const Q=[]; // {tab,id,a,x}
 function sel(tab,id,a,opts,x,lab){Q.push({tab,id,a,x});return `<select class="cel" id="${id}" data-k="${id}" aria-label="${lab||"Elige"}"><option value="">— elige —</option>${opts.map((o,j)=>`<option value="${j}">${o}</option>`).join("")}</select>`}
@@ -305,8 +305,7 @@ const docAreas=()=>`<details class="doc"><summary>📄 Las 4 áreas del desarrol
  <li><b>Cognitiva (pensamiento):</b> cómo aprende, piensa y resuelve problemas: buscar lo escondido, imitar, imaginar, contar, reconocer colores.</li>
  <li><b>Motora:</b> cómo mueve el cuerpo (motricidad <b>gruesa</b>: sostener la cabeza, sentarse, caminar, saltar) y las manos (motricidad <b>fina</b>: agarrar, pinza, garabatear, abotonar).</li></ul>
  <p class="note">En Colombia, la Escala Abreviada de Desarrollo EAD-3 del Ministerio de Salud organiza el desarrollo en 4 áreas parecidas: motricidad gruesa, motricidad fino-adaptativa, audición y lenguaje, y personal social.</p></details>`;
-const docs=()=>`<div class="docs">${docAreas()}${docTabla()}</div>`;
-const ejBox=t=>`<div class="box"><h3>El ejercicio</h3>${t}${docs()}</div>`;
+const ejBox=(t,d)=>`<div class="box"><h3>El ejercicio</h3>${t}<div class="docs">${d}</div></div>`;
 const FUENTES=`<ul class="guia"><li>Centros para el Control y la Prevención de Enfermedades – CDC. (2021, actualizado). <i>Aprenda los signos. Reaccione pronto: listas de verificación de los indicadores del desarrollo de 2 meses a 5 años</i> [en español]. https://www.cdc.gov/act-early/es/</li><li>Ministerio de Salud y Protección Social. (2016). <i>Escala Abreviada de Desarrollo-3 (EAD-3)</i>. Bogotá: MinSalud – Pontificia Universidad Javeriana. https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/VS/PP/ENT/Escala-abreviada-de-desarrollo-3.pdf</li><li>Congreso de Colombia. (2016). <i>Ley 1804 de 2016</i>: política de Estado para el desarrollo integral de la primera infancia De Cero a Siempre.</li></ul>`;
 
 const DAYS=[
@@ -315,7 +314,7 @@ const DAYS=[
   pasos:["Abre “Las 4 áreas del desarrollo explicadas”.","Lee cada conducta y pregúntate: ¿qué está usando el niño? ¿su relación con otros, su forma de comunicarse, su pensamiento o su cuerpo?","Elige el área en la lista.","Si sale en rojo, lee la explicación 💡 y vuelve a intentarlo."]},
  {n:2,c:"d2",t:"¿A qué edad aparece?",tc:"Edades",
   que:"Un <b>indicador (o hito) del desarrollo</b> es algo que la mayoría de los niños (75 % o más) ya puede hacer a cierta edad. Conocer las edades ayuda a saber qué esperar y a acompañar mejor, recordando que cada niño tiene su propio ritmo.",
-  pasos:["Abre la “Tabla de indicadores del desarrollo por edad”.","Busca la conducta en la tabla.","Elige la edad en la que la mayoría de los niños ya la logra.","Fíjate en el orden: primero cabeza, luego tronco, luego piernas."]},
+  pasos:["Abre la “Tabla de indicadores del desarrollo por edad”.","Busca la conducta en la tabla.","Elige la edad en la que la mayoría de los niños ya la logra.","Fíjate en el orden: primero cabeza, luego tronco, luego piernas (lee el truco al final)."]},
  {n:3,c:"d3",t:"El desarrollo sigue un orden",tc:"Secuencia",
   que:"El desarrollo avanza <b>paso a paso</b>: un logro prepara el siguiente. Por ejemplo, el bebé primero sostiene la cabeza, después se sienta, luego camina y más tarde corre. En el lenguaje, primero hace sonidos, luego dice palabras y después frases.",
   pasos:["Lee los 6 logros de cada grupo.","Piensa cuál aparece primero (el más sencillo).","Numéralos del 1.º (el primero que aparece) al 6.º (el último).","Puedes revisar la tabla de indicadores si tienes dudas."]},
@@ -332,25 +331,25 @@ function footer(n){return `<div class="foot"><p class="score">${DAYS[n-1].tc}: <
   <button class="btn" data-reset="${n}">Reiniciar</button>${n<5?`<button class="btn pri" data-go="${n+1}">Siguiente paso →</button>`:""}</div></div>`}
 
 const P1=[
- ["Sonríe cuando le hablan o le sonríen",0,"Responder con una sonrisa es una forma de relacionarse con el adulto: es social y emocional."],
- ["Mantiene la cabeza alzada cuando está boca abajo",3,"Usa los músculos del cuello y la espalda: es motora (motricidad gruesa)."],
- ["Hace sonidos como “agú”, “aahh”",1,"Son sus primeros intentos de comunicarse con la voz: comunicación y lenguaje."],
- ["Busca un juguete cuando ve que se lo esconden debajo de una manta",2,"Entiende que el juguete sigue existiendo aunque no lo vea: es pensamiento (cognitiva)."],
- ["Pasa objetos de una mano a la otra",3,"Usa y coordina las manos: es motora (motricidad fina)."],
- ["Se muestra tímido o asustado con personas extrañas",0,"Distingue a las personas conocidas de las extrañas y siente emociones frente a ellas: social y emocional."],
- ["Dice al menos dos palabras juntas, como “más leche”",1,"Une palabras para expresar lo que quiere: comunicación y lenguaje."],
- ["Juega imaginariamente, por ejemplo le da de comer a una muñeca",2,"Usa la imaginación y representa situaciones: es pensamiento (cognitiva)."],
- ["Patea una pelota",3,"Coordina piernas y equilibrio: es motora (motricidad gruesa)."],
- ["Consuela a otros niños que están tristes o lastimados",0,"Reconoce las emociones de los demás y responde a ellas: social y emocional."],
- ["Hace preguntas con “qué”, “dónde” o “por qué”",1,"Usa el lenguaje para preguntar y conversar: comunicación y lenguaje."],
- ["Cuenta hasta 10",2,"Maneja números y su orden: es pensamiento (cognitiva)."],
- ["Salta en un pie",3,"Exige fuerza y mucho equilibrio: es motora (motricidad gruesa)."],
- ["Sigue las reglas o respeta los turnos en un juego con otros niños",0,"Convive con otros y acepta acuerdos: social y emocional."]
+ ["Se calma cuando le hablan o lo alzan",0,"Se tranquiliza con la voz y el contacto del adulto: es social y emocional."],
+ ["Mueve ambos brazos y piernas",3,"Usa los músculos de todo el cuerpo: es motora (motricidad gruesa)."],
+ ["Responde con sonidos cuando le hablan",1,"Contesta con su voz: es su forma de “conversar”. Comunicación y lenguaje."],
+ ["Mira sus propias manos con interés",2,"Está descubriendo y explorando su cuerpo: es pensamiento (cognitiva)."],
+ ["Usa los dedos para llevarse alimentos a la boca",3,"Coordina dedos y boca: es motora (motricidad fina)."],
+ ["Le gusta mirarse en el espejo",0,"Se interesa por sí mismo y por las caras: social y emocional."],
+ ["Señala al menos 2 partes del cuerpo cuando se le pide",1,"Entiende lo que le dicen y responde: comunicación y lenguaje."],
+ ["Imita las tareas que hace el adulto, como barrer",2,"Observa, recuerda y copia lo que ve: es pensamiento (cognitiva)."],
+ ["Sube varios escalones caminando",3,"Requiere fuerza en las piernas y equilibrio: es motora (motricidad gruesa)."],
+ ["Muestra afecto: abraza, acaricia o besa",0,"Expresa cariño a otros: social y emocional."],
+ ["Usa o reconoce rimas simples (gato – pato, casa – taza)",1,"Juega con los sonidos de las palabras: comunicación y lenguaje."],
+ ["Dice algunos colores de los objetos",2,"Reconoce y nombra características de las cosas: es pensamiento (cognitiva)."],
+ ["Desabotona algunos botones",3,"Usa la pinza de los dedos con precisión: es motora (motricidad fina)."],
+ ["Sigue las reglas o se turna en los juegos con otros niños",0,"Convive con otros y acepta acuerdos: social y emocional."]
 ];
 const P2=[
- ["Sonríe cuando usted le habla o le sonríe",0],["Sujeta un juguete cuando se lo ponen en la mano",1],["Se ríe",2],["Se sienta sin apoyo",3],
- ["Camina apoyándose en los muebles",4],["Da unos pasos solo",5],["Camina sin agarrarse de alguien o de algo",6],["Corre",7],
- ["Salta levantando los dos pies",8],["Dice su nombre cuando se lo preguntan",9],["Forma oraciones con 4 o más palabras",10],["Salta en un pie",11]
+ ["Fija la vista en un juguete por varios segundos",0],["Sujeta un juguete cuando se lo ponen en la mano",1],["Se ríe",2],["Levanta los brazos para que lo alcen",3],
+ ["Dice “adiós” con la mano",4],["Da unos pasos solo",5],["Hace garabatos",6],["Come con cuchara",7],
+ ["Dice aproximadamente 50 palabras",8],["Dice su nombre cuando se lo preguntan",9],["Dibuja personas con 3 o más partes del cuerpo",10],["Escribe algunas letras de su nombre",11]
 ];
 const ORD=["1.º","2.º","3.º","4.º","5.º","6.º"];
 const P3=[
@@ -383,7 +382,7 @@ const EVAL=[
 ];
 
 function tab1(){
-  let h=ejBox(`<p>Lee cada conducta de un niño y elige a qué <b>área del desarrollo</b> pertenece principalmente.</p><p class="note">Después de elegir aparece una explicación 💡, aunque te equivoques. Así también aprendes.</p>`);
+  let h=ejBox(`<p>Lee cada conducta de un niño y elige a qué <b>área del desarrollo</b> pertenece principalmente.</p><p class="note">Después de elegir aparece una explicación 💡, aunque te equivoques. Así también aprendes.</p>`,docAreas());
   h+=`<div class="tw"><table class="st"><thead><tr><th style="text-align:left">Lo que hace el niño</th><th>Área del desarrollo</th><th class="ic">✓</th></tr></thead><tbody>`;
   P1.forEach((p,i)=>{const id="a1-"+i;h+=`<tr><td class="lab">${i+1}. ${p[0]}</td><td>${sel(1,id,p[1],AREAS,p[2],"Área")}</td><td class="ic" id="${id}-i"></td></tr>${xrow(id,p[2],3)}`});
   h+=`</tbody></table></div>`;
@@ -392,7 +391,7 @@ function tab1(){
   return h;
 }
 function tab2(){
-  let h=ejBox(`<p>Elige la <b>edad</b> en la que la mayoría de los niños ya logra cada conducta. Usa la tabla de indicadores.</p><p class="note">Cada niño tiene su propio ritmo: la edad indica cuándo la mayoría (75 % o más) ya lo hace.</p>`);
+  let h=ejBox(`<p>Elige la <b>edad</b> en la que la mayoría de los niños ya logra cada conducta. Usa la tabla de indicadores.</p><p class="note">Cada niño tiene su propio ritmo: la edad indica cuándo la mayoría (75 % o más) ya lo hace.</p>`,docTabla());
   h+=`<div class="tw"><table class="st"><thead><tr><th style="text-align:left">Conducta</th><th>¿A qué edad?</th><th class="ic">✓</th></tr></thead><tbody>`;
   P2.forEach((p,i)=>{const id="a2-"+i,x=`La mayoría de los niños lo logra a los <b>${EDADES[p[1]]}</b>.`;h+=`<tr><td class="lab">${i+1}. ${p[0]}</td><td>${sel(2,id,p[1],EDADES,x,"Edad")}</td><td class="ic" id="${id}-i"></td></tr>${xrow(id,x,3)}`});
   h+=`</tbody></table></div>`;
@@ -400,7 +399,7 @@ function tab2(){
   return h;
 }
 function tab3(){
-  let h=ejBox(`<p>Ordena cada grupo de logros del <b>1.º</b> (el que aparece primero) al <b>6.º</b> (el que aparece de último).</p>`);
+  let h=ejBox(`<p>Ordena cada grupo de logros del <b>1.º</b> (el que aparece primero) al <b>6.º</b> (el que aparece de último).</p><p class="note">Piensa primero qué es más sencillo. Si tienes dudas, consulta la tabla.</p>`,docTabla());
   P3.forEach((g,gi)=>{h+=`<h3>${gi===0?"A":"B"}. ${g.t}</h3><div class="tw"><table class="st"><thead><tr><th style="text-align:left">Logro</th><th>Orden</th><th class="ic">✓</th></tr></thead><tbody>`;
     g.it.forEach((p,i)=>{const id=`a3-${gi}-${i}`,x=`Aparece hacia los <b>${p[2]}</b>: va en el lugar <b>${ORD[p[1]]}</b>.`;h+=`<tr><td class="lab">${p[0]}</td><td>${sel(3,id,p[1],ORD,x,"Orden")}</td><td class="ic" id="${id}-i"></td></tr>${xrow(id,x,3)}`});
     h+=`</tbody></table></div>`;});
@@ -408,7 +407,7 @@ function tab3(){
   return h;
 }
 function tab4(){
-  let h=ejBox(`<p>Lee cada caso. Decide si el niño <b>va como se espera</b> o si muestra una <b>señal de alerta</b>, y elige qué debes hacer como técnica en primera infancia.</p><p class="note">Recuerda: la técnica observa, registra y acompaña. No diagnostica.</p>`);
+  let h=ejBox(`<p>Lee cada caso. Decide si el niño <b>va como se espera</b> o si muestra una <b>señal de alerta</b>, y elige qué debes hacer como técnica en primera infancia.</p><p class="note">Recuerda: la técnica observa, registra y acompaña. No diagnostica.</p>`,docTabla());
   h+=`<div class="casos">`;
   CASOS.forEach((c,i)=>{h+=`<div class="caso"><div class="nh"><span class="nn">Caso ${i+1}</span><b>${c.n}</b></div><p>${c.t}</p>
    <label class="fl">¿Cómo va su desarrollo?${sel(4,`c-e${i}`,c.e,ESTADO,c.x,"Estado")}</label><span class="ic2" id="c-e${i}-i"></span>
@@ -419,7 +418,7 @@ function tab4(){
   return h;
 }
 function tab5(){
-  let h=ejBox(`<p>Para cada niño, elige la <b>experiencia más adecuada</b> para fortalecer el área indicada.</p>`);
+  let h=ejBox(`<p>Para cada niño, elige la <b>experiencia más adecuada</b> para fortalecer el área indicada.</p>`,docAreas());
   h+=`<div class="casos">`;
   P5.forEach((p,i)=>{h+=`<div class="caso"><div class="nh"><span class="nn">Situación ${i+1}</span><b>${p.t}</b></div><label class="fl">La mejor experiencia es:${sel(5,`p5-${i}`,p.a,p.o,p.x,"Experiencia")}</label><span class="ic2" id="p5-${i}-i"></span><p class="xcase" id="p5-${i}-x" hidden>💡 ${p.x}</p></div>`});
   h+=`</div>`;
@@ -461,7 +460,7 @@ function check(){
 
 // ---------- eventos ----------
 function show(n){curDay=n;if(typeof renderSheet==="function"&&!$("#sheet").hidden)renderSheet();DAYS.forEach(d=>{$("#day"+d.n).hidden=d.n!==n;$("#tab"+d.n).setAttribute("aria-selected",d.n===n)});
-  try{localStorage.setItem("desa-v1-tab",n)}catch(e){}}
+  try{localStorage.setItem("desa-v2-tab",n)}catch(e){}}
 document.addEventListener("input",e=>{const el=e.target;if(!el.dataset||!el.dataset.k)return;store[el.dataset.k]=el.value;save();check();});
 document.addEventListener("change",e=>{const el=e.target;if(!el.dataset||!el.dataset.k)return;store[el.dataset.k]=el.value;save();check();});
 document.addEventListener("click",e=>{
@@ -497,7 +496,7 @@ $("#fab").addEventListener("click",()=>setSheet(true));
 $("#sheetClose").addEventListener("click",()=>setSheet(false));
 document.addEventListener("click",e=>{const b=e.target.closest("[data-sv]"); if(b){sheetView=b.dataset.sv;renderSheet();}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#sheet").hidden)setSheet(false)});
-let start=1; try{start=+localStorage.getItem("desa-v1-tab")||1}catch(e){}
+let start=1; try{start=+localStorage.getItem("desa-v2-tab")||1}catch(e){}
 show(start>=1&&start<=5?start:1); check();
 
 /* ---------- encabezado fijo ---------- */
