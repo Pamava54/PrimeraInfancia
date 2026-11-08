@@ -1,0 +1,71 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Centro de Primera Infancia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+:root{--bg:#F7F5FA;--surface:#FFFFFF;--ink:#1F2433;--muted:#5D6475;--line:#DDD8E6;
+ --c1:#3A6BA0;--c1s:#E5EDF7;--c2:#357F62;--c2s:#E2F1EA;--c3:#A86F14;--c3s:#F8EEDC;--c4:#65569E;--c4s:#ECE8F6;--c5:#B65345;--c5s:#F8E5E1;
+ --brand:#7A4FA0;--brands:#EFE6F7;
+ --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#14121A;--surface:#1E1B26;--ink:#ECE8F2;--muted:#A49EB2;--line:#332E3F;
+ --c1:#8DB5E3;--c1s:#1C2A3B;--c2:#82C9A9;--c2s:#18302A;--c3:#E5B464;--c3s:#33291A;--c4:#B5A8E6;--c4s:#272338;--c5:#EE9C8F;--c5s:#3A2320;--brand:#C9A6E8;--brands:#2B2238;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-left,0px)) 56px;display:flex;flex-direction:column;gap:22px}
+h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.15;text-wrap:balance}
+.hero{background:var(--brands);border:1px solid var(--line);border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:8px;border-left:8px solid var(--brand)}
+.hero small{color:var(--brand);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem}
+.hero h1{font-size:clamp(1.7rem,4.5vw,2.5rem);font-weight:800}
+.hero p{margin:0;color:var(--muted);max-width:68ch}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.sec-h p{margin:0;color:var(--muted);font-size:.92rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
+.card{position:relative;background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--cc);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px;min-height:210px}
+.card .n{font-size:.75rem;font-weight:800;color:var(--cc);background:var(--cs);border-radius:4px;padding:2px 8px;align-self:flex-start;text-transform:uppercase;letter-spacing:.05em}
+.card h3{font-size:1.2rem}
+.card p{margin:0;color:var(--muted);font-size:.94rem;flex:1}
+.card .go{font-weight:800;color:var(--cc)}
+.card.on{box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.card.on:hover{transform:translateY(-2px)}
+.card.off{opacity:.72}
+.card.off .go{color:var(--muted);font-weight:700}
+.stretch{position:absolute;inset:0;border-radius:12px}
+.stretch:focus-visible{outline:3px solid var(--cc);outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}}
+.info{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.info ul{margin:0;padding-left:1.2em;color:var(--muted)}
+footer{color:var(--muted);font-size:.85rem;text-align:center}
+.wm{position:fixed;inset:0;z-index:60;pointer-events:none;background-repeat:repeat;background-size:360px 220px;opacity:.07;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220'%3E%3Ctext x='180' y='120' text-anchor='middle' transform='rotate(-24 180 110)' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%231F2433'%3EPAMAVA soluciones%3C/text%3E%3C/svg%3E")}
+@media (prefers-color-scheme:dark){.wm{opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220'%3E%3Ctext x='180' y='120' text-anchor='middle' transform='rotate(-24 180 110)' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%23ECE8F2'%3EPAMAVA soluciones%3C/text%3E%3C/svg%3E")}}
+</style></head><body>
+<div class="wm" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="hero">
+    <small>Técnico en atención a la primera infancia y adolescencia</small>
+    <h1>Centro de Primera Infancia</h1>
+    <p>Talleres interactivos para aprender practicando: cada respuesta se revisa al instante (verde si está bien, rojo si hay que revisar), con explicaciones sencillas y nota sobre 10.</p>
+  </header>
+
+  <section>
+    <div class="sec-h"><h2>Ruta de talleres</h2><p>Se recomienda hacerlos en orden.</p></div>
+    <div class="grid" style="margin-top:12px">
+      <article class="card off" style="--cc:var(--c1);--cs:var(--c1s)"><span class="n">Taller 1 · Próximamente</span><h3>Derechos y marco legal</h3><p>Los derechos de niños, niñas y adolescentes, el Código de Infancia y Adolescencia y la política De Cero a Siempre, con casos sencillos.</p><span class="go">Muy pronto</span></article>
+      <article class="card on" style="--cc:var(--c2);--cs:var(--c2s)"><span class="n">Taller 2 · Disponible</span><h3>Desarrollo infantil por edades</h3><p>Las 4 áreas del desarrollo, los indicadores de 2 meses a 5 años, su orden, las señales de alerta y cómo acompañar a cada niño.</p><span class="go">Abrir el taller →</span><a class="stretch" href="taller-desarrollo.html" aria-label="Abrir el taller Desarrollo infantil por edades"></a></article>
+      <article class="card off" style="--cc:var(--c3);--cs:var(--c3s)"><span class="n">Taller 3 · Próximamente</span><h3>El juego y las actividades rectoras</h3><p>Juego, arte, literatura y exploración del medio, y una primera planeación guiada de una experiencia pedagógica.</p><span class="go">Muy pronto</span></article>
+      <article class="card off" style="--cc:var(--c4);--cs:var(--c4s)"><span class="n">Taller 4 · Próximamente</span><h3>Cuidado, salud y nutrición</h3><p>Rutinas, higiene, alimentación por edad y prevención de accidentes, con escenarios para decidir qué hacer.</p><span class="go">Muy pronto</span></article>
+      <article class="card off" style="--cc:var(--c5);--cs:var(--c5s)"><span class="n">Taller 5 · Próximamente</span><h3>Adolescencia</h3><p>Cambios físicos, emocionales y sociales de la adolescencia y cómo acompañarlos, con estudio de casos.</p><span class="go">Muy pronto</span></article>
+    </div>
+  </section>
+
+  <section class="info">
+    <h3>¿Cómo funcionan los talleres?</h3>
+    <ul>
+      <li>Escribe tu nombre arriba: tu nota aparece al lado.</li>
+      <li>Cada taller tiene 5 pasos; cada paso trae “¿Qué es?”, “Paso a paso” y explicaciones 💡.</li>
+      <li>Tu avance se guarda en el navegador del celular o del computador donde trabajes.</li>
+    </ul>
+  </section>
+  <footer>PAMAVA soluciones · Material de apoyo para el aula</footer>
+</div>
+</body></html>
