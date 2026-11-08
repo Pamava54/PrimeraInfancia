@@ -244,6 +244,36 @@ select.acc{min-width:260px}
 }
 </style>
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* ===== Tema infantil · Centro de Primera Infancia ===== */
+@media not (prefers-color-scheme: dark){:root:not([data-theme="dark"]){
+ --bg:#FFF8EC; --surface:#FFFFFF; --ink:#2A2540; --muted:#5E5A72; --line:#EADFCB; --input:#FFF4CF;
+ --d1:#2F7FC0; --d1s:#E3F1FB; --d2:#1E9670; --d2s:#DDF5EC; --d3:#B87600; --d3s:#FFF1C9; --d4:#6E4FC0; --d4s:#EEE8FA; --d5:#D54B3D; --d5s:#FDE5E1;}}
+:root{--f-display:"Fredoka","Baloo 2","Segoe UI",system-ui,sans-serif; --f-body:"Nunito","Segoe UI",system-ui,sans-serif}
+body{background-color:var(--bg);background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22220%22%3E%3Cg opacity=%22.22%22%3E%3Ccircle cx=%2220%22 cy=%2230%22 r=%224%22 fill=%22%234FA3E0%22/%3E%3Crect x=%22150%22 y=%2220%22 width=%229%22 height=%229%22 rx=%222%22 fill=%22%23FFC93C%22 transform=%22rotate(20 154 24)%22/%3E%3Cpath d=%22M90 80l5 9h-10z%22 fill=%22%23FF7A6B%22/%3E%3Ccircle cx=%22190%22 cy=%22120%22 r=%223.5%22 fill=%22%233CBF9A%22/%3E%3Crect x=%2240%22 y=%22160%22 width=%228%22 height=%228%22 rx=%222%22 fill=%22%239B7BD8%22 transform=%22rotate(-15 44 164)%22/%3E%3Cpath d=%22M120 170q6-8 12 0%22 fill=%22none%22 stroke=%22%23FF7A6B%22 stroke-width=%223%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%22110%22 cy=%22130%22 r=%222.5%22 fill=%22%23FFC93C%22/%3E%3Cpath d=%22M60 100l2 5 5 1-4 3 1 5-4-3-5 3 1-5-4-3 5-1z%22 fill=%22%23FFC93C%22/%3E%3C/g%3E%3C/svg%3E");background-size:220px 220px}
+h1{letter-spacing:.2px}
+.box,.tw,details,.caso,.nota-c,.kpi,.nota{border-radius:18px!important}
+.box,.caso{box-shadow:0 4px 0 var(--line)}
+.band{border-radius:22px;border-left-width:0;border:3px dashed var(--dc);position:relative;padding-right:96px;min-height:92px;justify-content:center}
+.band::after{content:"";position:absolute;right:18px;top:50%;width:64px;height:64px;transform:translateY(-50%) rotate(-6deg);background-size:contain;background-repeat:no-repeat}
+.day:nth-of-type(1) .band::after{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect x=%224%22 y=%2234%22 width=%2226%22 height=%2226%22 rx=%225%22 fill=%22%234FA3E0%22/%3E%3Crect x=%2234%22 y=%2234%22 width=%2226%22 height=%2226%22 rx=%225%22 fill=%22%23FF7A6B%22/%3E%3Crect x=%2219%22 y=%226%22 width=%2226%22 height=%2226%22 rx=%225%22 fill=%22%23FFC93C%22/%3E%3Ctext x=%2217%22 y=%2254%22 font-family=%22Arial%22 font-weight=%22700%22 font-size=%2217%22 fill=%22%23fff%22 text-anchor=%22middle%22%3EA%3C/text%3E%3Ctext x=%2247%22 y=%2254%22 font-family=%22Arial%22 font-weight=%22700%22 font-size=%2217%22 fill=%22%23fff%22 text-anchor=%22middle%22%3EB%3C/text%3E%3Ctext x=%2232%22 y=%2226%22 font-family=%22Arial%22 font-weight=%22700%22 font-size=%2217%22 fill=%22%23fff%22 text-anchor=%22middle%22%3EC%3C/text%3E%3C/svg%3E")}.day:nth-of-type(2) .band::after{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Ccircle cx=%2232%22 cy=%2232%22 r=%2227%22 fill=%22%233CBF9A%22/%3E%3Cpath d=%22M5 32h54%22 stroke=%22%23fff%22 stroke-width=%226%22/%3E%3Cpath d=%22M32 5a30 30 0 0 1 0 54%22 fill=%22none%22 stroke=%22%23FFC93C%22 stroke-width=%226%22/%3E%3Ccircle cx=%2222%22 cy=%2220%22 r=%224%22 fill=%22%23fff%22 opacity=%22.7%22/%3E%3C/svg%3E")}.day:nth-of-type(3) .band::after{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Cpath d=%22M32 16C24 10 12 10 4 13v38c8-3 20-3 28 3z%22 fill=%22%23FFC93C%22/%3E%3Cpath d=%22M32 16c8-6 20-6 28-3v38c-8-3-20-3-28 3z%22 fill=%22%23FFB020%22/%3E%3Cpath d=%22M32 16v38%22 stroke=%22%23E08A00%22 stroke-width=%222%22/%3E%3Cpath d=%22M45 4l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z%22 fill=%22%23FF7A6B%22/%3E%3C/svg%3E")}.day:nth-of-type(4) .band::after{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Cpath d=%22M30 4L48 24 30 44 12 24z%22 fill=%22%239B7BD8%22/%3E%3Cpath d=%22M30 4v40M12 24h36%22 stroke=%22%23fff%22 stroke-width=%222.5%22/%3E%3Cpath d=%22M30 44q-10 6 0 11t-2 9%22 fill=%22none%22 stroke=%22%232A2540%22 stroke-width=%222%22/%3E%3Cpath d=%22M27 51l-6 3 6 3zM30 59l-6 3 6 2z%22 fill=%22%23FF7A6B%22/%3E%3C/svg%3E")}.day:nth-of-type(5) .band::after{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Cpath d=%22M32 4l8 17 18 2-13 12 4 18-17-9-17 9 4-18L6 23l18-2z%22 fill=%22%23FF7A6B%22/%3E%3Ccircle cx=%2226%22 cy=%2229%22 r=%222.5%22 fill=%22%232A2540%22/%3E%3Ccircle cx=%2238%22 cy=%2229%22 r=%222.5%22 fill=%22%232A2540%22/%3E%3Cpath d=%22M26 37q6 6 12 0%22 fill=%22none%22 stroke=%22%232A2540%22 stroke-width=%222.5%22 stroke-linecap=%22round%22/%3E%3C/svg%3E")}
+.tab{border-radius:18px;border-top-width:6px}
+.tab[aria-selected="true"]{transform:translateY(-2px);box-shadow:0 4px 0 var(--dc)}
+.btn{border-radius:999px;padding:9px 18px;font-weight:700}
+.btn.pri{box-shadow:0 4px 0 rgba(0,0,0,.18)}
+select.cel{border-radius:12px!important}
+.st tr.grp td,.xrow td,.xcase{border-radius:10px}
+.cols .box h3::before{content:"⭐ "}
+.cols .box + .box h3::before{content:"🧩 "}
+.box > h3:first-child{color:var(--dc,var(--ink))}
+.nn{border-radius:999px!important}
+.kids-art{flex:0 1 260px;max-width:260px;align-self:center}
+.kids-art svg{width:100%;height:auto;display:block}
+.stick.mini .kids-art{display:none}
+@media (max-width:720px){.kids-art{display:none}.band{padding-right:78px}.band::after{width:52px;height:52px;right:12px}}
+@media (prefers-reduced-motion:no-preference){.band::after{animation:flota 4s ease-in-out infinite}@keyframes flota{50%{transform:translateY(-58%) rotate(4deg)}}}
+</style>
 </head><body>
 <div class="wm" aria-hidden="true"></div>
 <div class="wrap">
@@ -254,6 +284,13 @@ select.acc{min-width:260px}
       <h1>Desarrollo infantil por edades</h1>
       <p class="sub">Técnico en atención a la primera infancia · Áreas, hitos de 0 a 5 años y señales de alerta</p>
     </div>
+    <div class="kids-art" aria-hidden="true"><svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sol, nubes, arcoíris, cometa y globos">
+<path d="M40 120a70 70 0 0 1 140 0" fill="none" stroke="#FF7A6B" stroke-width="9"/><path d="M50 120a60 60 0 0 1 120 0" fill="none" stroke="#FFC93C" stroke-width="9"/><path d="M60 120a50 50 0 0 1 100 0" fill="none" stroke="#3CBF9A" stroke-width="9"/><path d="M70 120a40 40 0 0 1 80 0" fill="none" stroke="#4FA3E0" stroke-width="9"/>
+<g transform="translate(250 32)"><circle r="17" fill="#FFC93C"/><g stroke="#FFC93C" stroke-width="4" stroke-linecap="round"><path d="M0-26v-7M0 26v7M-26 0h-7M26 0h7M-18-18l-5-5M18 18l5 5M18-18l5-5M-18 18l-5 5"/></g><circle cx="-6" cy="-3" r="2.2" fill="#2A2540"/><circle cx="6" cy="-3" r="2.2" fill="#2A2540"/><path d="M-6 5q6 6 12 0" fill="none" stroke="#2A2540" stroke-width="2.2" stroke-linecap="round"/></g>
+<g fill="#fff" stroke="#D9E8F5" stroke-width="2"><path d="M10 40a12 12 0 0 1 20-9a14 14 0 0 1 26 4a9 9 0 0 1 2 18H16a9 9 0 0 1-6-13z"/><path d="M175 22a10 10 0 0 1 17-7a12 12 0 0 1 22 3a8 8 0 0 1 1 15h-35a8 8 0 0 1-5-11z"/></g>
+<g transform="translate(205 60)"><path d="M0-18L14 0 0 22-14 0z" fill="#9B7BD8"/><path d="M0-18V22M-14 0h28" stroke="#fff" stroke-width="2"/><path d="M0 22q-8 10 2 16t-4 18" fill="none" stroke="#2A2540" stroke-width="1.6"/><path d="M-3 32l-5 3 5 2zM0 44l-5 3 5 2z" fill="#FF7A6B"/></g>
+<g><path d="M118 58v44" stroke="#8A8AA0" stroke-width="1.4"/><ellipse cx="118" cy="48" rx="11" ry="13" fill="#FF7A6B"/><path d="M114 60l4 3 4-3z" fill="#FF7A6B"/><path d="M134 66v36" stroke="#8A8AA0" stroke-width="1.4"/><ellipse cx="134" cy="56" rx="10" ry="12" fill="#4FA3E0"/><path d="M130 67l4 3 4-3z" fill="#4FA3E0"/><circle cx="114" cy="43" r="3" fill="#fff" opacity=".6"/><circle cx="130" cy="51" r="3" fill="#fff" opacity=".6"/></g>
+</svg></div>
     <div class="who">
       <label for="nombre">Nombre del estudiante<input id="nombre" data-k="nombre" placeholder="Escribe tu nombre" autocomplete="off"></label>
       <div class="nota"><span>Nota</span><b id="nota">0,0</b><span>sobre 10</span></div>
