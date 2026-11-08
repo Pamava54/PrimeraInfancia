@@ -1,0 +1,362 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Biblioteca normativa · Primera infancia y adolescencia</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+:root{--bg:#FFF8EC;--surface:#FFFFFF;--ink:#2A2540;--muted:#5E5A72;--line:#EADFCB;--brand:#6E4FC0;--brands:#EEE8FA;--ok:#17713F;--okbg:#DCF2E3;
+ --f-display:"Fredoka","Baloo 2","Segoe UI",system-ui,sans-serif;--f-body:"Nunito","Segoe UI",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#14121A;--surface:#1E1B26;--ink:#ECE8F2;--muted:#A49EB2;--line:#332E3F;--brand:#C9A6E8;--brands:#2B2238;--ok:#74D49C;--okbg:#173826;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22220%22%3E%3Cg opacity=%22.22%22%3E%3Ccircle cx=%2220%22 cy=%2230%22 r=%224%22 fill=%22%234FA3E0%22/%3E%3Crect x=%22150%22 y=%2220%22 width=%229%22 height=%229%22 rx=%222%22 fill=%22%23FFC93C%22 transform=%22rotate(20 154 24)%22/%3E%3Cpath d=%22M90 80l5 9h-10z%22 fill=%22%23FF7A6B%22/%3E%3Ccircle cx=%22190%22 cy=%22120%22 r=%223.5%22 fill=%22%233CBF9A%22/%3E%3Crect x=%2240%22 y=%22160%22 width=%228%22 height=%228%22 rx=%222%22 fill=%22%239B7BD8%22 transform=%22rotate(-15 44 164)%22/%3E%3Cpath d=%22M120 170q6-8 12 0%22 fill=%22none%22 stroke=%22%23FF7A6B%22 stroke-width=%223%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%22110%22 cy=%22130%22 r=%222.5%22 fill=%22%23FFC93C%22/%3E%3Cpath d=%22M60 100l2 5 5 1-4 3 1 5-4-3-5 3 1-5-4-3 5-1z%22 fill=%22%23FFC93C%22/%3E%3C/g%3E%3C/svg%3E");background-size:220px 220px;color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-left,0px)) 60px;display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.15;text-wrap:balance}
+a.back{color:var(--brand);font-weight:800;text-decoration:none}
+.hero{display:grid;grid-template-columns:1fr minmax(0,320px);gap:10px 24px;align-items:center;border:3px dashed var(--brand);border-radius:26px;padding:24px;background:linear-gradient(135deg,#FFF1C9 0%,#FDE5E1 45%,#E3F1FB 100%)}
+@media (prefers-color-scheme:dark){.hero{background:var(--surface)}}
+.hero h1{font-size:clamp(1.8rem,4.6vw,2.6rem)}
+.hero p{margin:0;color:var(--muted);max-width:62ch}
+.hero .art svg{width:100%;height:auto;display:block}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.hero .art{max-width:260px}}
+details.tips{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:12px 18px;box-shadow:0 4px 0 var(--line)}
+details.tips summary{cursor:pointer;font-weight:800;font-family:var(--f-display);font-size:1.1rem;color:var(--brand)}
+details.tips ul{margin:10px 0 0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.filters{position:sticky;top:0;z-index:20;background:var(--bg);padding:10px 0;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.row .lb{font-weight:800;font-size:.85rem;color:var(--muted);margin-right:4px;min-width:52px}
+.chip{font:inherit;font-size:.88rem;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 12px}
+.chip[aria-pressed="true"]{background:var(--cc,var(--brand));border-color:var(--cc,var(--brand));color:#fff}
+.search{flex:1 1 220px;font:inherit;padding:8px 14px;border-radius:999px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+.count{font-weight:800;color:var(--brand)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 5px 0 var(--line);border-top:7px solid var(--cc)}
+.card.done{outline:3px solid var(--ok)}
+.top{display:flex;gap:12px;align-items:flex-start}
+.emo{font-size:2rem;line-height:1;width:54px;height:54px;flex:0 0 54px;display:grid;place-items:center;border-radius:16px;background:var(--cs);transform:rotate(-4deg)}
+.card h3{font-size:1.15rem}
+.meta{font-size:.82rem;color:var(--muted);margin-top:2px}
+.tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:.74rem;font-weight:800;border-radius:999px;padding:2px 9px;background:var(--tb);color:var(--tc)}
+.ages{font-size:.8rem;font-weight:700;color:var(--ink)}
+.card details summary{cursor:pointer;font-weight:800;color:var(--cc);list-style:none;border:2px solid var(--cc);border-radius:999px;padding:6px 12px;text-align:center}
+.card details summary::-webkit-details-marker{display:none}
+.card details[open] summary{background:var(--cc);color:#fff;margin-bottom:10px}
+.sec h4{font-family:var(--f-display);font-size:.98rem;margin:8px 0 4px}
+.sec ul,.sec ol{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:3px}
+.sec p{margin:0}
+.box{border-radius:14px;padding:8px 12px;margin-top:8px;font-size:.93rem}
+.box.ap{background:#DDF5EC;color:#11573F}.box.va{background:#EEE8FA;color:#47308A}.box.sg{background:#FDE5E1;color:#8E2A1F}
+@media (prefers-color-scheme:dark){.box.ap{background:#173826;color:#9BE3BD}.box.va{background:#272338;color:#CDBEF5}.box.sg{background:#3A2320;color:#F5B3A8}}
+.done-l{display:flex;gap:8px;align-items:center;font-weight:700;font-size:.9rem;cursor:pointer}
+.done-l input{width:20px;height:20px;accent-color:var(--ok)}
+.empty{text-align:center;color:var(--muted);padding:30px}
+.btn{font:inherit;font-weight:800;cursor:pointer;border-radius:999px;border:2px solid var(--brand);background:var(--surface);color:var(--brand);padding:6px 14px}
+footer{text-align:center;color:var(--muted);font-size:.85rem}
+.wm{position:fixed;inset:0;z-index:60;pointer-events:none;background-repeat:repeat;background-size:360px 220px;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220'%3E%3Ctext x='180' y='120' text-anchor='middle' transform='rotate(-24 180 110)' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%232A2540'%3EPAMAVA soluciones%3C/text%3E%3C/svg%3E")}
+@media (prefers-color-scheme:dark){.wm{opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220'%3E%3Ctext x='180' y='120' text-anchor='middle' transform='rotate(-24 180 110)' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%23ECE8F2'%3EPAMAVA soluciones%3C/text%3E%3C/svg%3E")}}
+@media (max-width:760px){.filters{position:static}.row{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}.row .chip{flex:0 0 auto}.row:last-child{flex-wrap:wrap}}
+@media print{.filters,.wm,details.tips,.btn,a.back,.done-l{display:none!important}body{background:#fff}.card{break-inside:avoid;box-shadow:none}.card details{display:block}.card details>*{display:block}}
+
+.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{font-weight:800;font-size:.9rem;text-decoration:none;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:999px;padding:5px 13px}
+.nav a:hover{border-color:var(--brand);color:var(--brand)}
+section.blk{display:flex;flex-direction:column;gap:12px;scroll-margin-top:12px}
+section.blk>h2{font-size:1.5rem;display:flex;gap:10px;align-items:center}
+section.blk>h2 .ic{font-size:1.4rem;width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:var(--brands);transform:rotate(-4deg)}
+section.blk>p.lead{margin:0;color:var(--muted)}
+.yr{font-size:.8rem;font-weight:800;color:var(--cc)}
+.res{margin:0}
+.use{background:var(--cs);border-radius:12px;padding:7px 11px;font-size:.92rem}
+.use b{color:var(--cc)}
+.arts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.arts li{border-left:4px solid var(--cc);padding:4px 0 4px 10px}
+.arts .an{font-weight:800;color:var(--cc);font-size:.85rem}
+.arts .at{font-weight:800}
+.arts p{margin:2px 0 0;font-size:.93rem}
+mark{background:#FFE58A;color:#2A2540;border-radius:3px;padding:0 2px}
+.tbl{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.tbl th,.tbl td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{background:var(--brands);font-family:var(--f-display);font-size:.95rem}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td:first-child{font-weight:800;white-space:nowrap;color:var(--brand)}
+.tbl td:last-child{font-size:.85rem;color:var(--muted)}
+@media (max-width:640px){.tbl thead{display:none}.tbl tr{display:grid;gap:2px;padding:10px 12px;border-bottom:1px solid var(--line)}.tbl td{border:0;padding:0;white-space:normal!important}}
+.steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:12px}
+.step{background:var(--surface);border:2px dashed var(--cc);border-radius:20px;padding:12px 14px}
+.step h3{font-size:1.08rem;color:var(--cc);margin-bottom:4px}.step p{margin:0;font-size:.94rem}
+.inst{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:12px}
+.ib{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 14px;display:flex;gap:12px;box-shadow:0 4px 0 var(--line)}
+.ib .e{font-size:1.7rem}.ib h3{font-size:1.02rem}.ib p{margin:2px 0 0;font-size:.92rem;color:var(--muted)}
+.lines{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:12px}
+.ln{display:block;text-decoration:none;color:var(--ink);background:var(--surface);border-radius:20px;padding:14px;border:3px solid var(--cc);box-shadow:0 5px 0 var(--cc)}
+.ln .nu{font-family:var(--f-display);font-size:2rem;font-weight:700;color:var(--cc);line-height:1}
+.ln h3{font-size:1rem;margin:4px 0}.ln p{margin:0;font-size:.9rem;color:var(--muted)}
+.qa{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 14px}
+.qa summary{cursor:pointer;font-weight:800}
+.qa p{margin:8px 0 2px}
+.glos{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:8px}
+.gl{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 12px;font-size:.93rem}
+.gl b{color:var(--brand);font-family:var(--f-display)}
+.note{background:#FFF1C9;color:#5C4300;border-radius:16px;padding:10px 14px;font-size:.92rem}
+@media (prefers-color-scheme:dark){.note{background:#3A3018;color:#F3DC9C}mark{background:#8A6C10;color:#fff}}
+.src{display:flex;flex-direction:column;gap:4px;font-size:.9rem}
+.src a{color:var(--brand);font-weight:700}
+@media print{.nav{display:none}.card details>*{display:block}}
+</style></head><body>
+<div class="wm" aria-hidden="true"></div>
+<div class="wrap">
+ <a class="back" href="index.html">← Centro de Primera Infancia</a>
+ <header class="hero"><div><small style="color:var(--brand);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem">Módulo de consulta</small><h1>Biblioteca normativa</h1><p>Todo lo legal sobre primera infancia, infancia y adolescencia en un solo lugar: la Constitución, los tratados, las leyes con sus artículos clave explicados en palabras sencillas, las edades que fija la ley, la ruta para actuar, las instituciones, las líneas de ayuda y un glosario.</p></div><div class="art" aria-hidden="true"><svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sol, nubes, arcoíris, cometa y globos">
+<path d="M40 120a70 70 0 0 1 140 0" fill="none" stroke="#FF7A6B" stroke-width="9"/><path d="M50 120a60 60 0 0 1 120 0" fill="none" stroke="#FFC93C" stroke-width="9"/><path d="M60 120a50 50 0 0 1 100 0" fill="none" stroke="#3CBF9A" stroke-width="9"/><path d="M70 120a40 40 0 0 1 80 0" fill="none" stroke="#4FA3E0" stroke-width="9"/>
+<g transform="translate(250 32)"><circle r="17" fill="#FFC93C"/><g stroke="#FFC93C" stroke-width="4" stroke-linecap="round"><path d="M0-26v-7M0 26v7M-26 0h-7M26 0h7M-18-18l-5-5M18 18l5 5M18-18l5-5M-18 18l-5 5"/></g><circle cx="-6" cy="-3" r="2.2" fill="#2A2540"/><circle cx="6" cy="-3" r="2.2" fill="#2A2540"/><path d="M-6 5q6 6 12 0" fill="none" stroke="#2A2540" stroke-width="2.2" stroke-linecap="round"/></g>
+<g fill="#fff" stroke="#D9E8F5" stroke-width="2"><path d="M10 40a12 12 0 0 1 20-9a14 14 0 0 1 26 4a9 9 0 0 1 2 18H16a9 9 0 0 1-6-13z"/><path d="M175 22a10 10 0 0 1 17-7a12 12 0 0 1 22 3a8 8 0 0 1 1 15h-35a8 8 0 0 1-5-11z"/></g>
+<g transform="translate(205 60)"><path d="M0-18L14 0 0 22-14 0z" fill="#9B7BD8"/><path d="M0-18V22M-14 0h28" stroke="#fff" stroke-width="2"/><path d="M0 22q-8 10 2 16t-4 18" fill="none" stroke="#2A2540" stroke-width="1.6"/><path d="M-3 32l-5 3 5 2zM0 44l-5 3 5 2z" fill="#FF7A6B"/></g>
+<g><path d="M118 58v44" stroke="#8A8AA0" stroke-width="1.4"/><ellipse cx="118" cy="48" rx="11" ry="13" fill="#FF7A6B"/><path d="M114 60l4 3 4-3z" fill="#FF7A6B"/><path d="M134 66v36" stroke="#8A8AA0" stroke-width="1.4"/><ellipse cx="134" cy="56" rx="10" ry="12" fill="#4FA3E0"/><path d="M130 67l4 3 4-3z" fill="#4FA3E0"/><circle cx="114" cy="43" r="3" fill="#fff" opacity=".6"/><circle cx="130" cy="51" r="3" fill="#fff" opacity=".6"/></g>
+</svg></div></header>
+ <nav class="nav" aria-label="Secciones">
+  <a href="#normas">📚 Normas</a><a href="#edades">🎂 Edades en la ley</a><a href="#ruta">🧭 Ruta para actuar</a><a href="#inst">🏛️ Instituciones</a><a href="#lineas">☎️ Líneas de ayuda</a><a href="#faq">❓ Preguntas frecuentes</a><a href="#glos">🔤 Glosario</a><a href="#fuentes">🔗 Fuentes</a>
+ </nav>
+ <p class="note">📌 <b>Material de consulta pedagógica.</b> Resume y explica las normas con palabras sencillas; no reemplaza el texto oficial ni la asesoría de un abogado. Las leyes cambian: antes de citar un artículo en un documento formal, verifícalo en la fuente oficial (enlaces al final).</p>
+
+ <section class="blk" id="normas">
+  <h2><span class="ic">📚</span>Normas</h2>
+  <div class="filters">
+   <div class="row"><span class="lb">Tipo</span><span id="fc"></span></div>
+   <div class="row"><span class="lb">Tema</span><span id="ft"></span></div>
+   <div class="row"><input id="q" class="search" type="search" placeholder="Buscar: maltrato, artículo 44, trabajo, PARD, lactancia…" aria-label="Buscar en las normas"><span class="count" id="cnt"></span><button class="btn" id="pr" type="button">🖨️ Imprimir</button></div>
+  </div>
+  <div class="grid" id="grid"></div>
+ </section>
+
+ <section class="blk" id="edades"><h2><span class="ic">🎂</span>Edades que fija la ley</h2><p class="lead">Las edades cambian lo que la ley permite o exige. Esta tabla las reúne.</p>
+  <table class="tbl"><thead><tr><th>Edad</th><th>Qué significa</th><th>Norma</th></tr></thead><tbody id="ed"></tbody></table></section>
+
+ <section class="blk" id="ruta"><h2><span class="ic">🧭</span>Ruta para actuar ante una vulneración de derechos</h2><p class="lead">Si sospechas maltrato, abuso, abandono o cualquier vulneración, sigue estos pasos. No necesitas pruebas: basta la sospecha.</p><div class="steps" id="ru"></div></section>
+
+ <section class="blk" id="inst"><h2><span class="ic">🏛️</span>Instituciones: quién hace qué</h2><div class="inst" id="in"></div></section>
+
+ <section class="blk" id="lineas"><h2><span class="ic">☎️</span>Líneas de ayuda</h2><div class="lines" id="li"></div></section>
+
+ <section class="blk" id="faq"><h2><span class="ic">❓</span>Preguntas frecuentes</h2><div id="fq" style="display:flex;flex-direction:column;gap:8px"></div></section>
+
+ <section class="blk" id="glos"><h2><span class="ic">🔤</span>Glosario</h2><div class="glos" id="gs"></div></section>
+
+ <section class="blk" id="fuentes"><h2><span class="ic">🔗</span>Fuentes oficiales para verificar</h2><div class="src">
+  <a href="http://www.secretariasenado.gov.co/senado/basedoc/ley_1098_2006.html" target="_blank" rel="noopener">Ley 1098 de 2006 · Secretaría del Senado (texto vigente con modificaciones)</a>
+  <a href="http://www.secretariasenado.gov.co/senado/basedoc/constitucion_politica_1991.html" target="_blank" rel="noopener">Constitución Política · Secretaría del Senado</a>
+  <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/" target="_blank" rel="noopener">Gestor normativo · Función Pública (todas las leyes y decretos)</a>
+  <a href="https://www.icbf.gov.co/" target="_blank" rel="noopener">Instituto Colombiano de Bienestar Familiar (ICBF)</a>
+  <a href="https://www.minsalud.gov.co/" target="_blank" rel="noopener">Ministerio de Salud y Protección Social</a>
+  <a href="https://www.unicef.org/colombia/convencion-sobre-los-derechos-del-nino" target="_blank" rel="noopener">Convención sobre los Derechos del Niño · UNICEF</a>
+ </div></section>
+ <footer>PAMAVA soluciones · Centro de Primera Infancia · Revisado en noviembre de 2026</footer>
+</div>
+<script>
+// cat: con=Constitución, tra=Tratados, ley=Leyes, dec=Decretos y resoluciones, pol=Políticas y estrategias
+// tema: pi=primera infancia, ado=adolescencia, pro=protección y violencias, edu=educación, sal=salud y nutrición, fam=familia
+const NORMAS=[
+{id:"cp",cat:"con",tema:["pi","ado","pro","edu","sal","fam"],n:"Constitución Política de Colombia",a:"1991",r:"La norma más importante del país. Reconoce los derechos fundamentales de los niños y dice que prevalecen sobre los de los demás.",u:"Es la base de todo: cualquier ley o decisión sobre niños debe respetarla.",arts:[
+ ["Art. 42","La familia","La familia es el núcleo fundamental de la sociedad; el Estado y la sociedad garantizan su protección integral."],
+ ["Art. 44","Derechos fundamentales de los niños","Vida, integridad física, salud, seguridad social, alimentación equilibrada, nombre y nacionalidad, tener una familia y no ser separado de ella, cuidado y amor, educación y cultura, recreación y libre expresión. Protección contra el abandono, la violencia, el abuso sexual y la explotación. La familia, la sociedad y el Estado deben asistirlos y protegerlos. Sus derechos prevalecen sobre los de los demás."],
+ ["Art. 45","El adolescente","Tiene derecho a la protección y a la formación integral, y a participar en los organismos que tienen a cargo su educación y su formación."],
+ ["Art. 50","Salud del menor de un año","Todo niño menor de un año sin seguridad social tiene derecho a recibir atención gratuita en las instituciones de salud que reciban aportes del Estado."],
+ ["Art. 67","Educación","Es un derecho y un servicio público. Es obligatoria entre los 5 y los 15 años y comprende como mínimo un año de preescolar y nueve de educación básica."]]},
+{id:"cdn",cat:"tra",tema:["pi","ado","pro"],n:"Convención sobre los Derechos del Niño (ONU)",a:"1989 · Ley 12 de 1991",r:"Tratado internacional que reconoce a todos los menores de 18 años como sujetos de derechos. Colombia lo aprobó con la Ley 12 de 1991.",u:"Fundamenta los principios de interés superior, participación y protección contra toda forma de violencia.",arts:[
+ ["Art. 3","Interés superior del niño","En todas las medidas que tomen instituciones, tribunales o autoridades, lo primero que se considera es el interés superior del niño."],
+ ["Art. 12","Derecho a opinar","El niño tiene derecho a expresar su opinión en los asuntos que lo afectan y a que se tenga en cuenta según su edad y madurez."],
+ ["Art. 19","Protección contra la violencia","Los Estados protegen al niño contra toda forma de perjuicio o abuso físico o mental, descuido, malos tratos o explotación, incluido el abuso sexual."],
+ ["Art. 28","Educación","Derecho a la educación, con enseñanza primaria obligatoria y gratuita."],
+ ["Art. 31","Juego y descanso","Derecho al descanso, al esparcimiento, al juego y a participar en la vida cultural y artística."]]},
+{id:"oit",cat:"tra",tema:["ado","pro"],n:"Convenios 138 y 182 de la OIT",a:"Ley 515 de 1999 · Ley 704 de 2001",r:"El Convenio 138 fija la edad mínima de admisión al empleo y el 182 obliga a eliminar las peores formas de trabajo infantil.",u:"Base de las reglas sobre trabajo de adolescentes y de la prevención del trabajo infantil.",arts:[
+ ["Conv. 138","Edad mínima","La edad mínima para trabajar no debe ser inferior a la edad en que termina la educación obligatoria."],
+ ["Conv. 182","Peores formas","Prohíbe la esclavitud, la explotación sexual, la utilización en actividades ilícitas y los trabajos que dañan la salud, la seguridad o la moralidad de los niños."]]},
+{id:"1098",cat:"ley",tema:["pi","ado","pro","edu","sal","fam"],n:"Ley 1098 de 2006 · Código de la Infancia y la Adolescencia",a:"2006",r:"La ley central de la niñez en Colombia: define edades, principios, derechos, obligaciones de familia, sociedad y Estado, el restablecimiento de derechos y el sistema penal para adolescentes.",u:"Es la norma que más vas a usar en tu trabajo: principios, derechos y rutas de protección.",arts:[
+ ["Art. 1","Finalidad","Garantizar a niños, niñas y adolescentes su pleno y armonioso desarrollo en la familia y la comunidad, en un ambiente de felicidad, amor y comprensión."],
+ ["Art. 3","Sujetos titulares de derechos","Niño o niña: de 0 a 12 años. Adolescente: de 12 a 18 años."],
+ ["Art. 7","Protección integral","Reconocerlos como sujetos de derechos, garantizar su cumplimiento, prevenir su amenaza o vulneración y asegurar su restablecimiento inmediato."],
+ ["Art. 8","Interés superior","Imperativo que obliga a todas las personas a garantizar la satisfacción integral y simultánea de todos sus derechos."],
+ ["Art. 9","Prevalencia de los derechos","Si hay conflicto entre sus derechos y los de otra persona, prevalecen los de los niños, niñas y adolescentes."],
+ ["Art. 10","Corresponsabilidad","La familia, la sociedad y el Estado son corresponsables de su atención, cuidado y protección."],
+ ["Art. 17","Vida, calidad de vida y ambiente sano","Derecho a la vida y a una buena calidad de vida, en condiciones de dignidad y goce de todos sus derechos."],
+ ["Art. 18","Integridad personal","Derecho a ser protegidos contra todas las acciones que causen muerte, daño o sufrimiento físico, sexual o psicológico. Define el maltrato infantil."],
+ ["Art. 20","Derechos de protección","Protección contra abandono, explotación económica, consumo de sustancias, violencia sexual, trata, reclutamiento, peores formas de trabajo, entre otros."],
+ ["Art. 22","Tener una familia","Derecho a tener y crecer en el seno de la familia y a no ser expulsados de ella."],
+ ["Art. 25","Identidad","Derecho a un nombre, una nacionalidad y a ser inscritos en el registro civil."],
+ ["Art. 27","Salud","Derecho a la salud integral; ningún hospital, clínica o profesional puede abstenerse de atender a un niño que requiera atención."],
+ ["Art. 28","Educación","Derecho a una educación de calidad; obligatoria por el Estado en un año de preescolar y nueve de básica."],
+ ["Art. 29","Desarrollo integral en la primera infancia","La primera infancia va de 0 a 6 años; es la etapa en la que se establecen las bases del desarrollo cognitivo, emocional y social. Derechos impostergables: atención en salud y nutrición, esquema de vacunación, protección contra peligros físicos y educación inicial."],
+ ["Art. 30","Recreación y cultura","Derecho al descanso, esparcimiento, juego y a participar en la vida cultural y las artes."],
+ ["Art. 31","Participación","Derecho a participar en las actividades de su entorno y a que sus opiniones sean tenidas en cuenta."],
+ ["Art. 33","Intimidad","Derecho a la intimidad personal; protección contra injerencias en su vida privada, la de su familia y su correspondencia."],
+ ["Art. 35","Edad mínima de trabajo","La edad mínima de admisión al trabajo es 15 años, con autorización del inspector de trabajo o del ente territorial. Los adolescentes autorizados tienen protección laboral."],
+ ["Art. 36","Discapacidad","Derecho a la vida digna, la integración social y la atención especializada de los niños con discapacidad."],
+ ["Art. 39","Obligaciones de la familia","Protegerlos contra la violencia, formarlos y orientarlos, asegurar su salud, educación y registro, brindar alimentación y afecto, entre otras."],
+ ["Art. 40","Obligaciones de la sociedad","Conocer, respetar y promover sus derechos, y denunciar ante las autoridades su amenaza o vulneración."],
+ ["Art. 41","Obligaciones del Estado","Garantizar el ejercicio de todos sus derechos, prevenir su vulneración y asegurar el restablecimiento."],
+ ["Art. 42","Obligaciones de las instituciones educativas","Facilitar el acceso y la permanencia, respetar la dignidad y los derechos de los estudiantes y formar en convivencia."],
+ ["Art. 43","Obligación ética de los establecimientos educativos","Garantizar el respeto a la dignidad, la vida y la integridad física y moral dentro de la convivencia escolar; proteger contra el maltrato y el acoso."],
+ ["Art. 44","Obligaciones complementarias","Entre otras: comprobar la afiliación a salud, detectar y reportar a las autoridades los casos de abuso, maltrato o peores formas de trabajo infantil, y prevenir el consumo de sustancias."],
+ ["Art. 45","Prohibición de sanciones crueles","Prohíbe imponer sanciones que impliquen maltrato físico o psicológico o que afecten la dignidad de los estudiantes."],
+ ["Art. 46","Obligaciones del sistema de salud","Atención prioritaria, vacunación, control de crecimiento y desarrollo, y programas de salud sexual y reproductiva, entre otras."],
+ ["Art. 50","Restablecimiento de derechos","Es la restauración de la dignidad e integridad de los niños como sujetos de derechos y de su capacidad para ejercerlos."],
+ ["Art. 52","Verificación de derechos","Ante una amenaza o vulneración, la autoridad verifica de inmediato el estado de cumplimiento de cada derecho (modificado por la Ley 1878 de 2018)."],
+ ["Art. 53","Medidas de restablecimiento","Amonestación, retiro de la actividad que amenace o vulnere derechos, ubicación inmediata en medio familiar, ubicación en centros de emergencia, adopción, entre otras."],
+ ["Art. 79","Defensorías de Familia","Dependencias del ICBF que previenen, garantizan y restablecen los derechos de los niños, niñas y adolescentes."],
+ ["Art. 83","Comisarías de Familia","Entidades municipales que protegen a los miembros de la familia frente a la violencia intrafamiliar."],
+ ["Art. 96","Autoridades competentes","Corresponde a los defensores y comisarios de familia procurar y promover el restablecimiento de los derechos."],
+ ["Art. 100","Trámite del PARD","El proceso administrativo de restablecimiento de derechos tiene un término único de 6 meses desde el conocimiento de la amenaza o vulneración (modificado por la Ley 1878 de 2018)."],
+ ["Art. 103","Carácter transitorio de las medidas","Las medidas se revisan y se hace seguimiento hasta por 6 meses, prorrogables; en ningún caso el proceso con el seguimiento puede exceder 18 meses."],
+ ["Art. 139","Sistema de Responsabilidad Penal para Adolescentes","Conjunto de principios, normas y autoridades para investigar y juzgar los delitos cometidos por personas entre 14 y 18 años."],
+ ["Art. 140","Finalidad del SRPA","Las medidas son de carácter pedagógico, específico y diferenciado; buscan la protección integral y la justicia restaurativa."],
+ ["Art. 142","Menores de 14 años","No serán juzgados ni declarados responsables penalmente; se les aplican medidas de verificación y restablecimiento de derechos."],
+ ["Art. 177","Sanciones","Amonestación, reglas de conducta, prestación de servicios a la comunidad, libertad asistida, internación en medio semicerrado y privación de la libertad en centro de atención especializado."]]},
+{id:"1804",cat:"ley",tema:["pi","edu","sal","fam"],n:"Ley 1804 de 2016 · Política De Cero a Siempre",a:"2016",r:"Convierte De Cero a Siempre en política de Estado para el desarrollo integral de la primera infancia (desde la gestación hasta los 6 años).",u:"Explica la atención integral, las realizaciones, los entornos, la RIA y la educación inicial.",arts:[
+ ["Art. 2","Política De Cero a Siempre","Es la postura del Estado sobre la primera infancia y el conjunto de normas, planes y acciones para su desarrollo integral."],
+ ["Art. 4a","Desarrollo integral","Proceso singular de transformaciones de cada niño, en el que despliega sus capacidades y construye su identidad y autonomía."],
+ ["Art. 4b","Realizaciones","Condiciones que hacen posible el desarrollo integral: cuidadores que acogen, salud, nutrición, entornos que favorecen el desarrollo, identidad en la diversidad, expresión y participación, y entornos que protegen sus derechos."],
+ ["Art. 4c","Entornos","Hogar, entorno de salud, educativo, espacio público y otros propios de cada cultura."],
+ ["Art. 4d","Atención integral","Debe ser pertinente, oportuna, flexible, diferencial, continua y complementaria."],
+ ["Art. 4e","Ruta Integral de Atenciones (RIA)","Herramienta que ordena las atenciones que debe recibir cada niño según su edad y contexto."],
+ ["Art. 5","Educación inicial","Es un derecho de los niños y niñas menores de 6 años."]]},
+{id:"2089",cat:"ley",tema:["pi","ado","pro","fam"],n:"Ley 2089 de 2021 · Crianza sin castigo físico",a:"2021",r:"Prohíbe el castigo físico, los tratos crueles, humillantes o degradantes y cualquier tipo de violencia como método de corrección contra niños, niñas y adolescentes.",u:"Respaldo para orientar a las familias en crianza sin violencia.",arts:[
+ ["Objeto","Prohibición","Ningún adulto puede corregir con golpes, gritos, humillaciones o amenazas; aplica a padres, cuidadores y educadores en todos los entornos."],
+ ["Estrategia","Estrategia nacional","Ordena una estrategia pedagógica y de prevención del castigo físico (adoptada para 2022-2030)."]]},
+{id:"1146",cat:"ley",tema:["pro","edu","ado"],n:"Ley 1146 de 2007 · Prevención de la violencia sexual",a:"2007",r:"Normas para la prevención de la violencia sexual y la atención integral de niños, niñas y adolescentes víctimas de abuso sexual.",u:"Define la violencia sexual y obliga a los docentes a identificar y denunciar.",arts:[
+ ["Art. 2","Definición","Violencia sexual es todo acto o comportamiento de tipo sexual ejercido sobre un niño, niña o adolescente usando la fuerza, coerción o aprovechando su condición de indefensión o la desigualdad de poder."],
+ ["Art. 11","Identificación temprana en la escuela","Los establecimientos educativos deben identificar señales de abuso y orientar a la comunidad educativa."],
+ ["Art. 12","Obligación de denunciar","El docente está obligado a denunciar ante las autoridades toda conducta o indicio de violencia o abuso sexual que conozca."]]},
+{id:"1620",cat:"ley",tema:["edu","ado","pro"],n:"Ley 1620 de 2013 · Convivencia escolar",a:"2013",r:"Crea el Sistema Nacional de Convivencia Escolar y la Ruta de Atención Integral para el acoso, la violencia escolar (incluida la que ocurre por internet) y la prevención del embarazo adolescente.",u:"Es la ruta a seguir en el colegio ante acoso, ciberacoso y violencia.",arts:[
+ ["Art. 5","Principios","Participación, corresponsabilidad, autonomía, diversidad e integralidad."],
+ ["Art. 12","Comité escolar de convivencia","Cada institución tiene un comité que atiende los casos y activa la ruta."],
+ ["Art. 29-30","Ruta de atención integral","Tiene cuatro componentes: promoción, prevención, atención y seguimiento."]]},
+{id:"1878",cat:"ley",tema:["pro"],n:"Ley 1878 de 2018 · Reforma al restablecimiento de derechos",a:"2018",r:"Modifica artículos de la Ley 1098 sobre el proceso administrativo de restablecimiento de derechos (PARD): verificación, términos y seguimiento.",u:"Fija un término único de 6 meses para resolver el PARD.",arts:[
+ ["Modifica art. 52","Verificación de derechos","La autoridad verifica de inmediato el estado de los derechos."],
+ ["Modifica art. 100","Trámite","Término único de 6 meses para definir la situación jurídica."],
+ ["Modifica art. 103","Seguimiento","Seguimiento de las medidas hasta por 6 meses, prorrogables; el proceso con el seguimiento no puede exceder 18 meses."]]},
+{id:"2126",cat:"ley",tema:["pro","fam"],n:"Ley 2126 de 2021 · Comisarías de Familia",a:"2021",r:"Regula la creación, conformación y funcionamiento de las Comisarías de Familia.",u:"Aclara qué casos atiende la Comisaría y cuáles el Defensor de Familia.",arts:[
+ ["Competencia","Qué atiende","Las comisarías conocen la violencia en el contexto familiar y restablecen los derechos de niños, niñas y adolescentes en ese contexto, excepto cuando se trate de violencia sexual, que corresponde al Defensor de Familia."]]},
+{id:"1885",cat:"ley",tema:["ado"],n:"Leyes 1622 de 2013 y 1885 de 2018 · Estatuto de Ciudadanía Juvenil",a:"2013 · 2018",r:"Define como joven a la persona entre 14 y 28 años y crea espacios de participación como los Consejos Municipales de Juventud.",u:"Útil para promover la participación de los adolescentes.",arts:[
+ ["Ley 1622","Joven","Persona entre 14 y 28 años en proceso de consolidación de su autonomía."],
+ ["Ley 1885","Consejos de Juventud","Regula los Consejos Municipales, Departamentales y Nacional de Juventud."]]},
+{id:"1823",cat:"ley",tema:["pi","sal"],n:"Ley 1823 de 2017 · Salas Amigas de la Familia Lactante",a:"2017",r:"Adopta la estrategia Salas Amigas de la Familia Lactante del Entorno Laboral en entidades públicas y empresas privadas.",u:"Apoya la lactancia materna de las madres trabajadoras.",arts:[
+ ["Objeto","Salas amigas","Espacios dignos para que las madres en lactancia extraigan y conserven su leche durante la jornada laboral."],
+ ["Reglamento","Vigilancia","El Ministerio de Salud vigila su implementación y fija los parámetros técnicos (Resolución 2423 de 2018)."]]},
+{id:"2097",cat:"ley",tema:["fam","pi"],n:"Ley 2097 de 2021 · REDAM",a:"2021",r:"Crea el Registro de Deudores Alimentarios Morosos: quien deba cuotas de alimentos queda registrado y tiene restricciones.",u:"Protege el derecho de los niños a recibir alimentos.",arts:[
+ ["Objeto","Registro","Inscribe a quienes incumplan tres o más cuotas alimentarias, sucesivas o no."]]},
+{id:"1361",cat:"ley",tema:["fam"],n:"Ley 1361 de 2009 · Protección integral a la familia",a:"2009",r:"Fortalece y garantiza el desarrollo integral de la familia como núcleo fundamental de la sociedad.",u:"Base de los programas de fortalecimiento familiar.",arts:[["Objeto","Familia","Establece derechos de la familia y obligaciones del Estado para su protección."]]},
+{id:"2025",cat:"ley",tema:["edu","fam"],n:"Ley 2025 de 2020 · Escuelas para padres y madres",a:"2020",r:"Lineamientos para las escuelas de padres, madres y cuidadores en las instituciones de preescolar, básica y media.",u:"Respalda el trabajo con familias desde la institución educativa.",arts:[["Objeto","Escuelas de padres","Las instituciones deben implementar escuelas para fortalecer la crianza y la corresponsabilidad de las familias."]]},
+{id:"1336",cat:"ley",tema:["pro","ado"],n:"Leyes 679 de 2001 y 1336 de 2009 · Explotación sexual",a:"2001 · 2009",r:"Normas para prevenir y sancionar la explotación sexual comercial, la pornografía y el turismo sexual con niños, niñas y adolescentes.",u:"Respaldan la denuncia de estos delitos.",arts:[["Objeto","Prevención","Medidas de prevención, control y sanción frente a la explotación sexual comercial de niños."]]},
+{id:"1581",cat:"ley",tema:["edu","pro"],n:"Ley 1581 de 2012 · Protección de datos personales",a:"2012",r:"Regula el manejo de los datos personales. Los datos de niños, niñas y adolescentes tienen protección especial.",u:"Para formularios, fotos, listas y registros de los niños: se necesita autorización y uso responsable.",arts:[["Art. 7","Datos de niños","Su tratamiento debe respetar el interés superior y sus derechos fundamentales; se escucha su opinión según su madurez."]]},
+{id:"1618",cat:"ley",tema:["edu","pro"],n:"Ley Estatutaria 1618 de 2013 · Derechos de las personas con discapacidad",a:"2013",r:"Garantiza el pleno ejercicio de los derechos de las personas con discapacidad mediante inclusión y ajustes razonables.",u:"Base para la educación inclusiva de niños con discapacidad.",arts:[["Objeto","Inclusión","Medidas de inclusión, acción afirmativa y ajustes razonables."]]},
+{id:"115",cat:"ley",tema:["edu","pi"],n:"Ley 115 de 1994 · Ley General de Educación",a:"1994",r:"Organiza el servicio educativo, incluido el nivel de preescolar.",u:"Regula el preescolar y los proyectos pedagógicos.",arts:[["Preescolar","Nivel preescolar","Educación ofrecida al niño para su desarrollo integral en lo biológico, cognoscitivo, psicomotriz, socioafectivo y espiritual."]]},
+{id:"1965",cat:"dec",tema:["edu","ado","pro"],n:"Decreto 1965 de 2013",a:"2013",r:"Reglamenta la Ley 1620 de convivencia escolar.",u:"Define cómo se clasifican y atienden las situaciones en el colegio.",arts:[["Situaciones","Tipos I, II y III","Tipo I: conflictos esporádicos sin daño. Tipo II: acoso o ciberacoso, o agresiones con daño sin delito. Tipo III: presuntos delitos, que se remiten a las autoridades."]]},
+{id:"4840",cat:"dec",tema:["pro","fam"],n:"Decreto 4840 de 2007",a:"2007",r:"Reglamenta funciones de las Comisarías y Defensorías de Familia en el restablecimiento de derechos.",u:"Complementa las competencias de las autoridades de familia.",arts:[["Objeto","Competencias","Define actuaciones de las autoridades administrativas de familia."]]},
+{id:"3280",cat:"dec",tema:["sal","pi","ado"],n:"Resolución 3280 de 2018 · Ruta de Promoción y Mantenimiento de la Salud",a:"2018",r:"Del Ministerio de Salud: define las atenciones en salud por curso de vida, incluidas las valoraciones de primera infancia, infancia y adolescencia.",u:"Explica qué atenciones deben recibir los niños en salud (crecimiento, desarrollo, vacunación).",arts:[["Primera infancia","Valoración integral","Incluye valoración del crecimiento y el desarrollo (con la EAD-3), salud bucal, nutrición y vacunación."]]},
+{id:"ead3",cat:"dec",tema:["pi","sal"],n:"Escala Abreviada de Desarrollo EAD-3",a:"Ministerio de Salud · 2016",r:"Instrumento oficial para valorar el desarrollo de los niños menores de 7 años.",u:"Se usa en los controles de salud; conocerla ayuda a entender los informes de desarrollo.",arts:[["Áreas","Cuatro áreas","Motricidad gruesa, motricidad fino-adaptativa, audición y lenguaje, y personal social."]]},
+{id:"pnia",cat:"pol",tema:["pi","ado"],n:"Política Nacional de Infancia y Adolescencia 2018-2030",a:"2018",r:"Orienta las acciones del Estado para el desarrollo integral de niños y adolescentes de 6 a 18 años, como continuidad de De Cero a Siempre.",u:"Marco de los programas para la infancia y la adolescencia.",arts:[["Enfoque","Desarrollo integral","Protección integral, enfoque de derechos y curso de vida."]]},
+{id:"est",cat:"pol",tema:["pro","fam"],n:"Estrategia Nacional contra el castigo físico 2022-2030",a:"2021-2022",r:"Estrategia pedagógica y de prevención ordenada por la Ley 2089 de 2021 para eliminar el castigo físico y los tratos humillantes.",u:"Materiales para trabajar crianza sin violencia con familias.",arts:[["Objetivo","Transformar","Cambiar creencias que normalizan el castigo físico y promover la parentalidad respetuosa."]]}
+];
+const CATS={con:"Constitución",tra:"Tratados internacionales",ley:"Leyes",dec:"Decretos, resoluciones e instrumentos",pol:"Políticas y estrategias"};
+const TEMAS={pi:"Primera infancia",ado:"Adolescencia",pro:"Protección y violencias",edu:"Educación",sal:"Salud y nutrición",fam:"Familia"};
+const EDADES_LEY=[
+ ["0 a 6 años","Primera infancia","Ley 1098, art. 29 · Ley 1804"],
+ ["0 a 12 años","Niño o niña","Ley 1098, art. 3"],
+ ["12 a 18 años","Adolescente","Ley 1098, art. 3"],
+ ["Menor de 1 año","Atención gratuita en salud si no tiene seguridad social","Constitución, art. 50"],
+ ["5 a 15 años","Educación obligatoria (un año de preescolar y nueve de básica)","Constitución, art. 67"],
+ ["Menor de 14 años","No responde penalmente; se restablecen sus derechos. Cualquier acto sexual con un menor de 14 años es delito","Ley 1098, art. 142 · Código Penal"],
+ ["14 a 18 años","Responde ante el Sistema de Responsabilidad Penal para Adolescentes, con medidas pedagógicas","Ley 1098, art. 139"],
+ ["15 años","Edad mínima para trabajar, con autorización del inspector de trabajo","Ley 1098, art. 35"],
+ ["14 a 28 años","Joven (ciudadanía juvenil)","Leyes 1622 de 2013 y 1885 de 2018"],
+ ["10 a 19 años","Adolescencia según la OMS","Organización Mundial de la Salud"]];
+const INST=[
+ ["🏛️","ICBF · Defensoría de Familia","Verifica y restablece derechos de niños, niñas y adolescentes. Atiende la violencia sexual y los casos fuera del contexto familiar. Puerta de entrada: Línea 141."],
+ ["🏠","Comisaría de Familia","Atiende la violencia en el contexto familiar y protege a los niños en esos casos (excepto violencia sexual). Es municipal."],
+ ["👮","Policía de Infancia y Adolescencia","Apoya a las autoridades en la protección y el restablecimiento de derechos; actúa en emergencias (Línea 123)."],
+ ["⚖️","Fiscalía General de la Nación","Investiga los delitos contra niños, niñas y adolescentes (por ejemplo, abuso sexual)."],
+ ["📜","Personería municipal","Ministerio Público: vigila que las autoridades protejan los derechos y recibe quejas."],
+ ["👩‍⚖️","Juez de Familia","Revisa los procesos de restablecimiento cuando la autoridad administrativa pierde competencia o hay inconformidad."],
+ ["🏫","Comité escolar de convivencia","Atiende acoso, ciberacoso y violencia escolar y activa la ruta de la Ley 1620."],
+ ["🩺","EPS e IPS (sector salud)","Controles de crecimiento y desarrollo, vacunación y atención; reportan casos de violencia detectados."],
+ ["🧑‍🏭","Inspector de trabajo","Autoriza el trabajo de adolescentes desde los 15 años y vigila sus condiciones."]];
+const LINEAS=[
+ ["141","ICBF","Protección, emergencia y orientación sobre niños, niñas y adolescentes. Gratuita, 24 horas."],
+ ["123","Emergencias","Policía y emergencias ante un peligro inmediato."],
+ ["155","Orientación a mujeres","Violencias contra las mujeres y las niñas."],
+ ["192 opción 4","Salud mental (MinSalud)","Orientación y primeros auxilios en salud mental."]];
+const RUTA=[
+ ["1. Detectar","Observa señales de alerta: cambios de comportamiento, lesiones, relatos del niño, ausencias, descuido."],
+ ["2. Escuchar sin revictimizar","Escucha con calma, cree lo que dice, no interrogues ni pidas detalles, no prometas guardar el secreto."],
+ ["3. Registrar","Escribe lo que viste y lo que dijo el niño con sus palabras, la fecha y la hora. Sin opiniones ni etiquetas."],
+ ["4. Informar","Comunica de inmediato a tu coordinador o directivo y al comité de convivencia si es en el colegio."],
+ ["5. Reportar","Reporta a la autoridad: Línea 141 / Defensoría de Familia (violencia sexual o fuera de la familia), Comisaría de Familia (violencia intrafamiliar), 123 si hay peligro inmediato."],
+ ["6. Acompañar y hacer seguimiento","Sigue acompañando al niño, protege su intimidad y colabora con la autoridad."]];
+const GLOS=[
+ ["NNA","Niños, niñas y adolescentes."],["Interés superior","Lo que de verdad es mejor para el niño, considerando todos sus derechos a la vez."],
+ ["PARD","Proceso Administrativo de Restablecimiento de Derechos: el trámite que adelanta el defensor o comisario de familia."],
+ ["Restablecimiento de derechos","Devolver al niño la garantía de los derechos que le fueron amenazados o vulnerados."],
+ ["Amenaza / vulneración","Amenaza: riesgo de que un derecho se afecte. Vulneración: el derecho ya fue afectado."],
+ ["SRPA","Sistema de Responsabilidad Penal para Adolescentes (14 a 18 años)."],
+ ["RIA","Ruta Integral de Atenciones: las atenciones que debe recibir cada niño en la primera infancia."],
+ ["Atención integral","Conjunto de acciones pertinentes, oportunas, flexibles, diferenciales, continuas y complementarias."],
+ ["Realizaciones","Condiciones que hacen posible el desarrollo integral (Ley 1804)."],
+ ["Entornos","Hogar, salud, educativo y espacio público, donde transcurre la vida del niño."],
+ ["CDI","Centro de Desarrollo Infantil."],["HCB","Hogar Comunitario de Bienestar."],
+ ["Corresponsabilidad","Familia, sociedad y Estado comparten la obligación de proteger a los niños."],
+ ["Revictimización","Causar más daño a una víctima, por ejemplo haciéndola contar lo ocurrido muchas veces."],
+ ["EAD-3","Escala Abreviada de Desarrollo, instrumento oficial para valorar el desarrollo de menores de 7 años."],
+ ["REDAM","Registro de Deudores Alimentarios Morosos."]];
+const FAQ=[
+ ["¿Necesito pruebas para reportar un caso de maltrato?","No. Basta una sospecha razonable. La autoridad es quien verifica. Toda persona tiene el deber de informar (Ley 1098, art. 40) y los docentes deben denunciar los indicios de abuso sexual (Ley 1146, art. 12)."],
+ ["¿Puedo reportar si la familia no está de acuerdo?","Sí. Los derechos de los niños prevalecen (Constitución art. 44 y Ley 1098 art. 9)."],
+ ["¿A dónde reporto?","Violencia sexual o casos fuera de la familia: Línea 141 o Defensoría de Familia (ICBF). Violencia dentro de la familia: Comisaría de Familia. Peligro inmediato: 123."],
+ ["¿Una palmada para corregir está permitida?","No. La Ley 2089 de 2021 prohíbe el castigo físico y los tratos humillantes como método de corrección."],
+ ["¿Un adolescente de 16 años puede trabajar?","Sí, con autorización del inspector de trabajo, en actividades no peligrosas y con jornada y salario protegidos (Ley 1098, art. 35)."],
+ ["¿Qué pasa si un adolescente comete un delito?","Si tiene entre 14 y 18 años, responde ante el SRPA con medidas pedagógicas. Si es menor de 14, no responde penalmente: se restablecen sus derechos."],
+ ["¿Cuánto dura el proceso de restablecimiento de derechos?","Un término único de 6 meses para definir la situación jurídica; el proceso con el seguimiento no puede pasar de 18 meses (Ley 1878 de 2018)."],
+ ["¿Puedo publicar fotos de los niños en redes?","Solo con autorización de la familia y cuidando su intimidad y su imagen (Ley 1098 art. 33 y Ley 1581 de 2012)."]];
+
+const $=x=>document.querySelector(x);
+const CC={con:["#2F7FC0","#E3F1FB"],tra:["#6E4FC0","#EEE8FA"],ley:["#1E9670","#DDF5EC"],dec:["#B87600","#FFF1C9"],pol:["#D54B3D","#FDE5E1"]};
+const ICO={con:"📜",tra:"🌍",ley:"⚖️",dec:"📋",pol:"🧩"};
+const dark=matchMedia("(prefers-color-scheme:dark)").matches;
+const esc=t=>t.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const norm=t=>t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+let fc=null,ft=null,q="";
+function hl(t){t=esc(t);if(!q)return t;const n=norm(t);let out="",i=0,k;while((k=n.indexOf(q,i))>-1){out+=t.slice(i,k)+"<mark>"+t.slice(k,k+q.length)+"</mark>";i=k+q.length}return out+t.slice(i)}
+function chips(){
+ $("#fc").innerHTML=`<button class="chip" data-c="">Todos</button>`+Object.entries(CATS).map(([k,v])=>`<button class="chip" data-c="${k}" style="--cc:${CC[k][0]}">${ICO[k]} ${v}</button>`).join(" ");
+ $("#ft").innerHTML=`<button class="chip" data-t="">Todos</button>`+Object.entries(TEMAS).map(([k,v])=>`<button class="chip" data-t="${k}">${v}</button>`).join(" ");
+}
+function card(n){
+ const [c,cs]=CC[n.cat];const head=norm(n.n+" "+n.a+" "+n.r+" "+n.u);
+ let arts=n.arts;const hit=q&&!head.includes(q);
+ if(q){const m=arts.filter(a=>norm(a.join(" ")).includes(q));if(hit)arts=m}
+ return `<article class="card" style="--cc:${c};--cs:${dark?"var(--brands)":cs}">
+ <div class="top"><div class="emo">${ICO[n.cat]}</div><div><h3>${hl(n.n)}</h3><div class="yr">${CATS[n.cat]} · ${esc(n.a)}</div></div></div>
+ <p class="res">${hl(n.r)}</p>
+ <div class="use"><b>Para qué te sirve:</b> ${hl(n.u)}</div>
+ <div class="tags">${n.tema.map(t=>`<span class="tag" style="--tb:${dark?"var(--brands)":cs};--tc:${c}">${TEMAS[t]}</span>`).join("")}</div>
+ <details ${q?"open":""}><summary>${q&&hit?"Artículos que coinciden":"Ver artículos clave"} (${arts.length})</summary>
+ <ul class="arts">${arts.map(a=>`<li><span class="an">${hl(a[0])}</span> · <span class="at">${hl(a[1])}</span><p>${hl(a[2])}</p></li>`).join("")}</ul></details></article>`}
+function render(){
+ const list=NORMAS.filter(n=>(fc===null||n.cat===fc)&&(ft===null||n.tema.includes(ft))&&(!q||norm(n.n+" "+n.a+" "+n.r+" "+n.u+" "+n.arts.flat().join(" ")).includes(q)));
+ $("#grid").innerHTML=list.length?list.map(card).join(""):`<p class="empty">No encontré normas con esa búsqueda. Prueba con otra palabra o revisa el glosario y las preguntas frecuentes.</p>`;
+ const na=list.reduce((s,n)=>{const h=norm(n.n+" "+n.a+" "+n.r+" "+n.u);return s+(q&&!h.includes(q)?n.arts.filter(a=>norm(a.join(" ")).includes(q)).length:n.arts.length)},0);
+ $("#cnt").textContent=`${list.length} normas · ${na} artículos`;
+ document.querySelectorAll("[data-c]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.c===(fc??""))));
+ document.querySelectorAll("[data-t]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.t===(ft??""))));
+}
+chips();
+document.addEventListener("click",e=>{const b=e.target.closest("[data-c],[data-t]");if(!b)return;
+ if(b.dataset.c!==undefined)fc=b.dataset.c||null;else ft=b.dataset.t||null;render()});
+$("#q").addEventListener("input",e=>{q=norm(e.target.value.trim());render()});
+$("#pr").addEventListener("click",()=>{document.querySelectorAll("#grid details").forEach(d=>d.open=true);window.print()});
+$("#ed").innerHTML=EDADES_LEY.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("");
+const RC=["#2F7FC0","#1E9670","#B87600","#6E4FC0","#D54B3D","#2F7FC0"];
+$("#ru").innerHTML=RUTA.map((r,i)=>`<div class="step" style="--cc:${RC[i]}"><h3>${r[0]}</h3><p>${r[1]}</p></div>`).join("");
+$("#in").innerHTML=INST.map(r=>`<div class="ib"><div class="e">${r[0]}</div><div><h3>${r[1]}</h3><p>${r[2]}</p></div></div>`).join("");
+const LC=["#D54B3D","#2F7FC0","#6E4FC0","#1E9670"];
+$("#li").innerHTML=LINEAS.map((r,i)=>`<a class="ln" style="--cc:${LC[i]}" href="tel:${r[0].split(" ")[0]}"><div class="nu">${r[0]}</div><h3>${r[1]}</h3><p>${r[2]}</p></a>`).join("");
+$("#fq").innerHTML=FAQ.map(r=>`<details class="qa"><summary>${r[0]}</summary><p>${r[1]}</p></details>`).join("");
+$("#gs").innerHTML=GLOS.map(r=>`<div class="gl"><b>${r[0]}:</b> ${r[1]}</div>`).join("");
+render();
+</script></body></html>
