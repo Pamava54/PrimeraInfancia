@@ -291,14 +291,17 @@ const TABLA=[
  ["5 años",["Sigue las reglas o se turna en los juegos","Canta, baila o actúa para usted","Hace tareas simples de la casa"],["Cuenta historias con al menos 2 eventos","Mantiene una conversación con más de 3 intercambios","Usa o reconoce rimas simples"],["Cuenta hasta 10","Presta atención de 5 a 10 minutos en una actividad","Escribe algunas letras de su nombre"],["Se abotona algunos botones","Salta en un pie"]]
 ];
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-let store={}; try{store=JSON.parse(localStorage.getItem("desa-v2")||"{}")||{}}catch(e){store={}}
-const save=()=>{try{localStorage.setItem("desa-v2",JSON.stringify(store))}catch(e){}};
+let store={}; try{store=JSON.parse(localStorage.getItem("desa-v3")||"{}")||{}}catch(e){store={}}
+const save=()=>{try{localStorage.setItem("desa-v3",JSON.stringify(store))}catch(e){}};
 const exp=(t,html,open)=>`<details class="ref"${open?" open":""}><summary>${t}</summary>${html}</details>`;
 const Q=[]; // {tab,id,a,x}
 function sel(tab,id,a,opts,x,lab){Q.push({tab,id,a,x});return `<select class="cel" id="${id}" data-k="${id}" aria-label="${lab||"Elige"}"><option value="">— elige —</option>${opts.map((o,j)=>`<option value="${j}">${o}</option>`).join("")}</select>`}
 const xrow=(id,x,cols)=>`<tr class="xrow" id="${id}-x" hidden><td colspan="${cols}">💡 ${x}</td></tr>`;
 
-const docTabla=()=>`<details class="doc"><summary>📄 Tabla de indicadores del desarrollo por edad (CDC)</summary><p class="note">Lo que la mayoría de los niños (75 % o más) puede hacer a cada edad. Fuente: CDC, “Aprenda los signos. Reaccione pronto.”</p><div class="tw"><table class="tind"><thead><tr><th>Edad</th>${AREAS.map(a=>`<th>${a.split(" (")[0]}</th>`).join("")}</tr></thead><tbody>${TABLA.map(r=>`<tr><td class="ed">${r[0]}</td>${[1,2,3,4].map(k=>`<td><ul>${r[k].map(t=>`<li>${t}</li>`).join("")}</ul></td>`).join("")}</tr>`).join("")}</tbody></table></div></details>`;
+const nk=t=>t.toLowerCase().replace(/[^a-záéíóúñ ]/g,"").replace(/\s+/g," ").trim().slice(0,22);
+const usados=()=>new Set([...P1.map(p=>p[0]),...P2.map(p=>p[0]),...P3.flatMap(g=>g.it.map(p=>p[0]))].map(nk));
+const docTabla=()=>{const U=usados();return `<details class="doc"><summary>📄 Ejemplos de lo que hace la mayoría de los niños en cada edad (CDC)</summary><p class="note">Son <b>otros ejemplos</b>, distintos a los del ejercicio: úsalos para comparar y razonar. Fuente: CDC, “Aprenda los signos. Reaccione pronto.”</p><div class="tw"><table class="tind"><thead><tr><th>Edad</th>${AREAS.map(a=>`<th>${a.split(" (")[0]}</th>`).join("")}</tr></thead><tbody>${TABLA.map(r=>`<tr><td class="ed">${r[0]}</td>${[1,2,3,4].map(k=>{const l=r[k].filter(t=>!U.has(nk(t)));return `<td>${l.length?`<ul>${l.map(t=>`<li>${t}</li>`).join("")}</ul>`:"—"}</td>`}).join("")}</tr>`).join("")}</tbody></table></div></details>`};
+const esperado=ed=>{const r=TABLA.find(x=>x[0]===ed);return `<details class="doc mini"><summary>📄 Lo que hace la mayoría de los niños a los ${ed}</summary><ul class="guia">${[1,2,3,4].map(k=>`<li><b>${AREAS[k-1].split(" (")[0]}:</b> ${r[k].join("; ")}.</li>`).join("")}</ul></details>`};
 const docAreas=()=>`<details class="doc"><summary>📄 Las 4 áreas del desarrollo explicadas</summary><ul class="guia">
  <li><b>Social y emocional:</b> cómo el niño se relaciona con los demás y maneja sus emociones: sonreír, jugar con otros, consolar, respetar turnos.</li>
  <li><b>Comunicación y lenguaje:</b> cómo entiende y se expresa: sonidos, gestos, palabras, frases, preguntas, contar historias.</li>
@@ -314,13 +317,13 @@ const DAYS=[
   pasos:["Abre “Las 4 áreas del desarrollo explicadas”.","Lee cada conducta y pregúntate: ¿qué está usando el niño? ¿su relación con otros, su forma de comunicarse, su pensamiento o su cuerpo?","Elige el área en la lista.","Si sale en rojo, lee la explicación 💡 y vuelve a intentarlo."]},
  {n:2,c:"d2",t:"¿A qué edad aparece?",tc:"Edades",
   que:"Un <b>indicador (o hito) del desarrollo</b> es algo que la mayoría de los niños (75 % o más) ya puede hacer a cierta edad. Conocer las edades ayuda a saber qué esperar y a acompañar mejor, recordando que cada niño tiene su propio ritmo.",
-  pasos:["Abre la “Tabla de indicadores del desarrollo por edad”.","Busca la conducta en la tabla.","Elige la edad en la que la mayoría de los niños ya la logra.","Fíjate en el orden: primero cabeza, luego tronco, luego piernas (lee el truco al final)."]},
+  pasos:["Lee la conducta y piensa: ¿es algo de bebé pequeño, de bebé que ya se sienta, de niño que ya camina o de niño que ya habla bien?","Abre los ejemplos por edad y busca conductas parecidas.","Elige el rango de edad en el que la mayoría ya la logra.","Si sale en rojo, lee la explicación 💡: te dice la edad exacta."]},
  {n:3,c:"d3",t:"El desarrollo sigue un orden",tc:"Secuencia",
-  que:"El desarrollo avanza <b>paso a paso</b>: un logro prepara el siguiente. Por ejemplo, el bebé primero sostiene la cabeza, después se sienta, luego camina y más tarde corre. En el lenguaje, primero hace sonidos, luego dice palabras y después frases.",
-  pasos:["Lee los 6 logros de cada grupo.","Piensa cuál aparece primero (el más sencillo).","Numéralos del 1.º (el primero que aparece) al 6.º (el último).","Puedes revisar la tabla de indicadores si tienes dudas."]},
+  que:"El desarrollo avanza <b>paso a paso</b>: cada logro prepara el siguiente. Todos los niños siguen casi el mismo orden, aunque no todos a la misma edad. Por eso, más que la fecha, importa que el niño siga avanzando.",
+  pasos:["Lee los 6 logros de cada grupo.","Piensa cuál aparece primero (el más sencillo).","Numéralos del 1.º (el primero que aparece) al 6.º (el último).","Si tienes dudas, abre el truco “de la cabeza a los pies”."]},
  {n:4,c:"d4",t:"Observar y detectar señales de alerta",tc:"Señales de alerta",
   que:"La técnica en primera infancia <b>observa, registra y acompaña</b>; <b>no diagnostica</b>. Si un niño no ha logrado lo esperado para su edad, o pierde habilidades que ya tenía, se habla con la familia y se sugiere una valoración en salud. Reaccionar pronto puede marcar una gran diferencia.",
-  pasos:["Lee el caso con atención: edad y lo que hace el niño.","Compara con la tabla de indicadores de esa edad.","Decide si va como se espera o si hay una señal de alerta.","Elige qué debes hacer como técnica.","Señal de alerta importante a cualquier edad: perder habilidades que ya tenía."]},
+  pasos:["Lee el caso con atención: edad y lo que hace el niño.","Abre “Lo que hace la mayoría de los niños a…” y compara.","Decide si va como se espera o si hay una señal de alerta.","Elige qué debes hacer como técnica.","Señal de alerta importante a cualquier edad: perder habilidades que ya tenía."]},
  {n:5,c:"d5",t:"¿Cómo lo acompaño?",tc:"Acompañar",
   que:"El adulto <b>potencia el desarrollo</b> con experiencias propias de la edad: juego, conversación, lectura, movimiento y afecto. La actividad adecuada es segura, está acorde con lo que el niño ya puede hacer y lo reta un poquito más.",
   pasos:["Lee la edad y el área que se quiere fortalecer.","Descarta las opciones peligrosas o que no corresponden a la edad.","Elige la experiencia más adecuada.","Al final, responde la evaluación de 5 preguntas."]}
@@ -351,6 +354,8 @@ const P2=[
  ["Dice “adiós” con la mano",4],["Da unos pasos solo",5],["Hace garabatos",6],["Come con cuchara",7],
  ["Dice aproximadamente 50 palabras",8],["Dice su nombre cuando se lo preguntan",9],["Dibuja personas con 3 o más partes del cuerpo",10],["Escribe algunas letras de su nombre",11]
 ];
+const RANGOS=["0 a 6 meses","7 a 12 meses","13 a 24 meses (1 a 2 años)","25 a 36 meses (2 a 3 años)","4 a 5 años"];
+const RANGO_DE=[0,0,0,1,1,2,2,2,3,3,4,4];
 const ORD=["1.º","2.º","3.º","4.º","5.º","6.º"];
 const P3=[
  {t:"Desarrollo motor (movimiento del cuerpo)",it:[["Camina apoyándose en los muebles",3,"12 meses"],["Mantiene la cabeza alzada cuando está boca abajo",0,"2 meses"],["Salta en un pie",5,"5 años"],["Se sienta sin apoyo",2,"9 meses"],["Corre",4,"2 años"],["Boca abajo, se voltea y queda boca arriba",1,"6 meses"]]},
@@ -359,12 +364,12 @@ const P3=[
 const ESTADO=["Su desarrollo va como se espera para su edad","Muestra una señal de alerta"];
 const ACCION=["Seguir acompañando con juegos y experiencias propias de su edad","Registrar lo observado, conversar con la familia y sugerir una valoración en salud","Decirle a la familia que el niño tiene un trastorno","No decir nada y esperar a que se le pase"];
 const CASOS=[
- {n:"Sofía · 9 meses",t:"Se sienta sin apoyo, hace sonidos como “babababa” y llora cuando su mamá sale del salón.",e:0,a:0,x:"Todo corresponde a los 9 meses: sentarse sin apoyo (motor), “babababa” (lenguaje) y reaccionar cuando su mamá se va (social). Llorar al separarse es normal a esta edad."},
- {n:"Mateo · 2 años",t:"No dice ninguna palabra, no señala para pedir lo que quiere y todavía no camina solo.",e:1,a:1,x:"A los 2 años la mayoría ya dice dos palabras juntas, y desde los 18 meses camina sin apoyo y señala. Hay varias señales de alerta: se registra, se conversa con la familia y se sugiere valoración."},
- {n:"Valentina · 4 años",t:"Forma oraciones de 4 o más palabras, dibuja una persona con cabeza, brazos y piernas y consuela a un amigo que se cayó.",e:0,a:0,x:"Son indicadores de los 4 años en lenguaje, pensamiento y lo social. Va muy bien: se sigue acompañando."},
- {n:"Samuel · 3 años",t:"Hace un año decía muchas palabras, pero ahora casi no habla y ya no mira cuando lo llaman por su nombre.",e:1,a:1,x:"Perder habilidades que ya tenía es una señal de alerta importante a cualquier edad. Hay que registrarlo y sugerir pronto una valoración."},
- {n:"Isabella · 4 meses",t:"Cuando la cargan no sostiene la cabeza y no reacciona a los sonidos fuertes.",e:1,a:1,x:"Desde los 2 meses los bebés reaccionan a sonidos fuertes, y a los 4 meses sostienen la cabeza firme cuando los cargan. Es una señal de alerta: se sugiere valoración."},
- {n:"Tomás · 18 meses",t:"Camina solo, hace garabatos y dice tres palabras además de “mamá” y “papá”.",e:0,a:0,x:"Son justamente los indicadores de los 18 meses. Va como se espera."}
+ {n:"Sofía · 9 meses",ed:"9 meses",t:"Se sienta sin apoyo, hace sonidos como “babababa” y llora cuando su mamá sale del salón.",e:0,a:0,x:"Todo corresponde a los 9 meses: sentarse sin apoyo (motor), “babababa” (lenguaje) y reaccionar cuando su mamá se va (social). Llorar al separarse es normal a esta edad."},
+ {n:"Mateo · 2 años",ed:"2 años",t:"No dice ninguna palabra, no señala para pedir lo que quiere y todavía no camina solo.",e:1,a:1,x:"A los 2 años la mayoría ya dice dos palabras juntas, y desde los 18 meses camina sin apoyo y señala. Hay varias señales de alerta: se registra, se conversa con la familia y se sugiere valoración."},
+ {n:"Valentina · 4 años",ed:"4 años",t:"Forma oraciones de 4 o más palabras, dibuja una persona con cabeza, brazos y piernas y consuela a un amigo que se cayó.",e:0,a:0,x:"Son indicadores de los 4 años en lenguaje, pensamiento y lo social. Va muy bien: se sigue acompañando."},
+ {n:"Samuel · 3 años",ed:"3 años",t:"Hace un año decía muchas palabras, pero ahora casi no habla y ya no mira cuando lo llaman por su nombre.",e:1,a:1,x:"Perder habilidades que ya tenía es una señal de alerta importante a cualquier edad. Hay que registrarlo y sugerir pronto una valoración."},
+ {n:"Isabella · 4 meses",ed:"4 meses",t:"Cuando la cargan no sostiene la cabeza y no reacciona a los sonidos fuertes.",e:1,a:1,x:"Desde los 2 meses los bebés reaccionan a sonidos fuertes, y a los 4 meses sostienen la cabeza firme cuando los cargan. Es una señal de alerta: se sugiere valoración."},
+ {n:"Tomás · 18 meses",ed:"18 meses",t:"Camina solo, hace garabatos y dice tres palabras además de “mamá” y “papá”.",e:0,a:0,x:"Son justamente los indicadores de los 18 meses. Va como se espera."}
 ];
 const P5=[
  {t:"Bebé de 4 meses · fortalecer el área motora (cuello y espalda)",o:["Ponerlo ratos boca abajo, siempre vigilado, con un juguete llamativo al frente","Dejarlo varias horas en la silla del carro","Darle una pelota para que la patee","Pedirle que arme un rompecabezas"],a:0,x:"El tiempo boca abajo, con un adulto al lado, fortalece cuello, hombros y espalda, y prepara para voltearse y sentarse. Las otras opciones no corresponden a su edad o lo dejan quieto mucho tiempo."},
@@ -391,15 +396,16 @@ function tab1(){
   return h;
 }
 function tab2(){
-  let h=ejBox(`<p>Elige la <b>edad</b> en la que la mayoría de los niños ya logra cada conducta. Usa la tabla de indicadores.</p><p class="note">Cada niño tiene su propio ritmo: la edad indica cuándo la mayoría (75 % o más) ya lo hace.</p>`,docTabla());
+  let h=ejBox(`<p>Elige el <b>rango de edad</b> en el que la mayoría de los niños ya logra cada conducta. Compara con los ejemplos de la tabla.</p>`,docTabla());
   h+=`<div class="tw"><table class="st"><thead><tr><th style="text-align:left">Conducta</th><th>¿A qué edad?</th><th class="ic">✓</th></tr></thead><tbody>`;
-  P2.forEach((p,i)=>{const id="a2-"+i,x=`La mayoría de los niños lo logra a los <b>${EDADES[p[1]]}</b>.`;h+=`<tr><td class="lab">${i+1}. ${p[0]}</td><td>${sel(2,id,p[1],EDADES,x,"Edad")}</td><td class="ic" id="${id}-i"></td></tr>${xrow(id,x,3)}`});
+  P2.forEach((p,i)=>{const id="a2-"+i,x=`La mayoría de los niños lo logra hacia los <b>${EDADES[p[1]]}</b>: rango <b>${RANGOS[RANGO_DE[p[1]]]}</b>.`;h+=`<tr><td class="lab">${i+1}. ${p[0]}</td><td>${sel(2,id,RANGO_DE[p[1]],RANGOS,x,"Rango de edad")}</td><td class="ic" id="${id}-i"></td></tr>${xrow(id,x,3)}`});
   h+=`</tbody></table></div>`;
-  h+=exp("💬 Truco para recordar el orden del desarrollo motor",`<p>El cuerpo se va “encendiendo” <b>de la cabeza hacia los pies</b> y <b>del centro hacia las manos</b>:</p><ol class="guia"><li>Cabeza (2 a 4 meses): sostiene la cabeza.</li><li>Tronco (6 a 9 meses): se voltea y se sienta.</li><li>Piernas (12 a 18 meses): se pone de pie y camina.</li><li>Equilibrio (2 a 5 años): corre, salta con dos pies y luego en un pie.</li></ol><p>Con las manos pasa igual: primero agarra con toda la mano, después hace pinza con el índice y el pulgar, y más tarde garabatea, abotona y escribe.</p>`);
+  h+=exp("💬 ¿Por qué hablamos de rangos y no de una fecha exacta?",`<p>Los indicadores dicen lo que hace la <b>mayoría</b> de los niños a cierta edad, pero cada niño tiene su ritmo: uno camina a los 11 meses y otro a los 14, y los dos están bien.</p><p>Por eso, al observar, la pregunta no es “¿lo hizo el día exacto?”, sino “¿está dentro de lo esperado para su edad y sigue avanzando?”.</p>`);
   return h;
 }
 function tab3(){
-  let h=ejBox(`<p>Ordena cada grupo de logros del <b>1.º</b> (el que aparece primero) al <b>6.º</b> (el que aparece de último).</p><p class="note">Piensa primero qué es más sencillo. Si tienes dudas, consulta la tabla.</p>`,docTabla());
+  let h=ejBox(`<p>Ordena cada grupo de logros del <b>1.º</b> (el que aparece primero) al <b>6.º</b> (el que aparece de último).</p><p class="note">Piensa qué es más sencillo y qué necesita haberse logrado antes. Abre el truco de abajo si tienes dudas.</p>`,"");
+  h+=exp("💬 Truco: las 3 reglas del orden",`<ol class="guia"><li><b>De la cabeza hacia los pies:</b> el bebé primero controla lo que está más arriba (cuello), después el tronco y por último las piernas.</li><li><b>Del centro hacia afuera:</b> primero mueve hombros y brazos completos; después las manos y por último los dedos con precisión.</li><li><b>De lo sencillo a lo complejo:</b> en el lenguaje primero hay llanto y sonidos, luego juego con sílabas, después palabras sueltas, luego palabras unidas y al final conversaciones.</li></ol><p class="note">Usa estas reglas para decidir qué va primero. No necesitas memorizar edades exactas.</p>`);
   P3.forEach((g,gi)=>{h+=`<h3>${gi===0?"A":"B"}. ${g.t}</h3><div class="tw"><table class="st"><thead><tr><th style="text-align:left">Logro</th><th>Orden</th><th class="ic">✓</th></tr></thead><tbody>`;
     g.it.forEach((p,i)=>{const id=`a3-${gi}-${i}`,x=`Aparece hacia los <b>${p[2]}</b>: va en el lugar <b>${ORD[p[1]]}</b>.`;h+=`<tr><td class="lab">${p[0]}</td><td>${sel(3,id,p[1],ORD,x,"Orden")}</td><td class="ic" id="${id}-i"></td></tr>${xrow(id,x,3)}`});
     h+=`</tbody></table></div>`;});
@@ -407,9 +413,9 @@ function tab3(){
   return h;
 }
 function tab4(){
-  let h=ejBox(`<p>Lee cada caso. Decide si el niño <b>va como se espera</b> o si muestra una <b>señal de alerta</b>, y elige qué debes hacer como técnica en primera infancia.</p><p class="note">Recuerda: la técnica observa, registra y acompaña. No diagnostica.</p>`,docTabla());
+  let h=ejBox(`<p>Lee cada caso y compáralo con lo que hace la mayoría de los niños a esa edad (está dentro de cada caso). Decide si <b>va como se espera</b> o si muestra una <b>señal de alerta</b>, y elige qué debes hacer.</p>`,"");
   h+=`<div class="casos">`;
-  CASOS.forEach((c,i)=>{h+=`<div class="caso"><div class="nh"><span class="nn">Caso ${i+1}</span><b>${c.n}</b></div><p>${c.t}</p>
+  CASOS.forEach((c,i)=>{h+=`<div class="caso"><div class="nh"><span class="nn">Caso ${i+1}</span><b>${c.n}</b></div><p>${c.t}</p>${esperado(c.ed)}
    <label class="fl">¿Cómo va su desarrollo?${sel(4,`c-e${i}`,c.e,ESTADO,c.x,"Estado")}</label><span class="ic2" id="c-e${i}-i"></span>
    <label class="fl">¿Qué debo hacer?${sel(4,`c-a${i}`,c.a,ACCION,c.x,"Acción")}</label><span class="ic2" id="c-a${i}-i"></span>
    <p class="xcase" id="c-${i}-x" hidden>💡 ${c.x}</p></div>`});
@@ -418,7 +424,7 @@ function tab4(){
   return h;
 }
 function tab5(){
-  let h=ejBox(`<p>Para cada niño, elige la <b>experiencia más adecuada</b> para fortalecer el área indicada.</p>`,docAreas());
+  let h=ejBox(`<p>Para cada niño, elige la <b>experiencia más adecuada</b> para fortalecer el área indicada.</p>`,"");
   h+=`<div class="casos">`;
   P5.forEach((p,i)=>{h+=`<div class="caso"><div class="nh"><span class="nn">Situación ${i+1}</span><b>${p.t}</b></div><label class="fl">La mejor experiencia es:${sel(5,`p5-${i}`,p.a,p.o,p.x,"Experiencia")}</label><span class="ic2" id="p5-${i}-i"></span><p class="xcase" id="p5-${i}-x" hidden>💡 ${p.x}</p></div>`});
   h+=`</div>`;
@@ -460,7 +466,7 @@ function check(){
 
 // ---------- eventos ----------
 function show(n){curDay=n;if(typeof renderSheet==="function"&&!$("#sheet").hidden)renderSheet();DAYS.forEach(d=>{$("#day"+d.n).hidden=d.n!==n;$("#tab"+d.n).setAttribute("aria-selected",d.n===n)});
-  try{localStorage.setItem("desa-v2-tab",n)}catch(e){}}
+  try{localStorage.setItem("desa-v3-tab",n)}catch(e){}}
 document.addEventListener("input",e=>{const el=e.target;if(!el.dataset||!el.dataset.k)return;store[el.dataset.k]=el.value;save();check();});
 document.addEventListener("change",e=>{const el=e.target;if(!el.dataset||!el.dataset.k)return;store[el.dataset.k]=el.value;save();check();});
 document.addEventListener("click",e=>{
@@ -496,7 +502,7 @@ $("#fab").addEventListener("click",()=>setSheet(true));
 $("#sheetClose").addEventListener("click",()=>setSheet(false));
 document.addEventListener("click",e=>{const b=e.target.closest("[data-sv]"); if(b){sheetView=b.dataset.sv;renderSheet();}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#sheet").hidden)setSheet(false)});
-let start=1; try{start=+localStorage.getItem("desa-v2-tab")||1}catch(e){}
+let start=1; try{start=+localStorage.getItem("desa-v3-tab")||1}catch(e){}
 show(start>=1&&start<=5?start:1); check();
 
 /* ---------- encabezado fijo ---------- */
