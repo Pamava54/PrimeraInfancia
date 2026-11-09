@@ -139,12 +139,13 @@ const edTxt=ed=>ed.length===1?EDADES[ed[0]]:`${EDADES[ed[0]].split(" ")[0]} a ${
 const chip=(lab,val,grp,c)=>`<button class="chip" type="button" data-${grp}="${val}" aria-pressed="false"${c?` style="--cc:${c}"`:""}>${lab}</button>`;
 $("#fe").innerHTML=chip("Todas","","e")+EDADES.map((t,i)=>chip(t,i,"e")).join("");
 $("#fa").innerHTML=chip("Todas","","a")+Object.entries(AREAS).map(([k,v])=>chip(v[0],k,"a",v[1])).join("");
+const IMGJ={8: 0, 12: 1, 16: 2, 26: 3, 28: 4, 30: 5, 33: 6, 34: 7, 35: 8, 36: 9, 38: 10};
 function card(j,i){const a0=AREAS[j.a[0]];
  return `<article class="card${done[i]?" done":""}" style="--cc:${a0[1]};--cs:${a0[2]}" id="j${i}">
   <div class="top"><div class="emo" aria-hidden="true">${j.e}</div><div><h3>${j.n}</h3><div class="ages">👶 ${edTxt(j.ed)} · ⏱️ ${j.t}</div><div class="meta">👥 ${j.g}</div></div></div>
   <div class="tags">${j.a.map(k=>`<span class="tag" style="--tc:${AREAS[k][1]};--tb:${AREAS[k][2]}">${AREAS[k][0]}</span>`).join("")}</div>
   <details><summary>Ver cómo se juega</summary><div class="sec">
-   <h4>🧺 Materiales</h4><ul>${j.mat.map(m=>`<li>${m}</li>`).join("")}</ul>
+   <h4>🧺 Materiales</h4><ul>${j.mat.map(m=>`<li>${m}</li>`).join("")}</ul>${IMGJ[i]!==undefined?`<p style="margin:6px 0 0"><a class="btn" style="text-decoration:none;display:inline-block;font-size:.9rem" href="imagenes.html#g${IMGJ[i]}">🖼️ Láminas para imprimir</a></p>`:""}
    <h4>🎯 Paso a paso</h4><ol>${j.p.map(m=>`<li>${m}</li>`).join("")}</ol>
    <div class="box ap"><b>🌱 Qué aprende:</b> ${j.ap}</div>
    <div class="box va"><b>🔄 Variación:</b> ${j.v}</div>

@@ -1,0 +1,229 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Biblioteca de imágenes para imprimir</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+:root{--bg:#FFF8EC;--surface:#FFFFFF;--ink:#2A2540;--muted:#5E5A72;--line:#EADFCB;--brand:#6E4FC0;--brands:#EEE8FA;--ok:#17713F;--okbg:#DCF2E3;
+ --f-display:"Fredoka","Baloo 2","Segoe UI",system-ui,sans-serif;--f-body:"Nunito","Segoe UI",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#14121A;--surface:#1E1B26;--ink:#ECE8F2;--muted:#A49EB2;--line:#332E3F;--brand:#C9A6E8;--brands:#2B2238;--ok:#74D49C;--okbg:#173826;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22220%22%3E%3Cg opacity=%22.22%22%3E%3Ccircle cx=%2220%22 cy=%2230%22 r=%224%22 fill=%22%234FA3E0%22/%3E%3Crect x=%22150%22 y=%2220%22 width=%229%22 height=%229%22 rx=%222%22 fill=%22%23FFC93C%22 transform=%22rotate(20 154 24)%22/%3E%3Cpath d=%22M90 80l5 9h-10z%22 fill=%22%23FF7A6B%22/%3E%3Ccircle cx=%22190%22 cy=%22120%22 r=%223.5%22 fill=%22%233CBF9A%22/%3E%3Crect x=%2240%22 y=%22160%22 width=%228%22 height=%228%22 rx=%222%22 fill=%22%239B7BD8%22 transform=%22rotate(-15 44 164)%22/%3E%3Cpath d=%22M120 170q6-8 12 0%22 fill=%22none%22 stroke=%22%23FF7A6B%22 stroke-width=%223%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%22110%22 cy=%22130%22 r=%222.5%22 fill=%22%23FFC93C%22/%3E%3Cpath d=%22M60 100l2 5 5 1-4 3 1 5-4-3-5 3 1-5-4-3 5-1z%22 fill=%22%23FFC93C%22/%3E%3C/g%3E%3C/svg%3E");background-size:220px 220px;color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-left,0px)) 60px;display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.15;text-wrap:balance}
+a.back{color:var(--brand);font-weight:800;text-decoration:none}
+.hero{display:grid;grid-template-columns:1fr minmax(0,320px);gap:10px 24px;align-items:center;border:3px dashed var(--brand);border-radius:26px;padding:24px;background:linear-gradient(135deg,#FFF1C9 0%,#FDE5E1 45%,#E3F1FB 100%)}
+@media (prefers-color-scheme:dark){.hero{background:var(--surface)}}
+.hero h1{font-size:clamp(1.8rem,4.6vw,2.6rem)}
+.hero p{margin:0;color:var(--muted);max-width:62ch}
+.hero .art svg{width:100%;height:auto;display:block}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.hero .art{max-width:260px}}
+details.tips{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:12px 18px;box-shadow:0 4px 0 var(--line)}
+details.tips summary{cursor:pointer;font-weight:800;font-family:var(--f-display);font-size:1.1rem;color:var(--brand)}
+details.tips ul{margin:10px 0 0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.filters{position:sticky;top:0;z-index:20;background:var(--bg);padding:10px 0;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.row .lb{font-weight:800;font-size:.85rem;color:var(--muted);margin-right:4px;min-width:52px}
+.chip{font:inherit;font-size:.88rem;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 12px}
+.chip[aria-pressed="true"]{background:var(--cc,var(--brand));border-color:var(--cc,var(--brand));color:#fff}
+.search{flex:1 1 220px;font:inherit;padding:8px 14px;border-radius:999px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+.count{font-weight:800;color:var(--brand)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 5px 0 var(--line);border-top:7px solid var(--cc)}
+.card.done{outline:3px solid var(--ok)}
+.top{display:flex;gap:12px;align-items:flex-start}
+.emo{font-size:2rem;line-height:1;width:54px;height:54px;flex:0 0 54px;display:grid;place-items:center;border-radius:16px;background:var(--cs);transform:rotate(-4deg)}
+.card h3{font-size:1.15rem}
+.meta{font-size:.82rem;color:var(--muted);margin-top:2px}
+.tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:.74rem;font-weight:800;border-radius:999px;padding:2px 9px;background:var(--tb);color:var(--tc)}
+.ages{font-size:.8rem;font-weight:700;color:var(--ink)}
+.card details summary{cursor:pointer;font-weight:800;color:var(--cc);list-style:none;border:2px solid var(--cc);border-radius:999px;padding:6px 12px;text-align:center}
+.card details summary::-webkit-details-marker{display:none}
+.card details[open] summary{background:var(--cc);color:#fff;margin-bottom:10px}
+.sec h4{font-family:var(--f-display);font-size:.98rem;margin:8px 0 4px}
+.sec ul,.sec ol{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:3px}
+.sec p{margin:0}
+.box{border-radius:14px;padding:8px 12px;margin-top:8px;font-size:.93rem}
+.box.ap{background:#DDF5EC;color:#11573F}.box.va{background:#EEE8FA;color:#47308A}.box.sg{background:#FDE5E1;color:#8E2A1F}
+@media (prefers-color-scheme:dark){.box.ap{background:#173826;color:#9BE3BD}.box.va{background:#272338;color:#CDBEF5}.box.sg{background:#3A2320;color:#F5B3A8}}
+.done-l{display:flex;gap:8px;align-items:center;font-weight:700;font-size:.9rem;cursor:pointer}
+.done-l input{width:20px;height:20px;accent-color:var(--ok)}
+.empty{text-align:center;color:var(--muted);padding:30px}
+.btn{font:inherit;font-weight:800;cursor:pointer;border-radius:999px;border:2px solid var(--brand);background:var(--surface);color:var(--brand);padding:6px 14px}
+footer{text-align:center;color:var(--muted);font-size:.85rem}
+.wm{position:fixed;inset:0;z-index:60;pointer-events:none;background-repeat:repeat;background-size:360px 220px;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220'%3E%3Ctext x='180' y='120' text-anchor='middle' transform='rotate(-24 180 110)' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%232A2540'%3EPAMAVA soluciones%3C/text%3E%3C/svg%3E")}
+@media (prefers-color-scheme:dark){.wm{opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220'%3E%3Ctext x='180' y='120' text-anchor='middle' transform='rotate(-24 180 110)' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%23ECE8F2'%3EPAMAVA soluciones%3C/text%3E%3C/svg%3E")}}
+@media (max-width:760px){.filters{position:static}.row{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}.row .chip{flex:0 0 auto}.row:last-child{flex-wrap:wrap}}
+@media print{.filters,.wm,details.tips,.btn,a.back,.done-l{display:none!important}body{background:#fff}.card{break-inside:avoid;box-shadow:none}.card details{display:block}.card details>*{display:block}}
+
+.bar{position:sticky;top:0;z-index:30;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bar .sp{flex:1}
+.btn.pri{background:var(--brand);color:#fff}
+.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{font-weight:800;font-size:.86rem;text-decoration:none;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:999px;padding:4px 12px}
+.nav a:hover{border-color:var(--brand);color:var(--brand)}
+section.gm{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:0 5px 0 var(--line);border-top:7px solid var(--brand);display:flex;flex-direction:column;gap:12px;scroll-margin-top:70px}
+.gh{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.gh .emo{font-size:2rem;width:54px;height:54px;display:grid;place-items:center;border-radius:16px;background:var(--brands);transform:rotate(-4deg)}
+.gh h2{font-size:1.3rem}.gh p{margin:0;color:var(--muted);font-size:.92rem;max-width:60ch}
+.gc{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-left:auto}
+.gc label{font-weight:700;font-size:.88rem;display:flex;gap:6px;align-items:center}
+.gc select{font:inherit;border:2px solid var(--line);border-radius:10px;padding:2px 6px;background:var(--surface);color:var(--ink)}
+.gc input[type=checkbox]{width:18px;height:18px;accent-color:var(--brand)}
+.sheets{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:14px}
+.shw{display:flex;flex-direction:column;gap:4px;align-items:center}
+.shw small{color:var(--muted);font-weight:700}
+.sheet{background:#fff;color:#2A2540;width:100%;aspect-ratio:195/254;display:grid;grid-template-rows:1fr 1fr;border:1px solid #cfc6b4;box-shadow:0 3px 8px rgba(0,0,0,.12);container-type:inline-size;break-inside:avoid}
+.cell{border:.5cqw dashed #aaa;margin:2cqw;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2cqw;min-height:0}
+.cell+.cell{margin-top:0}
+.cell .im{flex:1;min-height:0;width:100%;position:relative}
+.cell .im svg{position:absolute;inset:0;width:100%;height:100%}
+.cell.sil .im svg{filter:brightness(0)}
+.cell .nm{font-family:var(--f-display);font-weight:700;font-size:6.5cqw;line-height:1.1;padding-top:1cqw;text-align:center}
+.cell .ft{font-size:2.2cqw;color:#888;padding-top:.8cqw;letter-spacing:.04em}
+.cell.vac{border:none}
+.tip{background:#FFF1C9;color:#5C4300;border-radius:16px;padding:10px 14px;font-size:.92rem}
+@media (prefers-color-scheme:dark){.tip{background:#3A3018;color:#F3DC9C}}
+@page{size:Letter;margin:10mm}
+@media print{
+ html,body{background:#fff!important}body{background-image:none!important}
+ .wm,.wrap>*:not(#lib),.bar,.gh,.shw small{display:none!important}
+ section.gm{border:none!important;box-shadow:none!important;padding:0!important;background:none!important}
+ .wrap{display:block!important;padding:0!important;max-width:none!important}
+ #lib{display:block!important}
+ section.gm{display:block!important}
+ .sheets{display:block!important}
+ .shw{display:block!important;break-after:page;page-break-after:always}
+ .shw.off{display:none!important}
+ .sheet{width:195mm!important;height:254mm!important;aspect-ratio:auto!important;box-shadow:none!important;border:none!important;margin:0 auto}
+ .cell{border:.3mm dashed #999!important;margin:2mm 0!important}
+}
+</style></head><body>
+<div class="wm" aria-hidden="true"></div>
+<div class="wrap">
+ <a class="back" href="juegos.html">← Banco de juegos didácticos</a>
+ <header class="hero"><div><small style="color:var(--brand);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem">Para imprimir y recortar</small><h1>Biblioteca de imágenes</h1><p>Láminas para los juegos que las necesitan: animales, frutas, emociones, colores y más. Cada hoja trae <b>2 imágenes</b>. Elige el juego, imprime en hoja carta (mejor a color) y recorta por la línea punteada.</p></div><div class="art" aria-hidden="true"><svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sol, nubes, arcoíris, cometa y globos">
+<path d="M40 120a70 70 0 0 1 140 0" fill="none" stroke="#FF7A6B" stroke-width="9"/><path d="M50 120a60 60 0 0 1 120 0" fill="none" stroke="#FFC93C" stroke-width="9"/><path d="M60 120a50 50 0 0 1 100 0" fill="none" stroke="#3CBF9A" stroke-width="9"/><path d="M70 120a40 40 0 0 1 80 0" fill="none" stroke="#4FA3E0" stroke-width="9"/>
+<g transform="translate(250 32)"><circle r="17" fill="#FFC93C"><animate attributeName="r" values="17;18.2;17" dur="3.2s" repeatCount="indefinite"/></circle><g stroke="#FFC93C" stroke-width="4" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="28s" repeatCount="indefinite"/><path d="M0-26v-7M0 26v7M-26 0h-7M26 0h7M-18-18l-5-5M18 18l5 5M18-18l5-5M-18 18l-5 5"/></g><circle cx="-6" cy="-3" r="2.2" fill="#2A2540"/><circle cx="6" cy="-3" r="2.2" fill="#2A2540"/><path d="M-6 5q6 6 12 0" fill="none" stroke="#2A2540" stroke-width="2.2" stroke-linecap="round"/></g>
+<g fill="#fff" stroke="#D9E8F5" stroke-width="2"><path d="M10 40a12 12 0 0 1 20-9a14 14 0 0 1 26 4a9 9 0 0 1 2 18H16a9 9 0 0 1-6-13z"><animateTransform attributeName="transform" type="translate" additive="sum" values="0 0;16 2;0 0" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" dur="11s" begin="0s" repeatCount="indefinite"/></path><path d="M175 22a10 10 0 0 1 17-7a12 12 0 0 1 22 3a8 8 0 0 1 1 15h-35a8 8 0 0 1-5-11z"><animateTransform attributeName="transform" type="translate" additive="sum" values="0 0;-14 -2;0 0" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" dur="9s" begin="-3s" repeatCount="indefinite"/></path></g>
+<g transform="translate(205 60)"><animateTransform attributeName="transform" type="rotate" additive="sum" values="-7 0 56;7 0 56;-7 0 56" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" dur="4.2s" begin="0s" repeatCount="indefinite"/><path d="M0-18L14 0 0 22-14 0z" fill="#9B7BD8"/><path d="M0-18V22M-14 0h28" stroke="#fff" stroke-width="2"/><path d="M0 22q-8 10 2 16t-4 18" fill="none" stroke="#2A2540" stroke-width="1.6"/><path d="M-3 32l-5 3 5 2zM0 44l-5 3 5 2z" fill="#FF7A6B"/></g>
+<g><g><animateTransform attributeName="transform" type="translate" additive="sum" values="0 0;0 -6;0 0" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" dur="3.6s" begin="0s" repeatCount="indefinite"/><path d="M118 58v44" stroke="#8A8AA0" stroke-width="1.4"/><ellipse cx="118" cy="48" rx="11" ry="13" fill="#FF7A6B"/><path d="M114 60l4 3 4-3z" fill="#FF7A6B"/><circle cx="114" cy="43" r="3" fill="#fff" opacity=".6"/></g><g><animateTransform attributeName="transform" type="translate" additive="sum" values="0 0;0 -7;0 0" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" dur="4.4s" begin="-1.5s" repeatCount="indefinite"/><path d="M134 66v36" stroke="#8A8AA0" stroke-width="1.4"/><ellipse cx="134" cy="56" rx="10" ry="12" fill="#4FA3E0"/><path d="M130 67l4 3 4-3z" fill="#4FA3E0"/><circle cx="130" cy="51" r="3" fill="#fff" opacity=".6"/></g></g>
+</svg></div></header>
+ <p class="tip">🖨️ <b>Consejos:</b> imprime a color y pega las láminas en cartulina o plastifícalas para que duren. En el cuadro de impresión de tu navegador elige <b>tamaño Carta</b>, <b>márgenes predeterminados</b> y <b>escala 100 %</b>. Si tu impresora no imprime a color, pídele a los niños que las pinten.</p>
+ <div class="bar"><span class="count" id="cnt"></span><span class="sp"></span><button class="btn" id="bSel" type="button">🖨️ Imprimir los marcados</button><button class="btn pri" id="bAll" type="button">🖨️ Imprimir todo</button></div>
+ <nav class="nav" id="nav" aria-label="Juegos"></nav>
+ <div id="lib" style="display:flex;flex-direction:column;gap:20px"></div>
+ <footer>PAMAVA soluciones · Ilustraciones originales del Centro de Primera Infancia</footer>
+</div>
+<script>
+const K='stroke="#2A2540" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"';
+const ey=(x,y,r=5)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#2A2540"/><circle cx="${x+r*.3}" cy="${y-r*.35}" r="${r*.32}" fill="#fff"/>`;
+const SV=(inner,vb="0 0 200 200")=>`<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" role="img">${inner}</svg>`;
+const mouth=(d,w=3.5)=>`<path d="${d}" fill="none" stroke="#2A2540" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+const cheeks=(y=110)=>`<ellipse cx="56" cy="${y}" rx="9" ry="6" fill="#FF8A8A" opacity=".6"/><ellipse cx="144" cy="${y}" rx="9" ry="6" fill="#FF8A8A" opacity=".6"/>`;
+const tree=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s})"><g ${K}><rect x="-9" y="20" width="18" height="40" fill="#8B5A2B"/><circle cx="0" cy="0" r="32" fill="#4CAF50"/><circle cx="-24" cy="22" r="22" fill="#5CC46A"/><circle cx="24" cy="22" r="22" fill="#5CC46A"/></g></g>`;
+const wedge=(a,b,c)=>{const r=60,p=t=>[100+r*Math.sin(t*Math.PI/180),100-r*Math.cos(t*Math.PI/180)];const [x1,y1]=p(a),[x2,y2]=p(b);return `<path d="M100 100L${x1.toFixed(1)} ${y1.toFixed(1)}A60 60 0 0 1 ${x2.toFixed(1)} ${y2.toFixed(1)}Z" fill="${c}"/>`};
+const rays=Array.from({length:12},(_,i)=>`<line x1="100" y1="20" x2="100" y2="36" transform="rotate(${i*30} 100 100)"/>`).join("");
+const petals=Array.from({length:6},(_,i)=>{const t=i*60*Math.PI/180;return `<circle cx="${(100+34*Math.sin(t)).toFixed(1)}" cy="${(80-34*Math.cos(t)).toFixed(1)}" r="22" fill="#FF8FB1"/>`}).join("");
+const face=(fill="#FFD23F")=>`<circle cx="100" cy="100" r="70" fill="${fill}" ${K}/>`;
+const IM={
+// ---- animales
+perro:["Perro",SV(`<g ${K}><ellipse cx="46" cy="100" rx="17" ry="38" fill="#8B5A2B" transform="rotate(14 46 100)"/><ellipse cx="154" cy="100" rx="17" ry="38" fill="#8B5A2B" transform="rotate(-14 154 100)"/><ellipse cx="100" cy="102" rx="55" ry="52" fill="#E8B77A"/><ellipse cx="100" cy="128" rx="29" ry="21" fill="#FFF2DC"/><ellipse cx="100" cy="117" rx="10" ry="7" fill="#2A2540"/></g>${mouth("M100 124v10M86 137q14 10 28 0")}${ey(78,95)}${ey(122,95)}<path d="M92 141q8 14 16 0z" fill="#F27A8A" stroke="#2A2540" stroke-width="3"/>`)],
+gato:["Gato",SV(`<g ${K}><path d="M50 82L55 28 96 62Z" fill="#F4A259"/><path d="M150 82L145 28 104 62Z" fill="#F4A259"/><circle cx="100" cy="112" r="55" fill="#F4A259"/></g><path d="M62 52l-2 20 18-8z" fill="#F7B4B4"/><path d="M138 52l2 20-18-8z" fill="#F7B4B4"/>${mouth("M90 80q-6-12-2-20M110 80q6-12 2-20M100 80v-14")}<path d="M95 122l5 6 5-6z" fill="#F27A8A" stroke="#2A2540" stroke-width="2.5" stroke-linejoin="round"/>${mouth("M100 128q-6 12-16 8M100 128q6 12 16 8")}${mouth("M60 118l-34-6M60 128l-34 6M140 118l34-6M140 128l34 6",2.5)}${ey(78,105,6)}${ey(122,105,6)}`)],
+vaca:["Vaca",SV(`<g ${K}><ellipse cx="42" cy="85" rx="24" ry="13" fill="#fff" transform="rotate(-20 42 85)"/><ellipse cx="158" cy="85" rx="24" ry="13" fill="#fff" transform="rotate(20 158 85)"/><path d="M68 55q-14-22-4-32 8 12 24 28zM132 55q14-22 4-32-8 12-24 28z" fill="#F3E3B8"/><ellipse cx="100" cy="100" rx="50" ry="58" fill="#fff"/><path d="M60 62q20-14 36 2-6 22-26 20-14-6-10-22z" fill="#2A2540"/><ellipse cx="100" cy="142" rx="34" ry="24" fill="#F7B4B4"/><circle cx="88" cy="142" r="4.5" fill="#2A2540"/><circle cx="112" cy="142" r="4.5" fill="#2A2540"/></g>${ey(80,98)}${ey(122,98)}`)],
+pato:["Pato",SV(`<g ${K}><ellipse cx="95" cy="135" rx="62" ry="42" fill="#FFD84A"/><path d="M30 120q-14-14-8-28 14 6 18 22z" fill="#FFD84A"/><circle cx="125" cy="70" r="34" fill="#FFD84A"/><path d="M152 70q30 0 28 12-4 10-26 6z" fill="#FF8A2E"/><path d="M62 130q28 22 54 0q-10-20-54 0z" fill="#F0B92E"/></g>${ey(130,62)}<path d="M10 182q20-10 40 0t40 0 40 0 40 0 20 0" fill="none" stroke="#4FA3E0" stroke-width="5" stroke-linecap="round"/>`)],
+rana:["Rana",SV(`<g ${K}><ellipse cx="100" cy="125" rx="68" ry="50" fill="#5CC46A"/><circle cx="64" cy="78" r="26" fill="#5CC46A"/><circle cx="136" cy="78" r="26" fill="#5CC46A"/><circle cx="64" cy="78" r="17" fill="#fff"/><circle cx="136" cy="78" r="17" fill="#fff"/><circle cx="66" cy="80" r="8" fill="#2A2540"/><circle cx="134" cy="80" r="8" fill="#2A2540"/></g>${mouth("M60 128q40 36 80 0")}<circle cx="92" cy="106" r="2.5" fill="#2A2540"/><circle cx="108" cy="106" r="2.5" fill="#2A2540"/>${cheeks(125)}`)],
+pez:["Pez",SV(`<g ${K}><path d="M48 100L8 66v68z" fill="#F08A2E"/><ellipse cx="102" cy="100" rx="62" ry="42" fill="#FFA63D"/><path d="M92 62q14-22 38-18-4 20-14 24z" fill="#F08A2E"/><path d="M92 138q14 22 38 18-4-20-14-24z" fill="#F08A2E"/></g>${mouth("M80 85q8 15 0 30M100 80q8 20 0 40",2.5)}${mouth("M128 112q10 6 22-2")}${ey(138,90)}<circle cx="178" cy="60" r="7" fill="none" stroke="#4FA3E0" stroke-width="3"/><circle cx="168" cy="40" r="4" fill="none" stroke="#4FA3E0" stroke-width="3"/>`)],
+elefante:["Elefante",SV(`<g ${K}><ellipse cx="42" cy="100" rx="32" ry="46" fill="#A9B4C8"/><ellipse cx="158" cy="100" rx="32" ry="46" fill="#A9B4C8"/><circle cx="100" cy="98" r="52" fill="#B8C2D6"/><path d="M82 120q-6 40 8 56q10 8 18-6q-8-10-4-28q4-14 0-22z" fill="#B8C2D6"/></g>${ey(80,88)}${ey(120,88)}`)],
+conejo:["Conejo",SV(`<g ${K}><ellipse cx="72" cy="52" rx="15" ry="44" fill="#F7F2EA" transform="rotate(-8 72 52)"/><ellipse cx="128" cy="52" rx="15" ry="44" fill="#F7F2EA" transform="rotate(8 128 52)"/></g><ellipse cx="73" cy="55" rx="7" ry="30" fill="#F7B4C4" transform="rotate(-8 73 55)"/><ellipse cx="127" cy="55" rx="7" ry="30" fill="#F7B4C4" transform="rotate(8 127 55)"/><ellipse cx="100" cy="128" rx="52" ry="46" fill="#F7F2EA" ${K}/><path d="M95 128l5 6 5-6z" fill="#F27A8A" stroke="#2A2540" stroke-width="2.5" stroke-linejoin="round"/>${mouth("M100 134q-4 10-12 8M100 134q4 10 12 8")}${mouth("M62 130l-30-6M62 138l-30 6M138 130l30-6M138 138l30 6",2.5)}${ey(80,118)}${ey(120,118)}`)],
+// ---- frutas y verduras
+manzana:["Manzana",SV(`<path d="M100 70C70 45 30 65 36 110C42 155 75 175 100 160C125 175 158 155 164 110C170 65 130 45 100 70Z" fill="#E5483C" ${K}/><path d="M100 70q2-20 12-30" fill="none" stroke="#8B5A2B" stroke-width="6" stroke-linecap="round"/><path d="M110 50q22-20 40-6q-14 22-40 6z" fill="#4CAF50" ${K}/><path d="M52 92q4-18 22-24" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".6"/>`)],
+banano:["Banano",SV(`<path d="M45 60Q60 150 150 160Q175 160 178 140Q120 140 90 85Q80 55 60 50Q48 50 45 60Z" fill="#FFD84A" ${K}/><path d="M46 56q6-12 16-8" fill="none" stroke="#6B4A1F" stroke-width="7" stroke-linecap="round"/><path d="M62 70Q72 128 140 148" fill="none" stroke="#E0B52E" stroke-width="3" stroke-linecap="round"/>`)],
+naranja:["Naranja",SV(`<circle cx="100" cy="112" r="58" fill="#FF9A2E" ${K}/><path d="M104 54q20-22 40-8-14 24-40 8z" fill="#4CAF50" ${K}/><circle cx="82" cy="100" r="2.5" fill="#E07A10"/><circle cx="116" cy="126" r="2.5" fill="#E07A10"/><circle cx="96" cy="140" r="2.5" fill="#E07A10"/><circle cx="128" cy="96" r="2.5" fill="#E07A10"/><path d="M60 92q6-20 24-26" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".55"/>`)],
+fresa:["Fresa",SV(`<path d="M100 178C45 138 40 88 60 72C80 58 95 72 100 80C105 72 120 58 140 72C160 88 155 138 100 178Z" fill="#E63B52" ${K}/><path d="M66 72L84 56 100 72 116 56 134 72 100 88Z" fill="#4CAF50" ${K}/><path d="M100 72V48" stroke="#4CAF50" stroke-width="6" stroke-linecap="round"/><g fill="#FFE08A"><ellipse cx="80" cy="104" rx="3" ry="5"/><ellipse cx="108" cy="102" rx="3" ry="5"/><ellipse cx="128" cy="116" rx="3" ry="5"/><ellipse cx="92" cy="130" rx="3" ry="5"/><ellipse cx="116" cy="142" rx="3" ry="5"/><ellipse cx="72" cy="124" rx="3" ry="5"/></g>`)],
+sandia:["Sandía",SV(`<path d="M18 80A82 82 0 0 0 182 80Z" fill="#3CAF55" ${K}/><path d="M32 80A68 68 0 0 0 168 80Z" fill="#F05A6A"/><path d="M26 80A74 74 0 0 0 174 80" fill="none" stroke="#B8E6B8" stroke-width="6"/><g fill="#2A2540"><ellipse cx="70" cy="104" rx="4" ry="7" transform="rotate(-20 70 104)"/><ellipse cx="100" cy="120" rx="4" ry="7"/><ellipse cx="130" cy="104" rx="4" ry="7" transform="rotate(20 130 104)"/><ellipse cx="85" cy="138" rx="4" ry="7" transform="rotate(-10 85 138)"/><ellipse cx="116" cy="140" rx="4" ry="7" transform="rotate(10 116 140)"/></g>`)],
+uva:["Uvas",SV(`<path d="M100 44v-14" stroke="#8B5A2B" stroke-width="6" stroke-linecap="round"/><path d="M104 40q22-18 40-4-14 22-40 4z" fill="#4CAF50" ${K}/><g fill="#8E5BC8" ${K}><circle cx="72" cy="70" r="20"/><circle cx="112" cy="70" r="20"/><circle cx="52" cy="104" r="20"/><circle cx="92" cy="104" r="20"/><circle cx="132" cy="104" r="20"/><circle cx="72" cy="138" r="20"/><circle cx="112" cy="138" r="20"/><circle cx="92" cy="172" r="20"/></g><g fill="#fff" opacity=".55"><circle cx="66" cy="63" r="5"/><circle cx="106" cy="63" r="5"/><circle cx="86" cy="97" r="5"/></g>`)],
+zanahoria:["Zanahoria",SV(`<g ${K}><path d="M92 40q-14-24-30-26 6 20 26 36z" fill="#4CAF50"/><path d="M108 40q14-24 30-26-6 20-26 36z" fill="#4CAF50"/><path d="M100 40q0-26 0-34 0 20 0 34z" fill="#4CAF50"/><path d="M68 56q32-14 64 0Q118 124 100 182Q82 124 68 56Z" fill="#FF8A2E"/></g>${mouth("M82 84h18M96 112h20M90 138h14",3)}`)],
+tomate:["Tomate",SV(`<circle cx="100" cy="116" r="60" fill="#E5483C" ${K}/><path d="M64 70L84 60 100 72 116 60 136 70 118 82 126 96 100 88 74 96 82 82Z" fill="#4CAF50" ${K}/><path d="M60 100q6-20 24-26" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".5"/>`)],
+// ---- objetos
+sol:["Sol",SV(`<g stroke="#F59E0B" stroke-width="7" stroke-linecap="round">${rays}</g><circle cx="100" cy="100" r="50" fill="#FFD23F" ${K}/>${ey(84,94)}${ey(116,94)}${mouth("M82 114q18 18 36 0")}${cheeks(112).replace('56','66').replace('144','134')}`)],
+estrella:["Estrella",SV(`<path d="M100 20L122 78 184 82 136 120 152 180 100 146 48 180 64 120 16 82 78 78Z" fill="#FFD23F" ${K}/>${ey(86,102,4.5)}${ey(114,102,4.5)}${mouth("M90 118q10 10 20 0",3)}`)],
+corazon:["Corazón",SV(`<path d="M100 172C20 116 28 50 70 50C90 50 100 66 100 74C100 66 110 50 130 50C172 50 180 116 100 172Z" fill="#E5483C" ${K}/><path d="M56 78q4-14 16-16" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".6"/>`)],
+flor:["Flor",SV(`<path d="M100 112V186" stroke="#3E9B4F" stroke-width="7" stroke-linecap="round"/><path d="M100 160q30-26 52-8-18 24-52 8z" fill="#5CC46A" ${K}/><g ${K}>${petals}</g><circle cx="100" cy="80" r="18" fill="#FFD23F" ${K}/>`)],
+casa:["Casa",SV(`<g ${K}><rect x="136" y="46" width="16" height="40" fill="#B5651D"/><rect x="42" y="95" width="116" height="80" fill="#FFD9A0"/><path d="M28 98L100 36l72 62z" fill="#E5483C"/><rect x="85" y="125" width="30" height="50" fill="#8B5A2B"/><rect x="55" y="112" width="24" height="24" fill="#BEE3F8"/><rect x="123" y="112" width="24" height="24" fill="#BEE3F8"/></g><circle cx="108" cy="152" r="2.5" fill="#FFD23F"/>`)],
+carro:["Carro",SV(`<g ${K}><rect x="24" y="96" width="152" height="46" rx="14" fill="#E5483C"/><path d="M58 98L78 62H130L156 98Z" fill="#E5483C"/><path d="M68 94L84 68H104V94Z" fill="#BEE3F8"/><path d="M112 94V68H126L144 94Z" fill="#BEE3F8"/><circle cx="62" cy="144" r="20" fill="#2A2540"/><circle cx="140" cy="144" r="20" fill="#2A2540"/></g><circle cx="62" cy="144" r="7" fill="#ddd"/><circle cx="140" cy="144" r="7" fill="#ddd"/><rect x="164" y="104" width="12" height="10" rx="3" fill="#FFD23F"/>`)],
+pelota:["Pelota",SV(`${wedge(0,60,'#E5483C')}${wedge(60,120,'#fff')}${wedge(120,180,'#4FA3E0')}${wedge(180,240,'#fff')}${wedge(240,300,'#FFD23F')}${wedge(300,360,'#fff')}<circle cx="100" cy="100" r="60" fill="none" ${K}/><circle cx="100" cy="100" r="9" fill="#fff" ${K}/>`)],
+arbol:["Árbol",SV(`<g ${K}><rect x="88" y="120" width="24" height="58" fill="#8B5A2B"/><circle cx="64" cy="100" r="30" fill="#5CC46A"/><circle cx="136" cy="100" r="30" fill="#5CC46A"/><circle cx="100" cy="68" r="42" fill="#4CAF50"/></g>`)],
+// ---- emociones
+alegre:["Alegre",SV(`${face()}${ey(78,86,7)}${ey(122,86,7)}<path d="M62 108q38 46 76 0z" fill="#fff" ${K}/>${cheeks(106)}`)],
+triste:["Triste",SV(`${face()}${ey(78,90,7)}${ey(122,90,7)}${mouth("M70 138q30-30 60 0")}<path d="M66 106q-9 15 0 22q9-7 0-22z" fill="#4FA3E0" stroke="#2A2540" stroke-width="2.5"/>${mouth("M62 72q16-8 28-2M138 72q-16-8-28-2",3)}`)],
+enojado:["Enojado",SV(`${face("#FF9A7A")}${mouth("M56 68l34 16M144 68l-34 16",7)}${ey(80,100,6)}${ey(120,100,6)}${mouth("M72 140q28-24 56 0")}`)],
+asustado:["Asustado",SV(`${face()}<circle cx="78" cy="92" r="14" fill="#fff" ${K}/><circle cx="122" cy="92" r="14" fill="#fff" ${K}/><circle cx="78" cy="94" r="5" fill="#2A2540"/><circle cx="122" cy="94" r="5" fill="#2A2540"/>${mouth("M60 62q18-12 34 0M106 62q18-12 34 0",3)}${mouth("M72 136q7-9 14 0t14 0 14 0 14 0")}<path d="M164 48q-11 16 0 24q11-8 0-24z" fill="#4FA3E0" stroke="#2A2540" stroke-width="2.5"/>`)],
+sorprendido:["Sorprendido",SV(`${face()}${ey(78,92,8)}${ey(122,92,8)}${mouth("M60 62q18-14 34 0M106 62q18-14 34 0",3)}<ellipse cx="100" cy="136" rx="12" ry="16" fill="#2A2540"/>${cheeks(114)}`)],
+tranquilo:["Tranquilo",SV(`${face()}${mouth("M62 94q14 12 28 0M110 94q14 12 28 0")}${mouth("M74 120q26 22 52 0")}${cheeks(116)}`)],
+// ---- cuentos y lugares
+nina:["Niña",SV(`<g ${K}><path d="M52 182q0-48 48-48t48 48z" fill="#FF8FB1"/><circle cx="52" cy="100" r="14" fill="#7A4B2A"/><circle cx="148" cy="100" r="14" fill="#7A4B2A"/><circle cx="100" cy="90" r="42" fill="#F2C29B"/><path d="M58 86q4-46 42-46t42 46q-20-28-42-26t-42 26z" fill="#7A4B2A"/></g>${ey(84,98,4.5)}${ey(116,98,4.5)}${mouth("M88 114q12 10 24 0",3)}${cheeks(112).replace('56','66').replace('144','134')}`)],
+nino:["Niño",SV(`<g ${K}><path d="M52 182q0-48 48-48t48 48z" fill="#4FA3E0"/><circle cx="58" cy="94" r="9" fill="#F2C29B"/><circle cx="142" cy="94" r="9" fill="#F2C29B"/><circle cx="100" cy="88" r="42" fill="#F2C29B"/><path d="M58 82q2-42 42-44t42 44q-14-22-42-18t-42 18z" fill="#3B2A20"/></g>${ey(84,98,4.5)}${ey(116,98,4.5)}${mouth("M88 114q12 10 24 0",3)}${cheeks(112).replace('56','66').replace('144','134')}`)],
+dragon:["Dragón",SV(`<g ${K}><path d="M68 62l-6-30 24 20zM132 62l6-30-24 20z" fill="#F3E3B8"/><path d="M100 50l-8-16 16 0zM76 56l-14-12 18 0zM124 56l14-12-18 0z" fill="#F29E4C"/><circle cx="100" cy="108" r="54" fill="#5CC46A"/><ellipse cx="100" cy="132" rx="32" ry="22" fill="#A8E6A1"/><circle cx="88" cy="128" r="4" fill="#2A2540"/><circle cx="112" cy="128" r="4" fill="#2A2540"/></g>${ey(76,96,6)}${ey(124,96,6)}${mouth("M82 146q18 12 36 0")}<path d="M172 150q12-14 4-30-10 12-12 22z" fill="#FF8A2E" stroke="#2A2540" stroke-width="2.5"/>`)],
+mar:["El mar",SV(`<defs><clipPath id="cpMar"><rect x="10" y="30" width="180" height="140" rx="16"/></clipPath></defs><g clip-path="url(#cpMar)"><rect x="10" y="30" width="180" height="140" fill="#D8F0FF"/><circle cx="156" cy="62" r="16" fill="#FFD23F"/><path d="M100 58v58" stroke="#2A2540" stroke-width="3"/><path d="M96 62v50l-34-8z" fill="#fff" ${K}/><path d="M104 72l28 38h-28z" fill="#FFD23F" ${K}/><path d="M58 116h86l-14 20H72z" fill="#E5483C" ${K}/><path d="M10 138q15-12 30 0t30 0 30 0 30 0 30 0 30 0v40H10z" fill="#4FA3E0"/><path d="M10 158q15-12 30 0t30 0 30 0 30 0 30 0 30 0v20H10z" fill="#2F7FC0"/></g><rect x="10" y="30" width="180" height="140" rx="16" fill="none" ${K}/>`)],
+bosque:["El bosque",SV(`<defs><clipPath id="cpBos"><rect x="10" y="30" width="180" height="140" rx="16"/></clipPath></defs><g clip-path="url(#cpBos)"><rect x="10" y="30" width="180" height="140" fill="#E3F6DC"/><circle cx="162" cy="58" r="14" fill="#FFD23F"/><ellipse cx="100" cy="176" rx="110" ry="26" fill="#9BD97E"/>${tree(50,100,.8)}${tree(150,106,.7)}${tree(100,96,1)}</g><rect x="10" y="30" width="180" height="140" rx="16" fill="none" ${K}/>`)],
+llave:["La llave",SV(`<g ${K}><circle cx="62" cy="100" r="34" fill="#FFD23F"/><circle cx="62" cy="100" r="13" fill="#fff"/><rect x="92" y="92" width="86" height="16" rx="6" fill="#FFD23F"/><rect x="140" y="106" width="12" height="24" fill="#FFD23F"/><rect x="160" y="106" width="12" height="18" fill="#FFD23F"/></g>`)],
+cofre:["El cofre del tesoro",SV(`<g ${K}><rect x="28" y="98" width="144" height="68" rx="6" fill="#B5651D"/><path d="M28 98q0-58 72-58t72 58z" fill="#C97A2E"/><rect x="28" y="94" width="144" height="12" fill="#FFD23F"/><rect x="42" y="98" width="10" height="68" fill="#FFD23F"/><rect x="148" y="98" width="10" height="68" fill="#FFD23F"/><rect x="88" y="100" width="24" height="30" rx="4" fill="#FFD23F"/></g><circle cx="100" cy="113" r="4" fill="#2A2540"/>`)],
+globo:["El globo",SV(`<g ${K}><path d="M100 24c-44 0-60 62-24 96 8 8 16 12 24 12s16-4 24-12c36-34 20-96-24-96z" fill="#E5483C"/><path d="M92 134h16l-8 12z" fill="#E5483C"/></g>${mouth("M100 146q-14 14 0 26t0 20",2.5)}<ellipse cx="76" cy="64" rx="8" ry="14" fill="#fff" opacity=".5" transform="rotate(20 76 64)"/>`)],
+puerta:["La puerta",SV(`<g ${K}><rect x="55" y="25" width="90" height="150" rx="4" fill="#B5651D"/><rect x="68" y="40" width="64" height="44" rx="3" fill="#C97A2E"/><rect x="68" y="96" width="64" height="66" rx="3" fill="#C97A2E"/></g><circle cx="136" cy="94" r="6" fill="#FFD23F" stroke="#2A2540" stroke-width="2.5"/><path d="M30 178h140" stroke="#2A2540" stroke-width="5" stroke-linecap="round"/>`)],
+ventana:["La ventana",SV(`<g ${K}><rect x="40" y="30" width="120" height="130" rx="6" fill="#BEE3F8"/><path d="M100 30v130M40 95h120" fill="none"/><path d="M40 30h26q-8 42 0 80H40z" fill="#FF8FB1"/><path d="M160 30h-26q8 42 0 80h26z" fill="#FF8FB1"/><rect x="32" y="160" width="136" height="12" rx="4" fill="#C97A2E"/></g>`)],
+mesa:["La mesa",SV(`<g ${K}><rect x="44" y="96" width="14" height="76" fill="#B5651D"/><rect x="142" y="96" width="14" height="76" fill="#B5651D"/><rect x="28" y="80" width="144" height="18" rx="6" fill="#C97A2E"/></g>`)],
+silla:["La silla",SV(`<g ${K}><rect x="136" y="110" width="12" height="64" fill="#B5651D"/><rect x="58" y="110" width="12" height="64" fill="#B5651D"/><rect x="52" y="26" width="14" height="86" fill="#B5651D"/><rect x="52" y="30" width="72" height="62" rx="8" fill="#C97A2E"/><rect x="44" y="96" width="112" height="16" rx="6" fill="#C97A2E"/></g>`)],
+vela:["La vela",SV(`<g ${K}><rect x="72" y="100" width="56" height="72" rx="6" fill="#F7F2EA"/><path d="M100 100v-12" fill="none"/><path d="M100 90C82 68 96 50 100 28 114 48 122 70 100 90Z" fill="#FF9A2E"/></g><path d="M100 84c-8-10-2-20 0-30 6 10 10 20 0 30z" fill="#FFD23F"/>`)],
+// ---- flota o se hunde
+corcho:["Corcho",SV(`<g ${K}><rect x="62" y="50" width="76" height="110" rx="12" fill="#D9A566"/><ellipse cx="100" cy="50" rx="38" ry="12" fill="#E8BE88"/></g><g fill="#A87232"><circle cx="82" cy="90" r="3"/><circle cx="116" cy="110" r="3"/><circle cx="92" cy="132" r="3"/><circle cx="120" cy="80" r="3"/></g>`)],
+piedra:["Piedra",SV(`<path d="M36 140C20 110 40 70 80 62C120 54 168 80 166 124C164 150 120 158 90 156C60 156 42 152 36 140Z" fill="#9AA3AF" ${K}/><path d="M64 86q10-12 26-14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".5"/><path d="M110 118l14 8M80 128l10 6" stroke="#6B7280" stroke-width="3" stroke-linecap="round"/>`)],
+hoja:["Hoja",SV(`<path d="M40 160C30 80 90 30 170 36C176 110 130 170 40 160Z" fill="#5CC46A" ${K}/><path d="M34 168L140 70M80 118l-6-24M104 96l-4-22M70 140l-24-4M100 130l24 4" fill="none" stroke="#2F7A3E" stroke-width="3" stroke-linecap="round"/>`)],
+cuchara:["Cuchara",SV(`<g ${K} transform="rotate(-35 100 100)"><ellipse cx="100" cy="50" rx="30" ry="38" fill="#CBD5E1"/><rect x="92" y="84" width="16" height="96" rx="8" fill="#CBD5E1"/></g>`)],
+tapa:["Tapa de botella",SV(`<circle cx="100" cy="100" r="62" fill="#4FA3E0" ${K}/><circle cx="100" cy="100" r="48" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="6 5"/>`)],
+esponja:["Esponja",SV(`<g ${K}><rect x="30" y="52" width="140" height="96" rx="16" fill="#FFD23F"/><path d="M30 124h140v8q0 16-16 16H46q-16 0-16-16z" fill="#4CAF50"/></g><g fill="#E0AB10"><circle cx="64" cy="82" r="7"/><circle cx="100" cy="74" r="5"/><circle cx="136" cy="88" r="8"/><circle cx="84" cy="104" r="5"/><circle cx="120" cy="108" r="6"/><circle cx="52" cy="108" r="4"/></g>`)]
+};
+// colores
+const COL=[["Rojo","#E5483C","#fff"],["Azul","#2F7FC0","#fff"],["Amarillo","#FFD23F","#2A2540"],["Verde","#3CAF55","#fff"],["Naranja","#FF9A2E","#2A2540"],["Morado","#7E57C2","#fff"]];
+COL.forEach(([n,c,t])=>{IM["col_"+n]=[n,SV(`<rect x="14" y="14" width="172" height="172" rx="28" fill="${c}" ${K}/><text x="100" y="116" font-size="38" font-weight="700" font-family="Fredoka,Arial,sans-serif" text-anchor="middle" fill="${t}">${n.toUpperCase()}</text>`)]});
+// billetes y monedas de juguete
+[["1000","#F4A259"],["2000","#7FC8A9"],["5000","#8FB4E8"],["10000","#C79BE0"]].forEach(([v,c])=>{const f=Number(v).toLocaleString("es-CO");IM["bil_"+v]=["Billete de juguete $"+f,SV(`<rect x="6" y="6" width="288" height="128" rx="14" fill="${c}" ${K}/><rect x="16" y="16" width="268" height="108" rx="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="5 4"/><circle cx="58" cy="70" r="30" fill="#fff" opacity=".7"/><text x="58" y="82" font-size="34" font-weight="700" font-family="Fredoka,Arial,sans-serif" text-anchor="middle" fill="#2A2540">$</text><text x="190" y="82" font-size="40" font-weight="700" font-family="Fredoka,Arial,sans-serif" text-anchor="middle" fill="#2A2540">$${f}</text><text x="190" y="108" font-size="12" font-weight="700" font-family="Arial,sans-serif" text-anchor="middle" fill="#2A2540">BILLETE DE JUGUETE</text>`,"0 0 300 140")]});
+[["100","#D6DBE3"],["200","#E8C34D"],["500","#C9A24A"]].forEach(([v,c])=>{IM["mon_"+v]=["Moneda de juguete $"+v,SV(`<circle cx="100" cy="100" r="82" fill="${c}" ${K}/><circle cx="100" cy="100" r="68" fill="none" stroke="#fff" stroke-width="3" opacity=".8"/><text x="100" y="116" font-size="58" font-weight="700" font-family="Fredoka,Arial,sans-serif" text-anchor="middle" fill="#2A2540">${v}</text><text x="100" y="148" font-size="11" font-weight="700" font-family="Arial,sans-serif" text-anchor="middle" fill="#2A2540">MONEDA DE JUGUETE</text>`)]});
+// ---- juegos: [índice en el banco, nombre, emoji, copias por defecto, nota, láminas, silueta?]
+const GAMES=[
+[8,"Imitemos animales","🐶",1,"Tarjetas de animales para que los niños los imiten: sonido y movimiento.",["perro","gato","vaca","pato","rana","pez","elefante","conejo"]],
+[12,"Busquemos el color","🎨",1,"Tarjetas de colores: muéstrala y pide a los niños que busquen algo de ese color.",COL.map(c=>"col_"+c[0])],
+[16,"Memoria de parejas","🧩",2,"Cada lámina sale dos veces en la misma hoja: recorta las parejas y pégalas en cartulina.",["manzana","banano","sol","estrella","flor","casa","carro","pelota"]],
+[26,"Lotería de imágenes","🎟️",2,"Cada imagen sale dos veces: una para la ficha y otra para pegar en los cartones (6 imágenes por cartón).",["perro","gato","manzana","banano","sol","flor","casa","carro","pez","estrella","corazon","pelota"]],
+[28,"Dados de cuentos","🎲",1,"Pega 6 imágenes en las caras de un dado o caja. Puedes hacer un dado de personajes, otro de lugares y otro de objetos.",["nina","nino","dragon","casa","bosque","mar","llave","cofre","globo"]],
+[30,"Búsqueda del tesoro","🗺️",1,"Cada dibujo es una pista: indica el lugar donde está la siguiente. El cofre marca el final.",["puerta","ventana","mesa","silla","arbol","cofre"]],
+[33,"Caritas de emociones","😊",1,"Tarjetas de emociones para identificar y nombrar cómo se sienten.",["alegre","triste","enojado","asustado","sorprendido","tranquilo"]],
+[34,"Respira como...","🌸",1,"Imágenes para respirar: oler la flor, soplar la vela, inflar el globo.",["flor","vela","globo"]],
+[35,"Sombras con linterna","🔦",1,"Siluetas negras para recortar, pegar en un palito y proyectar su sombra en la pared.",["gato","perro","conejo","pato","pez","elefante"],true],
+[36,"¿Flota o se hunde?","💧",1,"Tarjetas para que los niños predigan antes de probar con los objetos reales.",["corcho","piedra","hoja","cuchara","tapa","esponja"]],
+[38,"Jugar a la tienda","🛒",1,"Frutas y verduras para vender, billetes y monedas de juguete para pagar.",["manzana","banano","naranja","fresa","sandia","uva","zanahoria","tomate","bil_1000","bil_2000","bil_5000","bil_10000","mon_100","mon_200","mon_500"]]
+];
+
+const $=x=>document.querySelector(x);
+const COPIAS={};
+GAMES.forEach((g,i)=>COPIAS[i]=g[3]);
+function lista(i){const g=GAMES[i];const out=[];g[5].forEach(k=>{for(let c=0;c<COPIAS[i];c++)out.push(k)});return out}
+function hojas(i){const L=lista(i),g=GAMES[i],sil=!!g[6],res=[];
+ for(let k=0;k<L.length;k+=2){const cells=[L[k],L[k+1]].map(id=>id?`<div class="cell${sil?" sil":""}"><div class="im">${IM[id][1]}</div><div class="nm">${sil?"Silueta de "+IM[id][0].toLowerCase():IM[id][0]}</div><div class="ft">${g[1]} · PAMAVA soluciones</div></div>`:`<div class="cell vac"></div>`).join("");
+  res.push(`<div class="shw" data-g="${i}"><div class="sheet">${cells}</div><small>Hoja ${k/2+1} de ${Math.ceil(L.length/2)}</small></div>`)}
+ return res.join("")}
+function pintar(i){const g=GAMES[i];$("#sh"+i).innerHTML=hojas(i);const L=lista(i);$("#inf"+i).textContent=`${g[5].length} imágenes · ${Math.ceil(L.length/2)} hojas`}
+function build(){
+ $("#nav").innerHTML=GAMES.map((g,i)=>`<a href="#g${i}">${g[2]} ${g[1]}</a>`).join("");
+ $("#lib").innerHTML=GAMES.map((g,i)=>`<section class="gm" id="g${i}"><div class="gh"><div class="emo" aria-hidden="true">${g[2]}</div><div><h2>${g[1]}</h2><p>${g[4]}</p><p><b id="inf${i}"></b> · <a href="juegos.html#j${g[0]}" style="color:var(--brand);font-weight:800">Ver cómo se juega →</a></p></div>
+  <div class="gc"><label><input type="checkbox" class="sel" data-i="${i}" checked> Incluir</label><label>Copias de cada imagen <select class="cp" data-i="${i}"><option value="1"${g[3]==1?" selected":""}>1</option><option value="2"${g[3]==2?" selected":""}>2</option><option value="3">3</option></select></label><button class="btn" type="button" data-p="${i}">🖨️ Imprimir este juego</button></div></div><div class="sheets" id="sh${i}"></div></section>`).join("");
+ GAMES.forEach((g,i)=>pintar(i));upd()}
+function upd(){const n=document.querySelectorAll(".sel:checked").length;let h=0;document.querySelectorAll(".sel:checked").forEach(c=>h+=Math.ceil(lista(+c.dataset.i).length/2));$("#cnt").textContent=`${n} juegos marcados · ${h} hojas`}
+function imprimir(ids){document.querySelectorAll(".shw").forEach(e=>e.classList.toggle("off",!ids.includes(+e.dataset.g)));
+ const done=()=>{document.querySelectorAll(".shw.off").forEach(e=>e.classList.remove("off"));removeEventListener("afterprint",done)};addEventListener("afterprint",done);window.print()}
+document.addEventListener("change",e=>{const c=e.target.closest(".cp,.sel");if(!c)return;const i=+c.dataset.i;if(c.classList.contains("cp")){COPIAS[i]=+c.value;pintar(i)}upd()});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-p]");if(b)imprimir([+b.dataset.p])});
+$("#bAll").addEventListener("click",()=>imprimir(GAMES.map((_,i)=>i)));
+$("#bSel").addEventListener("click",()=>{const ids=[...document.querySelectorAll(".sel:checked")].map(c=>+c.dataset.i);if(!ids.length){alert("Marca al menos un juego con la casilla “Incluir”.");return}imprimir(ids)});
+build();
+try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.querySelectorAll("svg").forEach(function(s){s.pauseAnimations&&s.pauseAnimations()})}catch(e){}
+</script></body></html>
